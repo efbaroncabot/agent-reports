@@ -1289,6 +1289,605 @@ This is the highest-scoring lead (29) available after applying rotation. Key sig
 })();
 </script>
 
+</section><section class="page" id="h11" data-hour="11">
+  <div class="wrapper">
+    <section class="header" role="banner" aria-label="header">
+      <div class="h-top">
+        <div>
+          <div class="title">Hourly Report — Jake Clay</div>
+          <div class="sub">Fri, 26/09/2025 • 11:00 (Asia/Dubai)</div>
+        </div>
+        <div class="badges">
+          <span class="badge">Monthly target: 3 deals</span>
+          <span class="badge good">Booking hour: Yes</span>
+          <span class="badge">Pacing 20/22</span>
+          <span class="badge">To threshold: £31,000</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="main cards">
+      <!-- Money Snapshot -->
+      <div class="card span-8">
+        <h2 title="Shows today's money picture: expected uplift if you win this hour, monthly EV, revenue MTD, and gap to the commission threshold.">Money Snapshot</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Annualized uplift (win this hour)</div><div class="value"><strong>£0</strong></div></div>
+          <div class="kpi"><div class="label">Monthly swing (EV)</div><div class="value">£0</div></div>
+          <div class="kpi"><div class="label">Revenue MTD</div><div class="value">£0</div></div>
+          <div class="kpi"><div class="label">To commission threshold (£31,000)</div><div class="value">£31,000</div></div>
+        </div>
+        <div class="hr"></div>
+        <canvas id="chartThreshold" aria-label="Revenue MTD vs Commission Threshold" role="img" height="140"></canvas>
+      </div>
+
+      <!-- Next Hour -->
+      <div class="card span-4">
+        <h2 title="What to focus on this next hour: dial target, free minutes, booking cap, and how busy now/next hour is.">Next Hour</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Dial target</div><div class="value">0</div></div>
+          <div class="kpi"><div class="label">Free minutes</div><div class="value">0m</div></div>
+          <div class="kpi"><div class="label">Bookings (cap)</div><div class="value">1/hr</div></div>
+          <div class="kpi"><div class="label">Slots</div><div class="value">60m busy • next 60m busy</div></div>
+        </div>
+        <div class="note">Best hours by 7d connect: —</div>
+      </div>
+
+      <!-- Funnel -->
+      <div class="card span-6">
+        <h2 title="Your conversion rates from dial → booking → strategy sit → cashflow sit → deal (plus cumulative dial→deal).">Funnel (conversion rates)</h2>
+        <canvas id="chartFunnel" aria-label="Funnel Conversion Rates" role="img" height="180"></canvas>
+        <div class="hr"></div>
+        <canvas id="chartFunnelCum" aria-label="Cumulative Deal Probability" role="img" height="140"></canvas>
+      </div>
+
+      <!-- EV Waterfall from 60 dials -->
+      <div class="card span-6">
+        <h2 title="Expected outcomes starting from 60 dials, flowing through each funnel stage to estimated £ revenue.">EV Waterfall — 60 dials → £</h2>
+        <canvas id="chartEV" aria-label="Expected outcomes from 60 dials" role="img" height="180"></canvas>
+      </div>
+
+      <!-- Activity & Percentiles -->
+      <div class="card span-6">
+        <h2 title="Call volume across time windows (Today, 7/30/60/90 days) to gauge pace.">Activity</h2>
+        <canvas id="chartActivity" aria-label="Call Activity" role="img" height="180"></canvas>
+      </div>
+      <div class="card span-6">
+        <h2 title="How your last-hour call count compares to team p50, p75, and the top performer.">Last Hour vs Team Percentiles</h2>
+        <canvas id="chartGaugeHour" aria-label="Calls in last hour vs p50/p75/top" role="img" height="200"></canvas>
+        <div class="note">Edge to p75: 0 calls</div>
+      </div>
+
+      <div class="card span-6">
+        <h2 title="Compares today's calls to your 7-day and 30-day daily averages.">Today vs Daily Averages</h2>
+        <canvas id="chartTodayVsAvg" aria-label="Today vs 7d/30d averages" role="img" height="200"></canvas>
+      </div>
+
+      <!-- Pipeline -->
+      <div class="card">
+        <h2 title="Deal counts by stage and closed-lost reasons; also shows calls→strategy (90d) and reservations MTD.">Pipeline Overview</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Deals (total)</div><div class="value">26</div></div>
+          <div class="kpi"><div class="label">Closed-lost today</div><div class="value">0</div></div>
+          <div class="kpi"><div class="label">Calls → Strategy (90d)</div><div class="value">0.0%</div></div>
+          <div class="kpi"><div class="label">Reservations MTD</div><div class="value">0</div></div>
+        </div>
+        <div class="grid" style="margin-top:10px">
+           <div class="span-4"><canvas id="chartStage" height="180" aria-label="Deals by Stage" role="img"></canvas></div>
+           <div class="span-4"><canvas id="chartLossAll" height="180" aria-label="Closed-lost reasons (all-time)" role="img"></canvas></div>
+           <div class="span-4"><canvas id="chartLoss" height="180" aria-label="Closed-lost reasons (today)" role="img"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Hours -->
+      <div class="card">
+        <h2 title="Intraday calls today vs the 7-day hourly average to spot strong and weak hours.">Hour by Hour — Calls vs 7-day Avg</h2>
+        <canvas id="chartHoursCalls" height="180" role="img" aria-label="Calls by hour today vs 7d avg"></canvas>
+      </div>
+
+      <div class="card">
+        <h2 title="7-day average connected rate by hour; use this to time your dialing for best pickup.">Connected Rate by Hour (7d)</h2>
+        <canvas id="chartHourContact" height="180" role="img" aria-label="Connected rate by hour (7d)"></canvas>
+      </div>
+
+      <!-- Today’s Calendar -->
+      <div class="card">
+        <h2 title="Hours with overlapping meetings so you can see calling availability.">Today’s Calendar (hour by hour)</h2>
+        <canvas id="chartHours" height="180" aria-label="Hour-by-hour meetings" role="img"></canvas>
+      </div>
+
+      <!-- Lead Intelligence -->
+      <div class="card span-6">
+        <h2 title="Mix of prioritized lead sources (email, paid, direct, search, etc.) to guide channel focus.">Lead Sources</h2>
+        <canvas id="chartLeadSrc" height="200" aria-label="Lead source mix" role="img"></canvas>
+      </div>
+      <div class="card span-6">
+        <h2 title="High-potential leads that haven't been actioned; includes an auto top pick to call now.">High-Potential Ignored</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Count</div><div class="value"><strong>0</strong></div></div>
+          <div class="kpi"><div class="label">Top Lead (auto)</div><div class="value">Abdul .</div></div>
+          <div class="kpi"><div class="label">Email Clicks</div><div class="value">1</div></div>
+          <div class="kpi"><div class="label">Last Contact</div><div class="value">05/09/2025, 17:19</div></div>
+        </div>
+      </div>
+
+      <!-- Progress & Revenue Windows -->
+      <div class="card span-6">
+        <h2 title="Tracks month-to-date reservations against the monthly target. Blue bar = progress so far; red bar = target to hit.">Reservations Progress (MTD)</h2>
+
+        <canvas id="chartResProgress" height="140" aria-label="Reservations MTD vs target" role="img"></canvas>
+      </div>
+      <div class="card span-6">
+        <h2 title="Shows revenue over rolling windows (last 7/30/60/90 days) to reveal trend and momentum.">Revenue — Rolling Windows</h2>
+        <canvas id="chartRevenueWin" height="180" role="img" aria-label="Revenue last 7/30/60/90d"></canvas>
+      </div>
+
+      <!-- Wins/Losses timeline -->
+      <div class="card">
+        <h2 title="Timeline of daily wins, losses, and reservations across the last 14 days.">Wins, Losses & Reservations — last 14 days</h2>
+        <canvas id="chartWinsLoss" height="180" role="img" aria-label="Wins/Losses/Reservations timeline"></canvas>
+      </div>
+
+      <!-- Performance & Streaks -->
+      <div class="card">
+        <h2 title="Momentum indicators: booking/sit/reservation streaks, XP, and team percentiles.">Performance & Streaks</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Strategy booking streak</div><div class="value">0d</div></div>
+          <div class="kpi"><div class="label">Strategy sat streak</div><div class="value">0d</div></div>
+          <div class="kpi"><div class="label">Reservation streak</div><div class="value">0d</div></div>
+          <div class="kpi"><div class="label">Leaderboard (7d)</div><div class="value">0</div></div>
+        </div>
+        <div class="kpis" style="margin-top:8px">
+          <div class="kpi"><div class="label">XP 7d</div><div class="value">0</div></div>
+          <div class="kpi"><div class="label">XP 30d</div><div class="value">0</div></div>
+          <div class="kpi"><div class="label">Team %ile — Calls 7d</div><div class="value">0</div></div>
+          <div class="kpi"><div class="label">Team %ile — Booked 7d</div><div class="value">0</div></div>
+        </div>
+      </div>
+
+      <!-- Owner -->
+      <div class="card">
+        <div class="kpis">
+          <div class="kpi"><div class="label">Owner</div><div class="value">Jake Clay</div></div>
+          <div class="kpi"><div class="label">Team</div><div class="value">Sales</div></div>
+          <div class="kpi"><div class="label">Calls Today</div><div class="value">19</div></div>
+          <div class="kpi"><div class="label">Revenue MTD</div><div class="value">£0</div></div>
+        </div>
+        
+      </div>
+
+      <!-- Top Lead Candidates (full-width, its own row) -->
+      <div class="card">
+        <h2 title="Prioritized, dial-able leads with score, source, engagement and freshness to guide who to call next.">Top Lead Candidates</h2>
+        <table class="table comfy fixed">
+
+    <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Score</th><th>Source</th><th>Clicks</th><th>Last Contact</th><th>Flag</th></tr></thead>
+    <tbody>
+    <tr>
+      <td class="clip">Abdul .</td>
+      <td class="clip"><a href="mailto:aah@live.be">aah@live.be</a></td>
+      <td class="nowrap"><a href="tel:263712205165">263712205165</a></td>
+      <td class="rt"><span class="num" title="33">33.0000</span></td>
+      <td class="clip">OFFLINE</td>
+      <td class="rt nowrap">1 clicks</td>
+      <td class="nowrap">20d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Torima Nyama</td>
+      <td class="clip"><a href="mailto:tmidzingwa50@gmail.com">tmidzingwa50@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+263788633828">+263788633828</a></td>
+      <td class="rt"><span class="num" title="30">30.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">16d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Taurai Masango</td>
+      <td class="clip"><a href="mailto:taumasango01@gmail.com">taumasango01@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+263772737473">+263772737473</a></td>
+      <td class="rt"><span class="num" title="29">29.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">16d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Jimmy Fayankin</td>
+      <td class="clip"><a href="mailto:jfaykins@gmail.com">jfaykins@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+2348023114483">+2348023114483</a></td>
+      <td class="rt"><span class="num" title="29">29.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">1 clicks</td>
+      <td class="nowrap">13d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Deji Alex</td>
+      <td class="clip"><a href="mailto:dejialadegbemi@gmail.com">dejialadegbemi@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+23408033039228">+23408033039228</a></td>
+      <td class="rt"><span class="num" title="29">29.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">3d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Ezinne Okey-Uchendu</td>
+      <td class="clip"><a href="mailto:ezinne41@yahoo.com">ezinne41@yahoo.com</a></td>
+      <td class="nowrap"><a href="tel:+2348037004835">+2348037004835</a></td>
+      <td class="rt"><span class="num" title="29">29.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">2d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Emmanuel Ojo Odoemenam</td>
+      <td class="clip"><a href="mailto:emmalinksintl@gmail.com">emmalinksintl@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+2348067806627">+2348067806627</a></td>
+      <td class="rt"><span class="num" title="28">28.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">30d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Henry Joseph</td>
+      <td class="clip"><a href="mailto:henrychukwuemekaadebayo@yahoo.com">henrychukwuemekaadebayo@yahoo.com</a></td>
+      <td class="nowrap"><a href="tel:+2348069496208">+2348069496208</a></td>
+      <td class="rt"><span class="num" title="27">27.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">16d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Wahaab O A A A Antonio</td>
+      <td class="clip"><a href="mailto:estateofjunaidadeniji@gmail.com">estateofjunaidadeniji@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+2348109000300">+2348109000300</a></td>
+      <td class="rt"><span class="num" title="27">27.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">1 clicks</td>
+      <td class="nowrap">16d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Anyirah Ify</td>
+      <td class="clip"><a href="mailto:leonardlogan071@gmail.com">leonardlogan071@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+2348064464426">+2348064464426</a></td>
+      <td class="rt"><span class="num" title="27">27.0000</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">12d ago</td>
+      <td class="nowrap"></td>
+    </tr></tbody></table>
+        <div class="details" style="margin-top:10px">
+            <div class="pill">Top pick</div>
+            <div class="mono" style="margin-top:6px">
+              Abdul . • <a href="mailto:aah@live.be">aah@live.be</a> • <a href="tel:263712205165">263712205165</a>
+This is the highest-scoring lead (33) available after applying rotation. Key signals include a perfect &#39;meeting&#39; score (100) and a perfect &#39;unworked&#39; score (100), indicating high intent and readiness for contact. The lead also has a high &#39;staleness&#39; score (99) and is significantly overdue for a follow-up, having last been contacted on September 5, 2025 at 17:19 Asia/Dubai.
+            </div>
+          </div>
+      </div>
+      <!-- Recent Calls (kept half-width) -->
+      <div class="card span-6">
+        <h2 title="Shows your most recent calls with timestamp, contact info, and call duration to help you quickly follow up.">Recent Calls</h2>
+        <em>No recent calls.</em>
+      </div>
+
+
+      <!-- Gamification -->
+      <div class="card">
+        <h2 title="Badges earned and focused challenges to drive key behaviors for the next hour/day.">Badges & Challenges</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Badges</div><div class="value">—</div></div>
+        </div>
+        <div class="hr"></div>
+        <div class="details">
+          <div class="mono">
+1. NEXT HOUR: Hit ≥ p75 (0) calls or book 1 strategy sit.
+2. NEXT HOUR: Call 2 high-potential ignored leads.
+3. TODAY: Defend show-up ≥95% (“book next meeting on the call”).
+4. Progress at least two of the 16 stalled deals to the next stage before the end of the day.
+5. Secure one more reservation to hit your monthly deal target of 3.
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Reporting -->
+      <div class="card">
+        <h2 title="LLM-written summary, hour plan, and consistency notes — expand sections below to read.">Detailed Reporting</h2>
+        <details open>
+          <summary>Summary</summary>
+          <div class="mono" style="margin-top:8px">As of 11:00 Asia/Dubai on Friday, September 26, 2025, your calendar is fully committed for this hour and the next, creating a two-hour window for strategic planning. You have made 19 calls so far today, contributing to a strong recent activity level of 420 calls in the last 7 days and 1,542 in the last 30 days. Financially, this month has been exceptionally successful. You have secured two major reservations—one for £304,113 on September 12, 2025, and another for £345,000 on September 18, 2025—which have propelled your revenue far beyond the monthly target of £25,000. However, you are still one deal short of your monthly target of 3 reservations, and with today being the 20th of 22 working days, the pressure is on to close the final deal. A critical bottleneck has emerged that requires your immediate attention: 16 deals are currently stalled in the &#39;Qualifiedtobuy&#39; or &#39;Presentationscheduled&#39; stages. Several of these, including deals for Anthony Siebert, Nasir Salah, and Kayode Sani, are marked as &#39;Presentationscheduled&#39; but have not progressed to a meeting or reservation, representing significant latent revenue. While your forward-looking pipeline is healthy, with 7 strategy sessions booked for this week and 37 for the month, these stalled deals pose a risk to closing out the month on target. Use this non-calling time to meticulously plan your follow-ups to unblock these opportunities.</div>
+        </details>
+        <div class="details">
+          <details>
+            <summary>Hour plan</summary>
+            <div class="mono" style="margin-top:8px">1. 11:00–11:25: Focus entirely on your current scheduled task or meeting, as this hour is fully blocked.
+2. 11:25–11:45: Use any available downtime to strategically review the list of 16 deals stalled in &#39;Qualifiedtobuy&#39; and &#39;Presentationscheduled&#39; stages, prioritizing the top three for follow-up.
+3. 11:45–12:00: Prepare for your next blocked hour by drafting personalized messages for your prioritized stalled deals, ready to send when you have a free moment.</div>
+          </details>
+          
+          
+        </div>
+      </div>
+
+    </section>
+  </div>
+  
+<script>
+(function(){
+  if (!window.Chart) return;
+
+  // Scope to this page + namespace IDs so pages don't clash
+  const ROOT = document.currentScript?.closest('section.page') || document;
+  const PFX  = ROOT?.id ? ROOT.id + '-' : '';
+  // Prefix all canvas IDs once (e.g., h10-chartFunnel)
+  Array.from(ROOT.querySelectorAll('canvas[id]')).forEach(el => {
+    if (!el.id.startsWith(PFX)) el.id = PFX + el.id;
+  });
+  
+  // Okabe–Ito palette
+  const OI = {
+    orange:'#E69F00', sky:'#56B4E9', green:'#009E73',
+    yellow:'#F0E442', blue:'#0072B2', verm:'#D55E00',
+    purple:'#CC79A7', black:'#000000'
+  };
+  try { if (window.ChartDataLabels) Chart.register(window.ChartDataLabels); } catch(e){}
+
+  // Center text plugin (for gauges/doughnuts)
+  const CenterText = {
+    id: 'centerText',
+    beforeDraw(chart, args, opts) {
+      if (!opts || !opts.text) return;
+      const {ctx, chartArea} = chart; if (!chartArea) return;
+      const x = (chartArea.left + chartArea.right) / 2;
+      const y = (chartArea.top + chartArea.bottom) / 2;
+      const lines = (typeof opts.text === 'function') ? opts.text(chart) : opts.text;
+      ctx.save();
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillStyle = getComputedStyle(document.body).color;
+      const lh = 18;
+      lines.forEach((line,i)=>{
+        ctx.font = i===0 ? '600 16px Inter, system-ui, sans-serif' : '700 18px Inter, system-ui, sans-serif';
+        ctx.fillText(line, x, y + (i - (lines.length-1)/2)*lh);
+      });
+      ctx.restore();
+    }
+  };
+  Chart.register(CenterText);
+  Chart.defaults.plugins = Chart.defaults.plugins || {};
+  Chart.defaults.plugins.tooltip = Chart.defaults.plugins.tooltip || {};
+  Chart.defaults.plugins.tooltip.callbacks = Chart.defaults.plugins.tooltip.callbacks || {};
+  const __origDefaultTooltip = Chart.defaults.plugins.tooltip.callbacks.label;
+  Chart.defaults.plugins.tooltip.callbacks.label = function(ctx){
+    const label = ctx.dataset && ctx.dataset.label ? ctx.dataset.label + ': ' : '';
+    const y = (typeof ctx.parsed?.y === 'number') ? ctx.parsed.y
+            : (typeof ctx.parsed === 'number') ? ctx.parsed
+            : NaN;
+    if (Number.isFinite(y)) return label + y.toFixed(4);
+    if (typeof __origDefaultTooltip === 'function') return __origDefaultTooltip(ctx);
+    return label + String(ctx.formattedValue ?? '');
+  };
+
+  // Data injected via template literals from node
+    const WORK_START_H = 10;
+  const WORK_END_H   = 18;
+  const HIDE_NON_WORK_HOURS = false;
+
+  const funnel = {
+    book:  0.0000,
+    strat: 0.0000,
+    cf:    0.0000,
+    deal:  0.0000
+  };
+  const dialToDeal = 0.000000;
+
+  const callsToday     = 19;
+  const calls7d        = 420;
+  const calls30d       = 1542;
+  const calls60d       = 3320;
+  const calls90d       = 6228;
+  const callsLastHour  = 0;
+  const p50 = 0; const p75 = 0; const top = 1;
+  const threshold = 31000; const revMTD = 0;
+  const done = Math.max(0, Math.min(threshold, revMTD));
+  const remain = Math.max(0, threshold - done);
+
+  const hours = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"];
+  const callsTodayByHour = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  const avgCalls7d = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  const connectedRate7d = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  const HOURLY = [{"hour":"09:00","meetings":0},{"hour":"10:00","meetings":0},{"hour":"11:00","meetings":0},{"hour":"12:00","meetings":0},{"hour":"13:00","meetings":0},{"hour":"14:00","meetings":0},{"hour":"15:00","meetings":0},{"hour":"16:00","meetings":0},{"hour":"17:00","meetings":0}];
+  const idxWork = hours.map((h,i)=>({i,h})).filter(o=>{
+    const H = parseInt(o.h.slice(0,2),10);
+    return H >= WORK_START_H && H < WORK_END_H;
+  }).map(o=>o.i);
+  const hoursWork               = idxWork.map(i=>hours[i]);
+  const callsTodayByHourWork    = idxWork.map(i=>callsTodayByHour[i]);
+  const avgCalls7dWork          = idxWork.map(i=>avgCalls7d[i]);
+  const connectedRate7dWork     = idxWork.map(i=>connectedRate7d[i]);
+
+  const stageLabels = ["1876144351","2280951001","Decisionmakerboughtin","Qualifiedtobuy","Presentationscheduled"];
+  const stageVals   = [1,1,5,14,5];
+  const LOSS        = {};
+  const LOSSALL     = {};
+
+  const leadSrcLabels = ["OFFLINE","PAID_SOCIAL","EMAIL_MARKETING"];
+  const leadSrcVals   = [5,18,2];
+
+  const resMTD = 0;
+  const resTarget = 3;
+  const rev7  = 0;
+  const rev30 = 0;
+  const rev60 = 0;
+  const rev90 = 0;
+
+  const winsLoss = {"13/09":{"wins":0,"loss":0,"res":0},"14/09":{"wins":0,"loss":0,"res":0},"15/09":{"wins":0,"loss":0,"res":0},"16/09":{"wins":0,"loss":0,"res":0},"17/09":{"wins":0,"loss":0,"res":0},"18/09":{"wins":0,"loss":0,"res":1},"19/09":{"wins":0,"loss":0,"res":0},"20/09":{"wins":0,"loss":0,"res":0},"21/09":{"wins":0,"loss":0,"res":0},"22/09":{"wins":0,"loss":0,"res":0},"23/09":{"wins":0,"loss":0,"res":0},"24/09":{"wins":0,"loss":0,"res":0},"25/09":{"wins":0,"loss":0,"res":0},"26/09":{"wins":0,"loss":0,"res":0}};
+  const timelineLabels = ["13/09","14/09","15/09","16/09","17/09","18/09","19/09","20/09","21/09","22/09","23/09","24/09","25/09","26/09"];
+  const tlWins = timelineLabels.map(l => winsLoss[l]?.wins || 0);
+  const tlLoss = timelineLabels.map(l => winsLoss[l]?.loss || 0);
+  const tlRes  = timelineLabels.map(l => winsLoss[l]?.res  || 0);
+
+  // Helper to make charts
+  function makeChart(id, cfg){
+    const el = ROOT.querySelector('#' + PFX + id);
+    if (!el) return;
+    if (el._chart) el._chart.destroy(); // prevents "canvas already in use"
+    el._chart = new Chart(el.getContext('2d'), cfg);
+  }
+
+  // 1) Funnel chart
+  makeChart('chartFunnel', {
+    type: 'bar',
+    data: { labels: ['Book','Strategy-sit','Cashflow-sit','Deal'],
+      datasets: [{ label: 'Rate (%)', data: [funnel.book*100,funnel.strat*100,funnel.cf*100,funnel.deal*100],
+        backgroundColor: [OI.orange,OI.sky,OI.green,OI.blue] }] },
+    options: { responsive:true, plugins:{ legend:{display:false} }, scales:{ y:{ beginAtZero:true, max:100, ticks:{ callback:v=>v+'%' } } } }
+  });
+
+  // 2) Cumulative dial→deal
+  makeChart('chartFunnelCum', {
+    type:'bar',
+    data:{ labels:['Dial to Deal'], datasets:[{ data:[dialToDeal*100] }] },
+    options:{ responsive:true, plugins:{ legend:{display:false}, datalabels:{ anchor:'end', align:'top', formatter:v=>v.toFixed(4)+'%' } }, scales:{ y:{ beginAtZero:true, max:100 } } }
+  });
+
+  // 3) EV Waterfall (60 dials)
+  (function(){
+    const dials = 60;
+    const booked = dials * funnel.book;
+    const sits   = booked * funnel.strat;
+    const cfs    = sits * funnel.cf;
+    const deals  = cfs * funnel.deal;
+    const pounds = deals * 15000;
+    makeChart('chartEV', {
+      type:'bar',
+      data:{ labels:['Dials','Bookings','Strategy sats','Cashflow sats','Deals','£'],
+        datasets:[{ label:'Expected', data:[dials, booked, sits, cfs, deals, pounds], backgroundColor:[OI.purple,OI.orange,OI.sky,OI.green,OI.blue,OI.yellow] }] },
+      options:{ responsive:true, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:(c)=>{ const y=c.parsed.y; return c.dataIndex===5 ? ('£'+Math.round(y).toLocaleString('en-GB')) : y.toFixed(4); } } } },
+        scales:{ y:{ beginAtZero:true } } }
+    });
+  })();
+
+  // 4) Activity
+  makeChart('chartActivity', {
+    type:'bar',
+    data:{ labels:['Today','7d','30d','60d','90d'], datasets:[{ label:'Calls', data:[callsToday,calls7d,calls30d,calls60d,calls90d], backgroundColor: OI.purple }]},
+    options:{ responsive:true, plugins:{ legend:{display:false} }, scales:{ y:{ beginAtZero:true } } }
+  });
+
+  // 5) Gauge last hour vs percentiles
+  makeChart('chartGaugeHour', {
+    type:'doughnut',
+    data:{ datasets:[{ data:[callsLastHour, Math.max(0, top - callsLastHour)], backgroundColor:[OI.blue, 'rgba(255,255,255,.08)'] }] },
+    options:{
+      responsive:true, circumference:180, rotation:-90, cutout:'70%',
+      plugins:{ legend:{display:false}, centerText:{ text: () => [callsLastHour+' calls', 'p50:'+p50+'  p75:'+p75+'  top:'+top] } }
+    }
+  });
+
+  // 6) Today vs averages
+  makeChart('chartTodayVsAvg', {
+    type:'bar',
+    data:{ labels:['Today','7d avg','30d avg'], datasets:[{ data:[callsToday, 60.00, 51.40], backgroundColor:[OI.orange,OI.sky,OI.green] }] },
+    options:{ responsive:true, plugins:{ legend:{display:false}, datalabels:{ anchor:'end', align:'top', formatter:v=> (typeof v==='number'? v.toFixed(4): v) } }, scales:{ y:{ beginAtZero:true } } }
+  });
+
+  // 7) Stage distribution
+  makeChart('chartStage', {
+    type:'bar',
+    data:{ labels:stageLabels, datasets:[{ data:stageVals, backgroundColor:OI.sky }] },
+    options:{ responsive:true, plugins:{ legend:{display:false} }, scales:{ y:{ beginAtZero:true } } }
+  });
+
+  // 8) Loss reasons
+  makeChart('chartLoss',    { type:'doughnut', data:{ labels:Object.keys(LOSS),    datasets:[{ data:Object.values(LOSS)    }] }, options:{ responsive:true, plugins:{ legend:{position:'bottom'} } } });
+  makeChart('chartLossAll', { type:'doughnut', data:{ labels:Object.keys(LOSSALL), datasets:[{ data:Object.values(LOSSALL) }] }, options:{ responsive:true, plugins:{ legend:{position:'bottom'} } } });
+
+  // 9) Hourly calls vs 7d avg
+  makeChart('chartHoursCalls', {
+    type: 'line',
+    data: {
+      labels: (HIDE_NON_WORK_HOURS ? hoursWork : hours),
+      datasets: [
+        { label: 'Today',  data: (HIDE_NON_WORK_HOURS ? callsTodayByHourWork : callsTodayByHour), tension: .2 },
+        { label: '7d avg', data: (HIDE_NON_WORK_HOURS ? avgCalls7dWork   : avgCalls7d),          tension: .2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // 10) Connected rate by hour (7d)
+  makeChart('chartHourContact', {
+    type:'line',
+    data:{ labels:(HIDE_NON_WORK_HOURS? hoursWork : hours), datasets:[{ label:'7d connected %', data:(HIDE_NON_WORK_HOURS? connectedRate7dWork : connectedRate7d) }] },
+    options:{ responsive:true, plugins:{ legend:{ position:'bottom' } }, scales:{ y:{ beginAtZero:true, max:100, ticks:{ callback:v=>v+'%' } } } }
+  });
+
+  // 11) Threshold chart
+  makeChart('chartThreshold', {
+    type:'doughnut',
+    data:{ labels:['MTD','To threshold'], datasets:[{ data:[done, remain], backgroundColor:[OI.green, OI.verm] }] },
+    options:{ responsive:true, cutout:'60%',
+      plugins:{ legend:{ position:'bottom' }, tooltip:{ callbacks:{ label:(c)=> c.label+': £'+Math.round(c.parsed).toLocaleString('en-GB') } },
+        centerText:{ text: () => ['MTD', '£'+Math.round(done).toLocaleString('en-GB')] } } }
+  });
+
+  // 12) Hour-by-hour meetings
+  makeChart('chartHours', {
+    type:'bar',
+    data:{ labels:HOURLY.map(h => h.hour), datasets:[{ label:'Meetings overlapping', data: HOURLY.map(h => h.meetings), backgroundColor:OI.yellow }] },
+    options:{ responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, ticks:{ stepSize:1} } } }
+  });
+
+  // 13) Lead sources
+  makeChart('chartLeadSrc', { type:'doughnut', data:{ labels:leadSrcLabels, datasets:[{ data:leadSrcVals }] }, options:{ responsive:true, plugins:{ legend:{ position:'bottom' } } } });
+
+  // 14) Reservations progress
+  makeChart('chartResProgress', {
+    type:'bar',
+    data:{
+      labels:['Reservations'],
+      datasets:[
+        { label:'MTD', data:[resMTD], backgroundColor:OI.blue },
+        { label:'Target', data:[resTarget], backgroundColor:OI.verm }
+      ]
+    },
+    options:{
+      responsive:true,
+      indexAxis:'y',
+      scales:{ x:{ beginAtZero:true, suggestedMax: Math.max(resTarget, resMTD)+1 } }
+    }
+  });
+
+
+  // 15) Revenue windows
+  makeChart('chartRevenueWin', {
+    type:'bar', data:{ labels:['7d','30d','60d','90d'], datasets:[{ label:'£', data:[rev7,rev30,rev60,rev90], backgroundColor:OI.purple }] },
+    options:{ responsive:true, plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label:(c)=>'£'+Math.round(c.parsed.y).toLocaleString('en-GB') } } }, scales:{ y:{ beginAtZero:true } } }
+  });
+
+  // 16) Wins/Losses timeline
+  makeChart('chartWinsLoss', {
+    type:'line',
+    data:{ labels:timelineLabels, datasets:[
+      { label:'Wins', data:tlWins,   tension:.2, borderColor:OI.green },
+      { label:'Losses', data:tlLoss, tension:.2, borderColor:OI.verm },
+      { label:'Reservations', data:tlRes, tension:.2, borderColor:OI.blue }
+    ]},
+    options:{ responsive:true, plugins:{ legend:{ position:'bottom' } }, scales:{ y:{ beginAtZero:true } } }
+  });
+
+})();
+</script>
+
 </section><!-- END-PAGES --></div>
   </div>
   <script>
