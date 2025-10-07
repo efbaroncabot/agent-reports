@@ -1,0 +1,1458 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Jake Clay — 07/10/2025</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+
+  <!-- Skeleton nav/header styles (keep) -->
+  <style>
+    body{margin:0;background:#0b1220;color:#e5e7eb;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+    .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:#0f172a;position:sticky;top:0}
+    .nav button{all:unset;cursor:pointer;border:1px solid #1f2937;border-radius:10px;padding:6px 10px;background:rgba(255,255,255,.04)}
+    #pages .page{display:none}
+    .page{display:none}
+    .page.active {display: block;}
+
+    .wrap{max-width:1200px;margin:0 auto;padding:12px}
+  </style>
+
+  <!-- Full report styles used by the injected page fragment -->
+  <style id="report-styles">
+    :root{
+      /* Okabe–Ito palette (color-blind-safe) */
+      --oi-orange:#E69F00; --oi-sky:#56B4E9; --oi-green:#009E73; --oi-yellow:#F0E442;
+      --oi-blue:#0072B2; --oi-verm:#D55E00; --oi-purple:#CC79A7; --oi-black:#000000;
+      --bg:#0b1220; --panel:#0f172a; --panel2:#111827; --text:#e5e7eb; --muted:#c7d2fe;
+      --border:#1f2937; --stripe:rgba(255,255,255,.035); --ok:rgba(0,158,115,.18);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:linear-gradient(180deg,#0b1220,#0e1630 50%,#0b1220);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+    a{color:#93c5fd;text-decoration:none} a:hover{text-decoration:underline}
+    .wrapper{max-width:1200px;margin:28px auto;padding:16px}
+    .header{border:1px solid var(--border);border-radius:18px;padding:18px;background:
+      radial-gradient(900px 400px at 10% -10%, rgba(0,114,178,.25),transparent 60%),
+      radial-gradient(900px 400px at 90% -20%, rgba(0,158,115,.2),transparent 60%),
+      linear-gradient(135deg,#101826,#0b1220 65%)}
+    .h-top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .title{font-size:1.25rem;font-weight:800}
+    .sub{color:var(--muted);font-size:.95rem}
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{padding:6px 10px;border-radius:999px;border:1px solid var(--border);font-weight:600;font-size:.8rem;background:rgba(255,255,255,.04)}
+    .badge.good{background:var(--ok)}
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr);margin-top:14px}
+    .card{grid-column:span 12;background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);border-radius:16px;padding:14px 14px 12px;box-shadow:0 10px 20px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.02)}
+    .card h2{margin:4px 0 8px;font-size:1.05rem}
+    .card h2[title]{text-decoration:underline dotted 1.5px rgba(148,163,184,.55);text-underline-offset:4px}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+    .kpi{border:1px dashed var(--border);border-radius:14px;padding:10px}
+    .kpis.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .kpi .label{color:var(--muted);font-size:.8rem}
+    .kpi .value{font-size:1.15rem;font-weight:800;margin-top:4px}
+    .hr{height:1px;background:var(--border);margin:8px 0}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+    .table th,.table td{padding:10px 12px;border-bottom:1px solid var(--border)}
+    .table thead th{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:rgba(255,255,255,.04)}
+    .table tbody tr:nth-child(odd){background:var(--stripe)}
+    .table.tight th,.table.tight td{padding:8px 10px}
+    .table.dense tbody td{padding-top:6px;padding-bottom:6px}
+    .table.comfy th,.table.comfy td{padding:12px 14px}
+    .table.comfy{font-size:.95rem}
+    
+    .table-container{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:14px;}
+    .table-container .table{border:none;border-radius:0;} /* Prevents double borders */
+    
+    .table.fixed{table-layout:fixed}
+    .table tbody tr.empty td{color:var(--muted);opacity:.6}
+    .num{font-variant-numeric:tabular-nums}
+    .num[title]{border-bottom:1px dotted var(--muted);cursor:help}
+    .rt{text-align:right}
+    .nowrap{white-space:nowrap}
+    .clip{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .compact td,.compact th{padding:8px 10px}
+    .pill{display:inline-block;padding:3px 8px;border-radius:999px;border:1px solid var(--border);font-size:.75rem;background:rgba(255,255,255,.05)}
+    .pill.warn{background:rgba(214,94,0,.12);border-color:rgba(214,94,0,.35)}
+    .mono{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:10px}
+    .details{margin-top:10px}
+    summary{cursor:pointer;color:#c7d2fe;font-weight:600}
+    canvas{background:linear-gradient(180deg,#0f172a,#0e1525);border:1px solid var(--border);border-radius:12px;margin:6px 0;padding:0}
+    .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .mini{border:1px dashed var(--border);border-radius:12px;padding:8px}
+    .mini h3{margin:0 0 6px;font-size:.8rem;color:var(--muted);font-weight:700}
+    .dual{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .dual-item h3{margin:0 0 6px;font-size:.9rem;color:var(--muted);font-weight:700}
+
+    .badge-green{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.35)}
+    .note{color:var(--muted);font-size:.85rem}
+    @media (min-width: 880px){
+      .span-5{grid-column:span 5}
+      .span-6{grid-column:span 6}
+      .span-7{grid-column:span 7}
+      .span-8{grid-column:span 8}
+      .span-12{grid-column:span 12}
+    }
+    .print-hide{display:block}
+    @media print{ .print-hide{display:none} }
+  </style>
+
+</head><body>
+  <div class="bar">
+    <div><strong>Jake Clay — 07/10/2025</strong><span id="tz" style="opacity:.7;margin-left:8px">Asia/Dubai</span></div>
+    <div class="nav"><button id="prev">←</button><span id="which" style="margin:0 10px;opacity:.8"></span><button id="next">→</button></div>
+  </div>
+  <div class="wrap">
+    <div id="pages"><!-- BEGIN-PAGES --><section class="page" id="h0931" data-hour="0931">
+  <div class="wrapper">
+    <section class="header" role="banner" aria-label="header">
+      <div class="h-top">
+        <div>
+          <div class="title">Hourly Report — Jake Clay</div>
+          <div class="sub">Tue, 07/10/2025 • 09:31 (Asia/Dubai)</div>
+        </div>
+        <div class="badges">
+          <span class="badge has-tip" title="Deals target for this month">
+            Monthly target: 3 deals
+          </span>
+          <span class="badge has-tip good" title="Are we within working dial/booking hours?">
+            Booking hour: Yes
+          </span>
+          <span class="badge has-tip" title="Workday index within the current month">
+            Pacing 5/23
+          </span>
+          <span class="badge has-tip" title="Gap to your commission threshold">
+            To threshold: £0
+          </span>
+        </div>    
+      </div>
+    </section>
+    <section class="grid" aria-label="main cards">
+  <!-- Owner (top) -->
+  <div class="card">
+    <div class="kpis">
+      <div class="kpi"><div class="label">Owner</div><div class="value">Jake Clay</div></div>
+      <div class="kpi"><div class="label">Team</div><div class="value">Dubai - Brokers</div></div>
+      <div class="kpi"><div class="label">Calls Today</div><div class="value"><span class="heat" data-heat="up" data-max="80" data-val="0">0</span></div></div>
+      <div class="kpi"><div class="label">Revenue Today</div><div class="value"><span class="heat" data-heat="up" data-max="20000" data-val="0">£0</span></div></div>
+    </div>
+    
+  </div>
+      <div class="card span-6">
+        <h2 title="Shows today's money picture: expected uplift if you win this hour, monthly EV, revenue MTD, and gap to the commission threshold.">Money Snapshot</h2>
+        <div class="kpis">
+          <div class="kpi has-tip" title="This is the potential increase to your yearly earnings if you hit this hour's dial target and convert at your current average rate. Calculation: 50 Dials × 0.347% Dial-to-Deal Rate × £4,000 Avg. Deal × 12 Months = £8,320"><div class="label">Annualized uplift (win this hour)</div><div class="value"><strong><span class="heat" data-heat="up" data-max="60000" data-val="8319.696839204204">£8,320</span></strong></div></div>
+
+          <div class="kpi has-tip" title="This is the 'Expected Value' of your activity this hour, representing the potential commission you could generate this month. Calculation: 50 Dials × 0.347% Dial-to-Deal Rate × £4,000 Avg. Deal = £693"><div class="label">Monthly swing (EV)</div><div class="value"><span class="heat" data-heat="up" data-max="10000" data-val="693.3080699336836">£693</span></div></div>
+
+          <div class="kpi has-tip" title="This is your total personal commission earned so far this month (Month-To-Date). Calculation based on your closed deals and commission structure."><div class="label">Personal £ MTD</div><div class="value"><span class="heat" data-heat="up" data-max="100000" data-val="0">£0</span></div></div>
+
+          <div class="kpi has-tip" title="This is the amount of commission you still need to earn this month to hit your commission threshold of £0. Calculation: £0 Threshold - £0 Personal £ MTD = £0"><div class="label">To commission threshold (£0)</div><div class="value"><span class="heat" data-heat="down" data-max="0" data-val="0">£0</span></div></div>
+
+        </div>
+        <div class="hr"></div>
+         <div class="kpis grid-2">
+            <div class="kpi has-tip" title="An estimated commission based on the number of deals closed this month. Calculation: 2 Deals MTD × £4,000 Avg. Commission/Deal = £8,000"><div class="label">Commission MTD (Est.)</div><div class="value"><span class="heat" data-heat="up" data-max="12000" data-val="8000">£8,000</span></div></div>
+            <div class="kpi has-tip" title="The total number of deals you have closed so far this month (Month-To-Date)."><div class="label">Deals MTD</div><div class="value">2</div></div>
+        </div>
+
+        <canvas id="chartThreshold" aria-label="Revenue MTD vs Commission Threshold" role="img" height="100"></canvas>
+      </div>
+
+      <!-- Vertical column for Last and Next Hour cards -->
+      <div class="span-6" style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- Last Hour Summary -->
+        <div class="card">
+          <h2 title="Summary of your performance in the last full hour.">Last Hour</h2>
+          <div class="kpis grid-2">
+            <div class="kpi"><div class="label">Calls</div><div class="value">0</div></div>
+            <div class="kpi"><div class="label">Prod %</div><div class="value">0.000%</div></div>
+            <div class="kpi"><div class="label">% of Team p50</div><div class="value">0.000%</div></div>
+            <div class="kpi"><div class="label">% of Team p90</div><div class="value">0.000%</div></div>
+          </div>
+        </div>
+
+        <!-- Next Hour -->
+        <div class="card">
+          <h2 title="What to focus on this next hour: dial target, free minutes, booking cap, and how busy now/next hour is.">Next Hour</h2>
+          <div class="kpis">
+            <div class="kpi"><div class="label">Dial target</div><div class="value">50</div></div>
+            <div class="kpi"><div class="label">Free minutes</div><div class="value">60m</div></div>
+            <div class="kpi"><div class="label">Bookings (cap)</div><div class="value">1/hr</div></div>
+            <div class="kpi"><div class="label">Slots</div><div class="value">0m busy • next 0m busy</div></div>
+          </div>
+          <div class="note">Best hours by 7d connect: 13:00 (33.70%) • 14:00 (31.40%) • 16:00 (28.80%) • 11:00 (27.60%)</div>
+        </div>
+      </div>
+
+      <div class="card span-6">
+        <h2 title="Simple comparison of today vs your 90-day average.">Today vs. 90d Avg (simple)</h2>
+        <canvas id="chartBestsRadar" height="200"></canvas>
+      </div>
+
+      <!-- Chart 2: Detailed Target Pacing -->
+      <div class="card span-6">
+        <h2 title="Visualizes your progress towards your monthly revenue and deal targets. The vertical line represents the goal.">Monthly Target Pacing</h2>
+        <canvas id="chartPacing" height="200"></canvas>
+      </div>
+      <div class="card span-12">
+        <h2 title="Compares your key metrics against your team. Your bar is highlighted in green.">Full Team Comparison</h2>
+        <div class="grid">
+            <div class="span-4"><canvas id="chartTeamCallsLastHour" height="220"></canvas></div>
+            <div class="span-4"><canvas id="chartTeamCallsToday" height="220"></canvas></div>
+            <div class="span-4"><canvas id="chartTeamCalls7d" height="220"></canvas></div>
+            <div class="span-6"><canvas id="chartTeamBooked7d" height="220"></canvas></div>
+            <div class="span-6"><canvas id="chartTeamSats7d" height="220"></canvas></div>
+            <div class="span-12"><canvas id="chartTeamRevenue30d" height="220"></canvas></div>
+            <div class="span-12"><canvas id="chartTeamEfficiency" height="240"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Against Your Targets (self) -->
+      <div class="card span-12">
+        <h2 title="Clear view of progress vs your own targets and pace.">Against Your Targets & Pace</h2>
+        <div class="grid">
+          <div class="span-6"><canvas id="chartHourTarget" height="200"></canvas></div>
+          <div class="span-6"><canvas id="chartDailyBookingsPace" height="200"></canvas></div>
+          <div class="span-6"><canvas id="chartWeeklyRevenue" height="200"></canvas></div>
+          <div class="span-6"><canvas id="chartMonthlyRevenue" height="200"></canvas></div>
+          <div class="span-12"><canvas id="chartMonthlyDealsPace" height="220"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Detailed Reporting -->
+      <div class="card span-6">
+        <h2 title="LLM-written summary, hour plan, and consistency notes — expand sections below to read.">Detailed Reporting</h2>
+        <details open>
+          <summary>Summary</summary>
+          <div class="mono" style="margin-top:8px">CHANGES SINCE LAST REPORT (06:00 DXB, Oct 6): It&#39;s a new day, and activity is starting from zero. No calls have been made yet.
+
+At the start of your day, 09:30 DXB, the immediate priority is to build momentum to meet an ambitious daily target of 7 bookings. This is crucial to get back on pace for the month. Your performance over the last 30 days demonstrates your capability, having generated an incredible £649,113 in revenue, placing you in the 100th percentile and making you the top producer on the Dubai Brokers team. However, the top of your funnel has recently become a bottleneck. Over the last seven days, your 188 calls resulted in only one strategy booking, a conversion rate of just 0.1%, which is significantly below your more robust 30-day average of 0.5%. While your call volume is strong, ranking 7th on the team, this low conversion rate is holding back your results.
+
+Once a meeting is booked, your process is flawless. You have a perfect 100% booked-to-sat rate over the last week, proving that the prospects you engage are high-quality. The challenge is purely in securing that initial commitment. To overcome this, leverage your proven high-performance windows. Your 7-day data shows call volumes peak at 15:00-17:00 DXB (averaging 35-37 calls/hr), and your best connection rate of 33.7% occurs at 13:00 DXB. Focusing your efforts during these periods is the most direct path to hitting today&#39;s target and capitalizing on pipeline opportunities like the &#39;Tayo Ilori&#39; deal, which is awaiting follow-up in the &#39;Presentation Scheduled&#39; stage.</div>
+        </details>
+        <div class="details">
+          <details>
+            <summary>Hour plan</summary>
+            <div class="mono" style="margin-top:8px">1. 09:30-09:35: Prepare for your first call by reviewing the top recommended lead, Emmanuel Adi Adie. Note his high lead score and last contact date.
+2. 09:35-10:00: Start your first power dialing session. Aim for 25 high-quality calls to build a strong foundation for the day.
+3. 10:00-10:05: Take a brief 5-minute pause to log call outcomes in the CRM and plan your next set of calls.
+4. 10:05-10:28: Launch your second dial block. Push to complete another 25+ calls to exceed the hourly target of 50.
+5. 10:28-10:30: Wrap up the hour, review your progress, and flag any promising leads for follow-up later today.</div>
+          </details>
+          <details style="margin-top:6px">
+                 <summary>Consistency notes</summary>
+                 <div class="mono" style="margin-top:8px">Over the last 7 days, the data shows 6 Strategy Sats but only 1 Strategy Booking and 1 &#39;Booked to Strategy Sat Hit&#39;. This indicates a potential data logging issue, as the number of meetings that occurred is much higher than the number recorded as successfully booked and converted.</div>
+               </details>
+        </div>
+      </div>
+
+      <!-- Funnel -->
+      <div class="card span-6">
+        <h2 title="Your conversion rates from dial → booking → strategy sit → cashflow sit → deal (plus cumulative dial→deal).">Funnel (conversion rates)</h2>
+        <canvas id="chartFunnel" aria-label="Funnel Conversion Rates" role="img" height="180"></canvas>
+        <div class="hr"></div>
+        <canvas id="chartFunnelCum" aria-label="Cumulative Deal Probability" role="img" height="140"></canvas>
+      </div>
+
+      <!-- EV Waterfall from 60 dials -->
+      <div class="card span-6">
+        <h2 title="Expected outcomes starting from 60 dials, flowing through each funnel stage to estimated £ revenue.">EV Waterfall — 60 dials → £</h2>
+        <canvas id="chartEV" aria-label="Expected outcomes from 60 dials" role="img" height="180"></canvas>
+       <div class="note" style="margin-top: 8px;">
+         Based on your current funnel rates, every <strong>60 dials</strong> you make are statistically expected to result in <strong>0.208 deals</strong>, generating an estimated <strong>£832</strong> in commission.
+       </div>
+      </div>
+
+      <!-- Activity & Percentiles -->
+      <div class="card span-6">
+        <h2 title="Volume across windows (Today, 7/30/60/90d).">Activity</h2>
+        <div class="mini-grid">
+
+          <div class="mini"><h3>Calls</h3><canvas id="chartActCalls" height="120" aria-label="Calls windows"></canvas></div>
+          <div class="mini"><h3>Booked</h3><canvas id="chartActBooked" height="120" aria-label="Booked windows"></canvas></div>
+          <div class="mini"><h3>Strategy sat</h3><canvas id="chartActStrat" height="120" aria-label="Strategy sat windows"></canvas></div>
+          <div class="mini"><h3>Cashflow sat</h3><canvas id="chartActCf" height="120" aria-label="Cashflow sat windows"></canvas></div>
+          <div class="mini"><h3>Decision sat</h3><canvas id="chartActDecision" height="120" aria-label="Decision sat windows"></canvas></div>
+          <div class="mini"><h3>Reservations</h3><canvas id="chartActRes" height="120" aria-label="Reservations windows"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card span-6">
+        <h2 title="How your last-hour call count compares to team p50, p75, and the top performer.">Last Hour vs Team Percentiles</h2>
+        <canvas id="chartGaugeHour" aria-label="Calls in last hour vs p50/p75/top" role="img" height="200"></canvas>
+        <div class="note">Edge to p90: 1 calls</div>
+      </div>
+
+      <!-- Today vs Team Percentiles -->
+      <div class="card span-6">
+        <h2 title="How your call count today compares to team p50 and p90.">Today vs Team Percentiles</h2>
+        <canvas id="chartGaugeToday" aria-label="Calls today vs p50/p90/top" role="img" height="200"></canvas>
+        <div class="note">Edge to p90: 1 calls</div>
+      </div>
+
+      <div class="card span-6">
+        <h2 title="Compares today's calls to your 7-day and 30-day daily averages.">Today vs Daily Averages</h2>
+        <canvas id="chartTodayVsAvg" aria-label="Today vs 7d/30d averages" role="img" height="200"></canvas>
+      </div>
+      <!-- Prod Hour by Hour -->
+      <div class="card span-6">
+        <h2 title="Productive connects per hour (calls × connected%) today vs 7-day avg.">Prod Hour by Hour vs Avgs</h2>
+        <canvas id="chartProdHourly" aria-label="Prod by hour (calls × connected%) vs avg" role="img" height="180"></canvas>
+      </div>
+
+
+      <!-- Pipeline -->
+      <div class="card span-6">
+        <h2 title="Deal counts by stage and closed-lost reasons; also shows calls→strategy (90d) and reservations MTD.">Pipeline Overview</h2>
+        <div class="kpis grid-2">
+          <div class="kpi"><div class="label">Deals (total)</div><div class="value"><span class="heat" data-heat="up" data-max="30" data-val="165">165</span></div></div>
+          <div class="kpi"><div class="label">Closed-lost today</div><div class="value"><span class="heat" data-heat="down" data-max="5" data-val="0">0</span></div></div>
+          <div class="kpi"><div class="label">Calls → Booked (30d)</div><div class="value"><span class="heat" data-heat="up" data-max="10" data-val="50">50.00%</span></div></div>
+          <div class="kpi"><div class="label">Reservations Today</div><div class="value"><span class="heat" data-heat="up" data-max="3" data-val="0">0</span></div></div>
+
+        </div>
+        <div class="grid" style="margin-top:10px">
+           <div class="span-12"><canvas id="chartStage" height="180" aria-label="Deals by Stage" role="img"></canvas></div>
+           <div class="span-12" style="min-height: 180px;"><canvas id="chartLossAll" height="180" aria-label="Closed-lost reasons (all-time)" role="img"></canvas></div>
+           <div class="span-12" style="min-height: 180px;"><div class="kpi" style="height:100%; display:flex; align-items:center; justify-content:center; text-align:center;"><div class="label">No Closed-Lost Deals Today</div></div></div>
+
+        </div>
+      </div>
+
+      <!-- Intraday Performance (split out, left) -->
+      <div class="card span-6">
+        <h2 title="Hourly call performance vs 7-day average.">Intraday Performance</h2>
+        <canvas id="chartHoursCalls" height="180" role="img" aria-label="Calls by hour today vs 7d avg"></canvas>
+      </div>
+      <!-- Connected Rate by Hour (7d) (split out, right) -->
+      <div class="card span-6">
+        <h2 title="7-day connection rate by hour.">Connected Rate by Hour (7d)</h2>
+        <canvas id="chartHourContact" height="180" role="img" aria-label="Connected rate by hour (7d)"></canvas>
+      </div>
+      <!-- Today’s Calendar (hour by hour) -->
+      <div class="card span-6">
+        <h2 title="Your schedule for today.">Today’s Calendar (hour by hour)</h2>
+        <canvas id="chartHours" height="180" aria-label="Hour-by-hour meetings" role="img"></canvas>
+      </div>
+      <!-- Productivity Comparison -->
+      <div class="card span-6">
+        <h2 title="Productivity comparison (Today vs WTD vs MTD).">Productivity Comparison</h2>
+        <canvas id="chartProdCompare" height="180" aria-label="Productivity comparison (Today vs WTD vs MTD)"></canvas>
+      </div>
+
+
+      <!-- Lead Intelligence -->
+      <div class="card span-6">
+        <h2 title="Mix of prioritized lead sources (email, paid, direct, search, etc.) to guide channel focus.">Lead Sources</h2>
+        <canvas id="chartLeadSrc" height="200" aria-label="Lead source mix" role="img"></canvas>
+      </div>
+      <div class="card span-6">
+        <h2 title="High-potential leads that haven't been actioned; includes an auto top pick to call now.">High-Potential Ignored</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Count</div><div class="value"><strong>0</strong></div></div>
+          <div class="kpi"><div class="label">Top Lead (auto)</div><div class="value">Emmanuel Adi Adie</div></div>
+          <div class="kpi"><div class="label">Email Clicks</div><div class="value">—</div></div>
+          <div class="kpi"><div class="label">Last Contact</div><div class="value">17/09/2025, 13:00</div></div>
+        </div>
+      </div>
+
+      <!-- Progress & Revenue Windows -->
+      <div class="card span-6">
+        <h2 title="Tracks month-to-date reservations against the monthly target. Blue bar = progress so far; red bar = target to hit.">Reservations Progress (MTD)</h2>
+
+        <canvas id="chartResProgress" height="140" aria-label="Reservations MTD vs target" role="img"></canvas>
+      </div>
+      <div class="card span-6">
+        <h2 title="Shows revenue over rolling windows (last 7/30/60/90 days) to reveal trend and momentum.">Revenue — Rolling Windows</h2>
+        <canvas id="chartRevenueWin" height="180" role="img" aria-label="Revenue last 7/30/60/90d"></canvas>
+      </div>
+
+      <!-- Wins/Losses timeline -->
+      <div class="card span-6">
+        <h2 title="Timeline of daily wins, losses, and reservations across the last 14 days.">Wins, Losses & Reservations — last 14 days</h2>
+        <canvas id="chartWinsLoss" height="180" role="img" aria-label="Wins/Losses/Reservations timeline"></canvas>
+      </div>
+
+      <!-- Performance & Streaks -->
+      <div class="card span-6">
+        <h2 title="Momentum indicators: booking/sit/reservation streaks, XP, and team percentiles.">Performance & Streaks</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Strategy booking streak</div><div class="value"><span class="heat" data-heat="up" data-max="7" data-val="0">0d</span></div></div>
+          <div class="kpi"><div class="label">Strategy sat streak</div><div class="value"><span class="heat" data-heat="up" data-max="7" data-val="0">0d</span></div></div>
+          <div class="kpi"><div class="label">Reservation streak</div><div class="value"><span class="heat" data-heat="up" data-max="7" data-val="0">0d</span></div></div>
+          <div class="kpi"><div class="label">Leaderboard (7d)</div><div class="value"><span class="heat" data-heat="up" data-max="1000" data-val="442">442</span></div></div>
+        </div>
+        <div class="kpis" style="margin-top:8px">
+          <div class="kpi"><div class="label">XP 7d</div><div class="value"><span class="heat" data-heat="up" data-max="1500" data-val="778">778</span></div></div>
+          <div class="kpi"><div class="label">XP 30d</div><div class="value"><span class="heat" data-heat="up" data-max="5000" data-val="3461">3461</span></div></div>
+          <div class="kpi"><div class="label">Team %ile — Calls 7d</div><div class="value"><span class="heat" data-heat="up" data-max="100" data-val="90">90</span></div></div>
+          <div class="kpi"><div class="label">Team %ile — Booked 7d</div><div class="value"><span class="heat" data-heat="up" data-max="100" data-val="73.3">73.3</span></div></div>
+        </div>
+       <div class="note" style="margin-top: 12px;">
+         Your longest active streak is <strong>0 days</strong>. Streaks measure consistency, a key driver of long-term success.
+       </div>
+      </div>
+      <!-- Badges & Challenges (placed next to Performance & Streaks, on its right) -->
+      <div class="card span-6">
+        <h2 title="Badges earned and focused challenges to drive key behaviors for the next hour/day.">Badges & Challenges</h2>
+        <div class="kpis">
+          <div class="kpi"><div class="label">Badges</div><div class="value">—</div></div>
+        </div>
+        <div class="hr"></div>
+        <div class="details">
+          <div class="mono">
+1. NEXT HOUR: Hit ≥ p90 (1) calls or book 1 strategy sit.
+2. NEXT HOUR: Call 5 high-potential ignored leads.
+3. TODAY: Defend show-up ≥95% (“book next meeting on the call”).
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Lead Candidates -->
+      <div class="card">
+        <h2 title="Prioritized, dial-able leads with score, source, engagement and freshness to guide who to call next.">Top Lead Candidates</h2>
+        <div class="table-container">
+          <table class="table comfy fixed">
+
+    <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Score</th><th>Source</th><th>Clicks</th><th>Last Contact</th><th>Flag</th></tr></thead>
+    <tbody>
+    <tr>
+      <td class="clip">Emmanuel Adi Adie</td>
+      <td class="clip"><a href="mailto:adieunimna@gmail.com">adieunimna@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+2348035744695">+2348035744695</a></td>
+      <td class="rt"><span class="num" title="36">36.00</span></td>
+      <td class="clip">OFFLINE</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">19d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Ezinne Okey-Uchendu</td>
+      <td class="clip"><a href="mailto:ezinne41@yahoo.com">ezinne41@yahoo.com</a></td>
+      <td class="nowrap"><a href="tel:+2348037004835">+2348037004835</a></td>
+      <td class="rt"><span class="num" title="34">34.00</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">13d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Torima Nyama</td>
+      <td class="clip"><a href="mailto:tmidzingwa50@gmail.com">tmidzingwa50@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+263788633828">+263788633828</a></td>
+      <td class="rt"><span class="num" title="32">32.00</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">27d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Taofik Lawal</td>
+      <td class="clip"><a href="mailto:taofiklawal@aol.com">taofiklawal@aol.com</a></td>
+      <td class="nowrap"><a href="tel:+2348028178241">+2348028178241</a></td>
+      <td class="rt"><span class="num" title="32">32.00</span></td>
+      <td class="clip">EMAIL_MARKETING</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">18d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Evans Eboite</td>
+      <td class="clip"><a href="mailto:therealtriple.e@gmail.com">therealtriple.e@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+2348088811036">+2348088811036</a></td>
+      <td class="rt"><span class="num" title="32">32.00</span></td>
+      <td class="clip">EMAIL_MARKETING</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">18d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Tebogo Mmakola</td>
+      <td class="clip"><a href="mailto:tebogommakola@gmail.com">tebogommakola@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+27765718066">+27765718066</a></td>
+      <td class="rt"><span class="num" title="32">32.00</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">6d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Deji Alex</td>
+      <td class="clip"><a href="mailto:dejialadegbemi@gmail.com">dejialadegbemi@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+23408033039228">+23408033039228</a></td>
+      <td class="rt"><span class="num" title="30">30.00</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">6d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Emmanuel Ojo Odoemenam</td>
+      <td class="clip"><a href="mailto:emmalinksintl@gmail.com">emmalinksintl@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+2348067806627">+2348067806627</a></td>
+      <td class="rt"><span class="num" title="29">29.00</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">41d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Wahaab O A A A Antonio</td>
+      <td class="clip"><a href="mailto:estateofjunaidadeniji@gmail.com">estateofjunaidadeniji@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:+2348109000300">+2348109000300</a></td>
+      <td class="rt"><span class="num" title="29">29.00</span></td>
+      <td class="clip">PAID_SOCIAL</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">27d ago</td>
+      <td class="nowrap"></td>
+    </tr>
+    <tr>
+      <td class="clip">Brenda Murahwa</td>
+      <td class="clip"><a href="mailto:brendamurahwa@gmail.com">brendamurahwa@gmail.com</a></td>
+      <td class="nowrap"><a href="tel:263772354678">263772354678</a></td>
+      <td class="rt"><span class="num" title="28">28.00</span></td>
+      <td class="clip">EMAIL_MARKETING</td>
+      <td class="rt nowrap">0 clicks</td>
+      <td class="nowrap">18d ago</td>
+      <td class="nowrap"></td>
+    </tr></tbody></table>
+        </div>
+
+        <div class="details" style="margin-top:10px">
+            <div class="pill">Top pick</div>
+            <div class="mono" style="margin-top:6px">
+              Emmanuel Adi Adie • <a href="mailto:adieunimna@gmail.com">adieunimna@gmail.com</a> • <a href="tel:+2348035744695">+2348035744695</a>
+Emmanuel is your highest-scoring lead at 36 and is primed for re-engagement. He has not been contacted since September 17, 2025, reflected in his high staleness score (95). His profile signals high potential with a perfect meeting score (100) and strong seniority (50) and lifecycle (40) scores. His OFFLINE source also suggests a potentially high-intent initial interaction.
+            </div>
+          </div>
+      </div>
+      
+      <!-- Recent Calls -->
+      <div class="card span-12">
+        <h2 title="Shows your most recent calls with timestamp, contact info, and call duration to help you quickly follow up.">Recent Calls</h2>
+        <div class="table-container"><em>No recent calls.</em></div>
+
+      </div>
+
+    </section>
+  </div>
+  
+<script>
+(function(){
+  if (!window.Chart) return;
+
+  // Scope to this page + namespace IDs so pages don't clash
+  const ROOT = document.currentScript?.closest('section.page') || document;
+  Array.from(ROOT.querySelectorAll('canvas[height]')).forEach(el => {
+    const h = parseInt(el.getAttribute('height') || '0', 10);
+    if (h) {
+      el.style.height = h + 'px';
+      el.style.maxHeight = h + 'px';
+      el.style.width = '100%';
+      el.style.maxWidth = '100%';
+      el.style.boxSizing = 'border-box';
+    }
+  });
+  const PFX  = ROOT?.id ? ROOT.id + '-' : '';
+  // Prefix all canvas IDs once (e.g., h10-chartFunnel)
+  Array.from(ROOT.querySelectorAll('canvas[id]')).forEach(el => {
+    if (!el.id.startsWith(PFX)) el.id = PFX + el.id;
+  });
+  Chart.defaults.animation = false;                   // fewer heavy repaints
+  Chart.defaults.resizeDelay = 200;                   // throttle resize listeners
+  Chart.defaults.devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+  Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue('--text') || '#e5e7eb';
+  Chart.defaults.borderColor = 'rgba(231, 233, 239, .25)';
+  Chart.defaults.scale.grid.color = 'rgba(231, 233, 239, .12)';
+  const OI = {
+    orange:'#E69F00', sky:'#56B4E9', green:'#009E73',
+    yellow:'#F0E442', blue:'#0072B2', verm:'#D55E00',
+    purple:'#CC79A7', black:'#000000'
+  };
+  try { if (window.ChartDataLabels) Chart.register(window.ChartDataLabels); } catch(e){}
+  try { if (window['chartjs-plugin-annotation']) Chart.register(window['chartjs-plugin-annotation']); } catch(e){}
+
+  // sensible defaults for readability
+  Chart.defaults.maintainAspectRatio = false;
+  Chart.defaults.plugins.legend.position = 'bottom';
+  if (window.ChartDataLabels) {
+    Chart.defaults.plugins.datalabels = {
+      color: getComputedStyle(document.documentElement).getPropertyValue('--text') || '#e5e7eb',
+      anchor: 'end',
+      align: 'top',
+      offset: -2,
+      clamp: true,
+      clip: false,
+      font: { weight: '700' }
+    };
+  }
+  // Center text plugin (for gauges/doughnuts)
+  const CenterText = {
+    id: 'centerText',
+    beforeDraw(chart, args, opts) {
+      if (!opts || !opts.text) return;
+      const {ctx, chartArea} = chart; if (!chartArea) return;
+      const x = (chartArea.left + chartArea.right) / 2;
+      const y = (chartArea.top + chartArea.bottom) / 2;
+      const lines = (typeof opts.text === 'function') ? opts.text(chart) : opts.text;
+      ctx.save();
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillStyle = getComputedStyle(document.body).color;
+      const lh = 18;
+      lines.forEach((line,i)=>{
+        ctx.font = i===0 ? '600 16px Inter, system-ui, sans-serif' : '700 18px Inter, system-ui, sans-serif';
+        ctx.fillText(line, x, y + (i - (lines.length-1)/2)*lh);
+      });
+      ctx.restore();
+    }
+  };
+  Chart.register(CenterText);
+  Chart.defaults.plugins = Chart.defaults.plugins || {};
+  Chart.defaults.plugins.tooltip = Chart.defaults.plugins.tooltip || {};
+  Chart.defaults.plugins.tooltip.callbacks = Chart.defaults.plugins.tooltip.callbacks || {};
+  const __origDefaultTooltip = Chart.defaults.plugins.tooltip.callbacks.label;
+  function formatFloat(val) {
+    const n = Number(val);
+    if (!Number.isFinite(n)) return '—';
+    const dp = Math.abs(n) > 1 ? 3 : 4;
+    return n.toLocaleString('en-US', {
+      minimumFractionDigits: dp,
+      maximumFractionDigits: dp,
+      useGrouping: true
+    });
+  }
+
+
+
+  // Label set for the small window charts
+  const winLabels = ['Today','7d','30d','60d','90d'];
+
+  Chart.defaults.plugins.tooltip.callbacks.label = function(ctx){
+
+    const label = ctx.dataset && ctx.dataset.label ? ctx.dataset.label + ': ' : '';
+    const y = (typeof ctx.parsed?.y === 'number') ? ctx.parsed.y
+            : (typeof ctx.parsed === 'number') ? ctx.parsed
+            : NaN;
+    if (Number.isFinite(y)) return label + formatFloat(y);
+    if (typeof __origDefaultTooltip === 'function') return __origDefaultTooltip(ctx);
+    return label + String(ctx.formattedValue ?? '');
+  };
+  function fmtGBP0(n) {
+    const v = Math.round(+n || 0);
+    try {
+      return v.toLocaleString('en-GB', {
+        style: 'currency', currency: 'GBP',
+        minimumFractionDigits: 0, maximumFractionDigits: 0
+      });
+    } catch {
+      return '£' + v.toLocaleString('en-GB');
+    }
+  }
+  // Integer formatting
+  function fmtInt(n) { return Math.round(+n || 0).toLocaleString('en-GB'); }
+
+  // Data injected via template literals from node
+    const WORK_START_H = 9;
+  const WORK_END_H   = 18;
+  const HIDE_NON_WORK_HOURS = true;
+
+  const funnel = {
+    book:  0.03367496339677892,
+    strat: 1,
+    cf:    0.4117647058823529,
+    deal:  0.25
+  };
+  const dialToDeal = 0.0034665403496684176;
+
+
+  const callsToday     = 0;
+  const calls7d        = 188;
+  const calls30d       = 633;
+  const calls60d       = 991;
+  const calls90d       = 1731;
+  const callsLastHour  = 0;
+  const dialTarget     = 50;
+  const p50_hour = 1; const p90_hour = 1; const topHour = 1;
+  const p50_today = 1; const p90_today = 1;
+  const threshold = 0; const revMTD = 0;
+  const done = Math.max(0, Math.min(threshold, revMTD));
+  const remain = Math.max(0, threshold - done);
+
+  const hours = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"];
+  const callsTodayByHour = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  const avgCalls7d = [0,0,0,0,0,0,0,0,0,0,7,25.4,28.5,20.75,11.67,35.33,37,9.75,0,0,0,0,0,0];
+  const connectedRate7d = [0,0,0,0,0,0,0,0,0,0,21.4,27.6,24.6,33.7,31.4,22.6,28.8,25.6,0,0,0,0,0,0];
+  const HOURLY = [{"hour":"09:00","meetings":0},{"hour":"10:00","meetings":0},{"hour":"11:00","meetings":0},{"hour":"12:00","meetings":0},{"hour":"13:00","meetings":0},{"hour":"14:00","meetings":0},{"hour":"15:00","meetings":0},{"hour":"16:00","meetings":0},{"hour":"17:00","meetings":0}];
+  const idxWork = hours.map((h,i)=>({i,h})).filter(o=>{
+    const H = parseInt(o.h.slice(0,2),10);
+    return H >= WORK_START_H && H < WORK_END_H;
+  }).map(o=>o.i);
+  const hoursWork               = idxWork.map(i=>hours[i]);
+  const callsTodayByHourWork    = idxWork.map(i=>callsTodayByHour[i]);
+  const avgCalls7dWork          = idxWork.map(i=>avgCalls7d[i]);
+  const connectedRate7dWork     = idxWork.map(i=>connectedRate7d[i]);
+
+  const stageLabels = ["Presentationscheduled","Qualifiedtobuy"];
+  const stageVals   = [1,2];
+
+  const LOSS        = {};
+  const LOSSALL     = {"closedlost":16,"closed lost":26};
+
+  const leadSrcLabels = ["OFFLINE","PAID_SOCIAL","EMAIL_MARKETING"];
+  const leadSrcVals   = [7,14,4];
+
+  const resMTD = 2;
+  const resTarget = 3;
+  const rev7  = 0;
+  const rev30 = 649113;
+  const rev60 = 649113;
+  const rev90 = 1027596;
+ 
+  const winsLoss = {"24/09":{"wins":0,"loss":0,"res":0},"25/09":{"wins":0,"loss":0,"res":0},"26/09":{"wins":0,"loss":0,"res":0},"27/09":{"wins":0,"loss":0,"res":0},"28/09":{"wins":0,"loss":0,"res":0},"29/09":{"wins":0,"loss":0,"res":0},"30/09":{"wins":0,"loss":0,"res":0},"01/10":{"wins":0,"loss":0,"res":0},"02/10":{"wins":0,"loss":0,"res":0},"03/10":{"wins":0,"loss":0,"res":0},"04/10":{"wins":0,"loss":0,"res":0},"05/10":{"wins":0,"loss":0,"res":0},"06/10":{"wins":0,"loss":0,"res":0},"07/10":{"wins":0,"loss":0,"res":0}};
+  const timelineLabels = ["24/09","25/09","26/09","27/09","28/09","29/09","30/09","01/10","02/10","03/10","04/10","05/10","06/10","07/10"];
+  const tlWins = timelineLabels.map(l => winsLoss[l]?.wins || 0);
+  const tlLoss = timelineLabels.map(l => winsLoss[l]?.loss || 0);
+  const tlRes  = timelineLabels.map(l => winsLoss[l]?.res  || 0);
+  const prodToday = 0;
+  const prodWTD = 2.6; // Proxy for WTD
+  const prodMTD = 3.4; // Proxy for MTD
+
+  const bests = {
+      max_calls_in_a_day: 0, // Today's best hour as proxy
+      max_bookings_in_a_day: 1 / 5, // Approx daily best
+      max_sats_in_a_day: 6 / 5,
+      max_calls_in_90d_avg: 1731 / 90,
+      max_bookings_in_90d_avg: 76 / 90,
+      max_sats_in_90d_avg: 41 / 90
+  };
+  const teamData = [{"name":"Kelsey-Ellie Ashford","calls":448},{"name":"Finn Slade","calls":283},{"name":"Rio Duhaney","calls":273},{"name":"Lewis Carney","calls":252},{"name":"Mike Rea","calls":217},{"name":"Zayn Mahmood","calls":199},{"name":"Jake Clay","calls":188},{"name":"James Cox","calls":163},{"name":"Ginny Wai","calls":159},{"name":"Emily Johnson","calls":127},{"name":"James Pemberton","calls":109},{"name":"Luca Camilleri","calls":85},{"name":"Daniel Varnaseri","calls":63},{"name":"Jenny Russell","calls":54},{"name":"James Flatt","calls":9},{"name":"Tom Hepworth","calls":2},{"name":"Leah Higginson","calls":1},{"name":"Jason Tucker","calls":0}];
+  const teamPivot = [{"owner_name":"Jake Clay","Calls Today":0,"Calls Last 7d":188,"Revenue Last 30d":649113,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":100,"Strategy Sats Last 7d":6,"calls_to_booked_7d_pct":0.1,"Leaderboard Points (7d)":442,"Strategy Booked Last 7d":1},{"owner_name":"Tom Hepworth","Calls Today":0,"Calls Last 7d":2,"Revenue Last 30d":427783,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":19,"Strategy Booked Last 7d":0},{"owner_name":"Leah Higginson","Calls Today":0,"Calls Last 7d":1,"Revenue Last 30d":221650,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":6,"Strategy Booked Last 7d":1},{"owner_name":"Ginny Wai","Calls Today":0,"Calls Last 7d":159,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0.5,"Leaderboard Points (7d)":367,"Strategy Booked Last 7d":4},{"owner_name":"James Cox","Calls Today":0,"Calls Last 7d":163,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0.9,"Leaderboard Points (7d)":172,"Strategy Booked Last 7d":0},{"owner_name":"James Flatt","Calls Today":0,"Calls Last 7d":9,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":9,"Strategy Booked Last 7d":0},{"owner_name":"James Pemberton","Calls Today":0,"Calls Last 7d":109,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0.3,"Leaderboard Points (7d)":160,"Strategy Booked Last 7d":0},{"owner_name":"Jason Tucker","Calls Today":0,"Calls Last 7d":0,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":0,"Strategy Booked Last 7d":0},{"owner_name":"Jenny Russell","Calls Today":0,"Calls Last 7d":54,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":96,"Strategy Booked Last 7d":0},{"owner_name":"Kelsey-Ellie Ashford","Calls Today":1,"Calls Last 7d":448,"Revenue Last 30d":0,"Calls Last 1 Hour":1,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0.3,"Leaderboard Points (7d)":1180,"Strategy Booked Last 7d":8},{"owner_name":"Lewis Carney","Calls Today":0,"Calls Last 7d":252,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":3,"calls_to_booked_7d_pct":0.6,"Leaderboard Points (7d)":438,"Strategy Booked Last 7d":7},{"owner_name":"Luca Camilleri","Calls Today":0,"Calls Last 7d":85,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":50,"Strategy Sats Last 7d":2,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":198,"Strategy Booked Last 7d":4},{"owner_name":"Mike Rea","Calls Today":0,"Calls Last 7d":217,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":380,"Strategy Booked Last 7d":7},{"owner_name":"Rio Duhaney","Calls Today":0,"Calls Last 7d":273,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":3,"calls_to_booked_7d_pct":0.2,"Leaderboard Points (7d)":588,"Strategy Booked Last 7d":3},{"owner_name":"Daniel Varnaseri","Calls Today":0,"Calls Last 7d":63,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0.5,"Leaderboard Points (7d)":94,"Strategy Booked Last 7d":0},{"owner_name":"Zayn Mahmood","Calls Today":0,"Calls Last 7d":199,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":75,"Strategy Sats Last 7d":5,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":410,"Strategy Booked Last 7d":4},{"owner_name":"Emily Johnson","Calls Today":0,"Calls Last 7d":127,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0.5,"Leaderboard Points (7d)":104,"Strategy Booked Last 7d":0},{"owner_name":"Finn Slade","Calls Today":0,"Calls Last 7d":283,"Revenue Last 30d":0,"Calls Last 1 Hour":0,"booked_to_sat_7d_pct":0,"Strategy Sats Last 7d":0,"calls_to_booked_7d_pct":0,"Leaderboard Points (7d)":202,"Strategy Booked Last 7d":0}];
+  const currentUser = "Jake Clay";
+  const revTargetGross   = 12000;
+  const weeklyTargetGross= 3000;
+  const revTarget        = revTargetGross;
+  const weeklyTarget     = weeklyTargetGross;
+
+  const yearlyTarget = 150000;
+  const dealsTarget = 3;
+  const workIdx = 5;
+  const workTot = 23;
+  const targetDealsToDate = Math.round(dealsTarget * (workIdx / Math.max(1,workTot)));
+  const actualDealsMTD = resMTD;
+  // Helper to make charts
+  function makeChart(id, cfg){
+    const el = ROOT.querySelector('#' + PFX + id);
+    if (!el) return;
+    try {
+      if (el._chart) el._chart.destroy(); // prevents "canvas already in use"
+      el._chart = new Chart(el.getContext('2d'), cfg);
+    } catch (e) {
+      console.error('Chart init failed for', id, e);
+    }
+
+  }
+  // (A) This Hour: Dials target vs actual
+  makeChart('chartHourTarget', {
+    type:'doughnut', data:{ datasets:[{ data:[Math.max(0,callsLastHour), Math.max(0, dialTarget - callsLastHour)], backgroundColor: [OI.green, 'rgba(255,255,255,.08)'] }] },
+    options:{ cutout:'68%', plugins:{ legend:{display:false}, centerText:{ text: () => [callsLastHour+' calls', 'target '+50] } } }
+  });
+
+  // (B) Today: bookings pace (needed vs achieved today)
+  const bookedToday = 0;
+  const needToday   = Math.max(0, Math.ceil( (1) && 1 ?  // dummy guard, values shown in UI text elsewhere
+    (dealsTarget - actualDealsMTD) / Math.max(1,(workTot - workIdx + 1)) : 1));
+  makeChart('chartDailyBookingsPace', {
+    type:'bar', data:{ labels:['Today'], datasets:[
+      { label:'Booked', data:[bookedToday], backgroundColor: OI.green },
+      { label:'Needed to Pace', data:[needToday], backgroundColor: OI.verm }
+    ]}, options:{ scales:{ y:{ beginAtZero:true, ticks: { stepSize: 1 } } }, plugins: { datalabels: { formatter: v => fmtInt(v) } } }
+
+  });
+
+  // (C) Weekly revenue vs target
+  makeChart('chartWeeklyRevenue', {
+    type:'bar', data:{ labels:['Weekly'], datasets:[
+      { label:'Target (personal)', data:[weeklyTarget] },
+      { label:'Last 7d', data:[rev7] }
+    ]}, options:{ scales:{ y:{ beginAtZero:true } }, plugins:{ datalabels:{ anchor:'end', align:'top', offset:-2, formatter:v=>fmtGBP0(v) } } }
+  });
+
+  // (D) Monthly revenue vs target (using 30d as proxy if true MTD unavailable)
+  makeChart('chartMonthlyRevenue', {
+    type:'bar', data:{ labels:['Monthly'], datasets:[
+      { label:'Target (personal)', data:[revTarget] },
+      { label:'Recent (≤30d)', data:[rev30] }
+    ]}, options:{ scales:{ y:{ beginAtZero:true } }, plugins:{ datalabels:{ anchor:'end', align:'top', offset:-2, formatter:v=>fmtGBP0(v) } } }
+  });
+
+  // (E) Monthly deals pace: expected to date vs actual MTD
+  makeChart('chartMonthlyDealsPace', {
+    type:'bar', data:{ labels:['Deals MTD'], datasets:[
+      { label:'On-pace to date', data:[targetDealsToDate] },
+      { label:'Actual', data:[actualDealsMTD] },
+      { label:'Month Target', data:[dealsTarget] }
+    ]}, options:{ indexAxis:'y', scales:{ x:{ beginAtZero:true } } }
+  });
+
+  makeChart('chartBestsRadar', {
+    type: 'bar',
+    data: {
+      labels: ['Calls', 'Bookings', 'Sats'],
+      datasets: [
+        { label: 'Today',  data: [callsToday, 0, 0], backgroundColor: OI.sky },
+        { label: '90d Avg', data: [1731/90, 76/90, 41/90], backgroundColor: OI.green }
+      ]
+    },
+  options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          // keep axis ticks as integers
+          ticks: { callback: v => Math.round(Number(v)).toLocaleString('en-GB') }
+        }
+      },
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            // "90d Avg" -> 3 decimals, "Today" -> integer
+            label: (ctx) => {
+              const isAvg = String(ctx?.dataset?.label || '').toLowerCase().includes('90d');
+              const y = Number(ctx.parsed?.y ?? ctx.parsed ?? 0);
+              const txt = isAvg
+                ? y.toLocaleString('en-GB', { minimumFractionDigits: 3, maximumFractionDigits: 3 })
+                : Math.round(y).toLocaleString('en-GB');
+              return (ctx.dataset?.label ? ctx.dataset.label + ': ' : '') + txt;
+            }
+          }
+        },
+        datalabels: {
+          anchor: 'end', align: 'end',
+          // match tooltip: 3dp for 90d Avg, integer for Today
+          formatter: (v, ctx) => {
+            const isAvg = String(ctx?.dataset?.label || '').toLowerCase().includes('90d');
+            const y = Number(v || 0);
+            return isAvg
+              ? y.toLocaleString('en-GB', { minimumFractionDigits: 3, maximumFractionDigits: 3 })
+              : Math.round(y).toLocaleString('en-GB');
+          }
+        }
+      }
+    }
+  });
+
+
+  const commissionMTD = 8000;
+  makeChart('chartPacing', {
+    type: 'bar',
+    data: {
+      labels: ['Pacing'],
+      datasets: [
+        {
+          label: 'Deals MTD',
+          data: [resMTD],
+          backgroundColor: OI.blue,
+          yAxisID: 'yDeals'
+
+        },
+        {
+          label: 'Revenue MTD (£)',
+          data: [commissionMTD],
+          backgroundColor: OI.sky,
+          yAxisID: 'yRevenue'
+
+        },
+        {
+          label: 'Deals Target',
+          data: [resTarget],
+          backgroundColor: OI.verm,
+          yAxisID: 'yDeals'
+
+        },
+        {
+          label: 'Revenue Target (£)',
+          data: [revTarget],
+          backgroundColor: OI.orange,
+          yAxisID: 'yRevenue'
+
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+          datalabels: { align: 'end', anchor: 'end',
+          formatter: function(value, context) {
+            if (!value) return '';
+            if (context.dataset.yAxisID === 'yRevenue') {
+              return fmtGBP0(value);
+            }
+            return fmtInt(value);
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let label = context.dataset.label || '';
+              if (label) {
+                label += ': ';
+              }
+              if (context.parsed.y !== null) {
+                if (context.dataset.yAxisID === 'yRevenue') {
+                  label += fmtGBP0(context.parsed.y);
+                } else {
+                  label += fmtInt(context.parsed.y);
+                }
+              }
+              return label;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: false }, 
+        yDeals: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          title: {
+            display: true,
+            text: 'Deals'
+          },
+          ticks: {
+            stepSize: 1
+          }
+        },
+        yRevenue: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          title: {
+            display: true,
+            text: 'Revenue (£)'
+          },
+          grid: {
+            drawOnChartArea: false, // only show the grid for the primary axis
+          },
+          ticks: {
+            callback: function(value) {
+              return fmtGBP0(value);
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // Chart 3: Team Comparison (2 charts)
+  const teamLabels7d = teamPivot.map(a => a.owner_name);
+  const teamColors7d = teamPivot.map(a => a.owner_name === currentUser ? OI.green : OI.blue);
+  const teamLabels30d = teamPivot.map(a => a.owner_name);
+  const teamColors30d = teamPivot.map(a => a.owner_name === currentUser ? OI.green : OI.blue);
+  function addTeamAvgAnnotation(data, label) {
+    const avg = data.reduce((sum, val) => sum + val, 0) / (data.length || 1);
+    return {
+      annotations: {
+        line1: {
+          type: 'line',
+          yMin: avg,
+          yMax: avg,
+          borderColor: OI.yellow,
+          borderWidth: 2,
+          borderDash: [6, 6],
+          label: {
+            content: 'Avg: ' + (label.includes('£') ? fmtGBP0(avg) : fmtInt(avg)),
+            enabled: true,
+            position: 'end',
+            backgroundColor: 'rgba(0,0,0,0.6)',
+            font: { weight: '600' }
+          }
+        }
+      }
+    };}
+    // Calls (Last Hour)
+  const callsLastHourData = teamPivot.map(a => +a['Calls Last 1 Hour'] || 0);
+  makeChart('chartTeamCallsLastHour', { type: 'bar', data: { labels: teamLabels7d, datasets: [{ label: 'Calls Last Hour', data: callsLastHourData, backgroundColor: teamColors7d }] }, options: { indexAxis: 'y', responsive: true, plugins: { title: { display: true, text: 'Calls (Last Hour)' }, legend: { display: false }, datalabels: { anchor: 'end', align: 'end', formatter: v => fmtInt(v) }, annotation: addTeamAvgAnnotation(callsLastHourData, '') } } });
+ 
+
+  // Calls (Today)
+  const callsTodayData = teamPivot.map(a => +a['Calls Today'] || 0);
+  makeChart('chartTeamCallsToday', { type: 'bar', data: { labels: teamLabels7d, datasets: [{ label: 'Calls Today', data: callsTodayData, backgroundColor: teamColors7d }] }, options: { indexAxis: 'y', responsive: true, plugins: { title: { display: true, text: 'Calls (Today)' }, legend: { display: false }, datalabels: { anchor: 'end', align: 'end', formatter: v => fmtInt(v) }, annotation: addTeamAvgAnnotation(callsTodayData, '') } } });
+   
+  const revenue30dData = teamPivot.map(a => +a['Revenue Last 30d'] || 0);
+  makeChart('chartTeamRevenue30d', { type: 'bar', data: { labels: teamLabels30d, datasets: [{ label: 'Revenue Last 30d', data: revenue30dData, backgroundColor: teamColors30d }] }, options: { indexAxis: 'y', responsive: true, plugins: { title: { display: true, text: 'Revenue (Last 30d)' }, legend: { display: false }, datalabels: { anchor: 'end', align: 'end', formatter: v => fmtGBP0(v) }, annotation: addTeamAvgAnnotation(revenue30dData, '£') } } });
+ 
+  // Calls (7d)
+  const calls7dData = teamPivot.map(a => +a['Calls Last 7d'] || 0);
+  makeChart('chartTeamCalls7d', { type: 'bar', data: { labels: teamLabels7d, datasets: [{ label: 'Calls Last 7d', data: calls7dData, backgroundColor: teamColors7d }] }, options: { indexAxis: 'y', responsive: true, plugins: { title: { display: true, text: 'Calls (Last 7d)' }, legend: { display: false }, datalabels: { anchor: 'end', align: 'end', formatter: v => fmtInt(v) }, annotation: addTeamAvgAnnotation(calls7dData, '') } } });
+ // Booked (7d)
+  const booked7dData = teamPivot.map(a => +a['Strategy Booked Last 7d'] || 0);
+  makeChart('chartTeamBooked7d', { type: 'bar', data: { labels: teamLabels7d, datasets: [{ label: 'Booked Last 7d', data: booked7dData, backgroundColor: teamColors7d }] }, options: { indexAxis: 'y', responsive: true, plugins: { title: { display: true, text: 'Booked (Last 7d)' }, legend: { display: false }, datalabels: { anchor: 'end', align: 'end', formatter: v => fmtInt(v) }, annotation: addTeamAvgAnnotation(booked7dData, '') } } });
+
+  // Strategy Sats (7d)
+  const sats7dData = teamPivot.map(a => +a['Strategy Sats Last 7d'] || 0);
+  makeChart('chartTeamSats7d', { type: 'bar', data: { labels: teamLabels7d, datasets: [{ label: 'Sats Last 7d', data: sats7dData, backgroundColor: teamColors7d }] }, options: { indexAxis: 'y', responsive: true, plugins: { title: { display: true, text: 'Strategy Sits (Last 7d)' }, legend: { display: false }, datalabels: { anchor: 'end', align: 'end', formatter: v => fmtInt(v) }, annotation: addTeamAvgAnnotation(sats7dData, '') } } });
+
+  // Efficiency scatter: x=calls, y=booked%, r=rev30d
+  makeChart('chartTeamEfficiency', {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Calls vs Booked% (bubble=£30d)',
+        data: teamPivot.map(a => {
+          const x = +a['Calls Last 7d'] || 0;
+          const pctRaw = +a['calls_to_booked_7d_pct'] || 0;   // tolerate 0–1 or 0–100
+          const y = pctRaw <= 1 ? pctRaw * 100 : pctRaw;      // normalize to %
+          const rev30 = Math.max(0, +a['Revenue Last 30d'] || 0);
+          return { x, y, r: Math.max(4, Math.sqrt(rev30) / 100) };
+        }),
+        parsing: false,
+        pointRadius: ctx => ctx.raw?.r || 4
+      }]
+    },
+    options: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const agent = teamPivot[context.dataIndex];
+              if (!agent) return '';
+              const name = agent.owner_name;
+              const calls = agent['Calls Last 7d'] || 0;
+              const bookedPct = ((agent['calls_to_booked_7d_pct'] || 0) * 100).toFixed(1) + '%';
+              const rev = fmtGBP0(agent['Revenue Last 30d'] || 0);
+              return name + ': ' + calls + ' calls, ' + bookedPct + ' booked, ' + rev;
+            }
+          }
+        }
+      },
+      scales: { y: { beginAtZero:true, max:100, ticks:{ callback:v=>v+'%' } }, x: { beginAtZero:true } }
+    }  });
+  // 1) Funnel chart
+  makeChart('chartFunnel', {
+    type: 'bar',
+    data: { labels: ['Book','Strategy-sit','Cashflow-sit','Deal'],
+      datasets: [{ label: 'Rate (%)', data: [funnel.book*100,funnel.strat*100,funnel.cf*100,funnel.deal*100],
+        backgroundColor: [OI.orange,OI.sky,OI.green,OI.blue] }] },
+        options: { responsive:true, plugins:{ legend:{display:false}, datalabels:{ anchor:'end', align:'top', formatter:v=>formatFloat(v)+'%' } }, scales:{ y:{ beginAtZero:true, max:100, ticks:{ callback:v=>v+'%' } } } }
+  });
+
+  // 2) Cumulative dial→deal
+  makeChart('chartFunnelCum', {
+    type:'bar',
+    data:{ labels:['Dial to Deal'], datasets:[{ data:[dialToDeal*100] }] },
+    options:{ responsive:true, plugins:{ legend:{display:false}, datalabels:{ anchor:'end', align:'top', formatter:v=>formatFloat(v)+'%' } }, scales:{ y:{ beginAtZero:true, max:100 } } }
+  });
+
+  // 3) EV Waterfall (60 dials)
+  (function(){
+    const dials = 60;
+    const booked = dials * funnel.book;
+    const sits   = booked * funnel.strat;
+    const cfs    = sits * funnel.cf;
+    const deals  = cfs * funnel.deal;
+    const pounds = deals * 4000;
+    makeChart('chartEV', {
+      type:'bar',
+      data:{ labels:['Dials','Booked','Strat Sat','CF Sat','Deals','£'],
+        datasets:[{ label:'Expected', data:[dials, booked, sits, cfs, deals, pounds], backgroundColor:[OI.purple,OI.orange,OI.sky,OI.green,OI.blue,OI.yellow] }] },
+      options:{ responsive:true, plugins:{ legend:{display:false},
+        tooltip:{ callbacks:{ label:(c)=>{ const y=c.parsed.y; return c.dataIndex===5 ? ('£'+Math.round(y).toLocaleString('en-GB')) : formatFloat(y); } } },
+        datalabels:{ anchor:'end', align:'end', formatter:v=> (Number.isFinite(v) ? formatFloat(v) : '') } },
+        scales:{ y:{ beginAtZero:true, ticks:{ callback:(v)=>formatFloat(v) } } } }
+
+    });
+  })();
+
+  // 4) Activity (small multiples)
+  const callsWin = [callsToday,calls7d,calls30d,calls60d,calls90d];
+  const bookedWin = [0, 1, 22, 36, 76];
+  const stratWin  = [0, 6, 24, 27, 41];
+  const cfWin     = [0, 1, 7, 11, 15];
+  const decisionWin=[0, 1, 2, 3, 7];
+  const resWin    = [0, 0, 2, 2, 3];
+  function mini(id, data, color){
+    makeChart(id, {
+      type: 'bar',
+      data: { labels: winLabels, datasets: [{ data, backgroundColor: color || OI.purple }] },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const y = Number(ctx.parsed?.y ?? ctx.parsed ?? 0);
+                const txt = Math.round(y).toLocaleString('en-GB');
+                return (ctx.dataset?.label ? ctx.dataset.label + ': ' : '') + txt;
+              }
+            }
+          },
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            formatter: (v) => Math.round(+v || 0).toLocaleString('en-GB')
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1,
+              callback: (v) => Math.round(+v).toLocaleString('en-GB')
+            }
+          }
+        }
+      }
+    });
+  }
+
+  mini('chartActCalls',    callsWin,   OI.purple);
+  mini('chartActBooked',   bookedWin,  OI.orange);
+  mini('chartActStrat',    stratWin,   OI.sky);
+  mini('chartActCf',       cfWin,      OI.green);
+  mini('chartActDecision', decisionWin,OI.blue);
+  mini('chartActRes',      resWin,     OI.verm);
+
+
+  // 5) Gauge last hour vs percentiles
+  const p50i_h = Math.round(p50_hour), p90i_h = Math.round(p90_hour), topHouri = Math.round(topHour);
+  makeChart('chartGaugeHour', {
+    type:'doughnut',
+ data:{ datasets:[{ data:[callsLastHour, Math.max(0, topHour - callsLastHour)], backgroundColor:[OI.blue, 'rgba(255,255,255,.08)'] }] },
+    options:{
+      responsive:true, circumference:180, rotation:-90, cutout:'70%',
+      plugins:{ legend:{display:false}, centerText:{ text: () => [callsLastHour+' calls', 'p50:'+p50i_h+'  p90:'+p90i_h+'  top:'+topHouri] } }
+    }
+  });
+
+  // Gauge today vs percentiles
+  const topToday = Math.max(1, ...teamPivot.map(a => a['Calls Today'] || 0));
+  const p50i_d = Math.round(p50_today), p90i_d = Math.round(p90_today), topTodayi = Math.round(topToday);
+  makeChart('chartGaugeToday', {
+    type:'doughnut',
+    data:{ datasets:[{ data:[callsToday, Math.max(0, topToday - callsToday)], backgroundColor:[OI.orange, 'rgba(255,255,255,.08)'] }] },
+    options:{
+      responsive:true, circumference:180, rotation:-90, cutout:'70%',
+      plugins:{ legend:{display:false}, centerText:{ text: () => [callsToday+' calls', 'p50:'+p50i_d+'  p90:'+p90i_d+'  top:'+topTodayi] } }
+    }
+  });
+
+  // 6) Today vs averages
+  makeChart('chartTodayVsAvg', {
+    type:'bar',
+    data:{ labels:['Today','7d avg','30d avg'], datasets:[{ data:[callsToday, 26.857142857142858, 21.1], backgroundColor:[OI.orange,OI.sky,OI.green] }] },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{ display:false },
+        tooltip:{
+          callbacks:{
+            label:(ctx)=>{
+              const idx = ctx.dataIndex;                      // 0 = Today, 1 = 7d avg, 2 = 30d avg
+              const y = Number(ctx.parsed?.y ?? 0);
+              const txt = (idx === 0)
+                ? Math.round(y).toLocaleString('en-GB')       // Today -> integer
+                : y.toLocaleString('en-GB', { maximumFractionDigits: 3 }); // averages -> keep decimals (≤3dp)
+              return (ctx.dataset?.label ? ctx.dataset.label + ': ' : '') + txt;
+            }
+          }
+        },
+        datalabels:{
+          anchor:'end', align:'top',
+          formatter:(v, ctx)=>{
+            return (ctx.dataIndex === 0)
+              ? Math.round(+v || 0).toLocaleString('en-GB')   // Today
+              : (+v || 0).toLocaleString('en-GB', { maximumFractionDigits: 3 }); // avgs
+          }
+        }
+      },
+      scales:{ y:{ beginAtZero:true } }
+    }
+    }
+  );
+
+  // Prod Hour by Hour (connected-rate adjusted) = calls × (7d connected %)
+  (function(){
+    const labels    = (HIDE_NON_WORK_HOURS ? hoursWork : hours);
+    const callsT    = (HIDE_NON_WORK_HOURS ? callsTodayByHourWork : callsTodayByHour);
+    const callsAvg  = (HIDE_NON_WORK_HOURS ? avgCalls7dWork   : avgCalls7d);
+    const connFrac  = (HIDE_NON_WORK_HOURS ? connectedRate7dWork : connectedRate7d).map(v => (+v||0)/100);
+    const prodToday = callsT.map((c,i)=> Number(((+c||0) * (connFrac[i]||0)).toFixed(3)));
+    const prodAvg   = callsAvg.map((c,i)=> Number(((+c||0) * (connFrac[i]||0)).toFixed(3)));
+
+    makeChart('chartProdHourly', {
+      type:'line',
+      data:{ labels, datasets:[
+        { label:'Today (calls×connect%)',   data:prodToday, tension:.2 },
+        { label:'7d avg (calls×connect%)', data:prodAvg,   tension:.2 }
+      ]},
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{ position:'bottom' },
+        datalabels:{
+          align: context => context.datasetIndex === 0 ? 'top' : 'bottom',
+          formatter:(v)=> (Number(v)||0).toLocaleString('en-GB', { minimumFractionDigits: 3, maximumFractionDigits: 3 })
+        },
+        tooltip:{
+          callbacks:{
+            label:(ctx)=>{
+              const y = Number(ctx.parsed.y ?? 0);
+              const three = y.toLocaleString('en-GB', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+              return (ctx.dataset?.label ? ctx.dataset.label + ': ' : '') + three;
+            }
+          }
+        }
+      },
+      scales:{
+        y:{
+          beginAtZero:true,
+          // force 3 decimals on ticks
+          ticks:{
+            callback:(v)=> Number(v).toLocaleString('en-GB', { minimumFractionDigits: 3, maximumFractionDigits: 3 })
+          }
+        }
+      }
+    }
+
+    });
+  })();
+
+  // 7) Stage distribution
+  if (stageLabels.length) { makeChart('chartStage', {
+    type:'bar',
+    data:{ labels:stageLabels, datasets:[{ data:stageVals, backgroundColor:OI.sky }] },
+    options:{ responsive:true, plugins:{ legend:{display:false} }, scales:{ y:{ beginAtZero:true } } }
+  }); } else {
+    const holder = ROOT.querySelector('#' + PFX + 'chartStage')?.parentElement;
+    if (holder) holder.innerHTML = '<div class="kpi" style="height:100%;display:flex;align-items:center;justify-content:center;text-align:center;"><div class="label">No stage data available</div></div>';
+  }
+
+  // 8) Loss reasons
+ makeChart('chartLoss',    { type:'doughnut', data:{ labels:Object.keys(LOSS),    datasets:[{ data:Object.values(LOSS)    }] }, options:{ responsive:true, maintainAspectRatio: true, plugins:{ legend:{position:'bottom'} } } });
+ makeChart('chartLossAll', { type:'doughnut', data:{ labels:Object.keys(LOSSALL), datasets:[{ data:Object.values(LOSSALL) }] }, options:{ responsive:true, maintainAspectRatio: true, plugins:{ legend:{position:'bottom'} } } });
+
+  // 9) Hourly calls vs 7d avg
+  makeChart('chartHoursCalls', {
+    type: 'line',
+    data: {
+      labels: (HIDE_NON_WORK_HOURS ? hoursWork : hours),
+      datasets: [
+        { label: 'Today',  data: (HIDE_NON_WORK_HOURS ? callsTodayByHourWork : callsTodayByHour), tension: .2 },
+        { label: '7d avg', data: (HIDE_NON_WORK_HOURS ? avgCalls7dWork   : avgCalls7d),          tension: .2 }
+      ],
+      datalabels: {
+        align: context => context.datasetIndex === 0 ? 'top' : 'bottom',
+ formatter: v => Math.round(+v||0)
+      }
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' },
+        datalabels: {
+          align: context => context.datasetIndex === 0 ? 'top' : 'bottom',
+          formatter: v => Math.round(+v||0)
+        }
+      },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // 10) Connected rate by hour (7d)
+  makeChart('chartHourContact', {
+    type:'line',
+    data:{ labels:(HIDE_NON_WORK_HOURS? hoursWork : hours), datasets:[{ label:'7d connected %', data:(HIDE_NON_WORK_HOURS? connectedRate7dWork : connectedRate7d) }] },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{ position:'bottom' },
+        datalabels:{ formatter:v => (Number(v)||0).toLocaleString('en-GB', { maximumFractionDigits: 1 }) + '%' }
+      },
+      scales:{ y:{ beginAtZero:true, max:100, ticks:{ callback:v=>v+'%' } } }
+    }  });
+
+  // 11) Threshold chart
+  makeChart('chartThreshold', {
+    type:'doughnut',
+    data:{ labels:['MTD','To threshold'], datasets:[{ data:[done, remain], backgroundColor:[OI.green, OI.verm] }] },
+    options:{ responsive:true, cutout:'60%',
+      plugins:{ legend:{ position:'bottom' }, tooltip:{ callbacks:{ label:(c)=> c.label+': £'+Math.round(c.parsed).toLocaleString('en-GB') } },
+        centerText:{ text: () => ['MTD', '£'+Math.round(done).toLocaleString('en-GB')] } } }
+  });
+
+  // 12) Hour-by-hour meetings
+  makeChart('chartHours', {
+    type:'bar',
+    data:{ labels:HOURLY.map(h => h.hour), datasets:[{ label:'Meetings overlapping', data: HOURLY.map(h => h.meetings), backgroundColor:OI.yellow }] },
+    options:{ responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, ticks:{ stepSize:1} } } }
+  });
+
+  // 13) Lead sources
+  makeChart('chartLeadSrc', { type:'doughnut', data:{ labels:leadSrcLabels, datasets:[{ data:leadSrcVals }] }, options:{ responsive:true, plugins:{ legend:{ position:'bottom' } } } });
+
+  // 14) Reservations progress
+  makeChart('chartResProgress', {
+    type:'bar',
+    data:{
+      labels:['Reservations'],
+      datasets:[
+        { label:'MTD', data:[resMTD], backgroundColor:OI.blue },
+        { label:'Target', data:[resTarget], backgroundColor:OI.verm }
+      ]
+    },
+options:{
+  responsive:true,
+  indexAxis:'y',
+  plugins:{
+    legend:{ display:false },
+    datalabels:{
+      anchor:'end', align:'end',
+      formatter:(v)=> Math.round(+v || 0).toLocaleString('en-GB')
+    },
+    tooltip:{
+      callbacks:{
+        label:(c)=> (c.dataset?.label ? c.dataset.label + ': ' : '') +
+                   Math.round(c.parsed?.x ?? 0).toLocaleString('en-GB')
+      }
+    }
+  },
+  scales:{
+    x:{ beginAtZero:true, suggestedMax: Math.max(resTarget, resMTD)+1,
+        ticks:{ stepSize:1, callback:(v)=>Math.round(+v).toLocaleString('en-GB') } }
+  }
+}
+
+  });
+
+
+  // 15) Revenue windows
+  makeChart('chartRevenueWin', {
+    type:'bar', data:{ labels:['7d','30d','60d','90d'], datasets:[{ label:'£', data:[rev7,rev30,rev60,rev90], backgroundColor:OI.purple }] },
+    options:{ responsive:true, plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label:(c)=>'£'+Math.round(c.parsed.y).toLocaleString('en-GB') } } }, scales:{ y:{ beginAtZero:true } } }
+  });
+
+  // 16) Wins/Losses timeline
+  makeChart('chartWinsLoss', {
+    type:'line',
+    data:{ labels:timelineLabels, datasets:[
+      { label:'Wins', data:tlWins,   tension:.2, borderColor:OI.green },
+      { label:'Losses', data:tlLoss, tension:.2, borderColor:OI.verm },
+      { label:'Reservations', data:tlRes, tension:.2, borderColor:OI.blue }
+    ]},
+    options:{ responsive:true, plugins:{ legend:{ position:'bottom' } }, scales:{ y:{ beginAtZero:true } } }
+  });
+
+  // 17) Productivity Comparison
+  makeChart('chartProdCompare', {
+    type: 'bar',
+    data: {
+      labels: ['Today', 'This Week', 'This Month'],
+      datasets: [{
+        label: 'Prod %',
+        data: [prodToday, prodWTD, prodMTD],
+        backgroundColor: [OI.sky, OI.green, OI.blue]
+      }]
+    },
+    options: {
+      responsive: true, plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => v + '%' } } }
+    }
+  });
+
+  // 18) Heat coloring for KPIs (vintage cherry → soft green)
+  (function colorizeHeat(){
+    const els = document.querySelectorAll('.heat');
+    els.forEach(el=>{
+      const dir = el.getAttribute('data-heat')||'up';
+      const max = +el.getAttribute('data-max')||0;
+      const raw = +el.getAttribute('data-val') || (()=>{
+        const s = el.textContent.replace(/[£,%s,]/g,'');
+        const n = parseFloat(s); return isFinite(n)?n:0;
+      })();
+      let t = 0;
+      if (/%$/.test(el.textContent.trim())) {
+        t = Math.max(0, Math.min(1, raw/100));
+      } else if (max>0) {
+        t = Math.max(0, Math.min(1, raw/max));
+      } else {
+        t = Math.max(0, Math.min(1, Math.sqrt(raw)/10)); // gentle fallback
+      }
+      const good = (dir==='up' ? t>=0.5 : t<0.25 ? true : false);
+      if (good) el.classList.add('good'); else el.classList.remove('good');
+    });
+  })();
+
+})();
+</script>
+
+</section><!-- END-PAGES --></div>
+  </div>
+  <script>
+  (function(){
+    function pages(){
+      const inContainer = Array.from(document.querySelectorAll('#pages .page'));
+      return inContainer.length ? inContainer : Array.from(document.querySelectorAll('.page'));
+    }
+  function show(i) {
+      const ps = pages(); // Get the list of all report sections
+      if (!ps.length) return; // Exit if no pages are found
+  
+      // Ensure the index 'i' is within the valid range of available pages
+      i = Math.max(0, Math.min(ps.length - 1, i));
+  
+      // 1. Forcefully hide EVERY report section
+      ps.forEach(p => {
+          p.style.display = 'none';
+      });
+  
+      // 2. Show ONLY the target section
+      // This check prevents errors if ps[i] is somehow undefined
+      if (ps[i]) {
+          ps[i].style.display = 'block';
+      }
+  
+      // Update the navigation text (e.g., "14:00")
+      const w = document.getElementById('which');
+      if (w && ps[i]) {
+        const dh = ps[i].dataset.hour || '';
+        w.textContent = dh.length === 4 ? (dh.slice(0, 2) + ':' + dh.slice(2, 4)) : (dh + ':00');
+      }
+  
+      // Update the URL hash to match the visible report
+      if (ps[i]) {
+          location.hash = ps[i].id;
+      }
+  
+      // Trigger a resize event to ensure charts render correctly in the now-visible section
+      requestAnimationFrame(() => {
+        const vis = pages()[i];
+        if (!vis) return;
+        vis.querySelectorAll('canvas').forEach(c => c._chart?.resize());
+      });
+  }
+
+
+    let cur = Math.max(0, pages().findIndex(p => ('#' + p.id) === location.hash));
+    document.getElementById('prev').onclick = () => { cur = Math.max(0, cur - 1); show(cur); };
+    document.getElementById('next').onclick = () => { cur = Math.min(pages().length - 1, cur + 1); show(cur); };
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  document.getElementById('prev').click();
+      if (e.key === 'ArrowRight') document.getElementById('next').click();
+    });
+    window.addEventListener('hashchange', () => {
+      const idx = pages().findIndex(p => ('#' + p.id) === location.hash);
+      if (idx >= 0) { cur = idx; show(cur); }
+    });
+
+    show(cur);
+  })();
+
+
+  </script>
+</body></html>
