@@ -1,0 +1,492 @@
+<!doctype html><html><head><title>Daily Reports</title></head><body><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="mgr-1424">
+  <div class="wrapper">
+    
+    <section class="header">
+      <div class="h-top">
+        <div>
+          <div class="title">📊 Sales Performance Dashboard - Mark Pearson</div>
+          <div class="sub">Monday, 10/11/2025 • 14:24 (Asia/Dubai)</div>
+        </div>
+      </div>
+    </section>
+    <section class="grid">
+      
+    <div class="card span-12">
+      <h2>🚀 Executive Summary</h2>
+      <div class="md"><p>Team of 8: 490% to MTD revenue target (£796K surplus). 2 agents require IMMEDIATE intervention (Zayn, Leah). Top issue: LOW_ACTIVITY across high-risk members. Forecast: Will exceed monthly revenue target by over £1.5M, but future pipeline risk is critical.</li></ul></div>
+      <div class="hr"></div>
+      <div class="kpis grid-6">
+        <div class="kpi">
+          <div class="label">Team Size</div>
+          <div class="value">8</div>
+          <div class="trend">agents</div>
+        </div>
+        <div class="kpi">
+          <div class="label">MTD Revenue</div>
+          <div class="value">£1,000,567</div>
+          <div class="trend">490.1% of target</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Revenue Gap</div>
+          <div class="value positive">£796,400</div>
+          <div class="trend">ahead of target</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Revenue at Risk</div>
+          <div class="value">£90,278</div>
+          <div class="trend">from 3 agents</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Calls Today</div>
+          <div class="value">302</div>
+          <div class="trend">38 per agent</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Bookings Today</div>
+          <div class="value">6</div>
+          <div class="trend">2.0% conversion</div>
+        </div>
+      </div>
+    </div>
+      
+    <div class="card span-8">
+      <h2>⏰ Today's Hourly Performance</h2>
+      <canvas id="hourlyChart" height="80"></canvas>
+      <div class="chart-legend">
+        <span class="legend-item"><span class="dot blue"></span> Calls</span>
+        <span class="legend-item"><span class="dot green"></span> Bookings</span>
+        <span class="legend-item"><span class="dot orange"></span> Active Agents</span>
+      </div>
+    </div>
+      
+    <div class="card span-4">
+      <h2>🎯 Target Progress (MTD)</h2>
+      <div class="progress-container">
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>First Sits</span>
+            <span class="progress-value">33 / 75</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 44%"></div>
+          </div>
+          <div class="progress-pct">44%</div>
+        </div>
+        
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>Second Sits</span>
+            <span class="progress-value">16 / 44</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 36.36363636363637%"></div>
+          </div>
+          <div class="progress-pct">36%</div>
+        </div>
+        
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>Revenue</span>
+            <span class="progress-value">£1,000,567 / £204,167</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%"></div>
+          </div>
+          <div class="progress-pct">490%</div>
+        </div>
+      </div>
+    </div>
+      
+    <div class="card span-6">
+      <h2>📈 30-Day Call Trends</h2>
+      <canvas id="dailyTrendsChart" height="100"></canvas>
+    </div>
+      
+    <div class="card span-6">
+      <h2>💰 6-Month Revenue & Sits</h2>
+      <canvas id="monthlyRevenueChart" height="100"></canvas>
+    </div>
+      
+    <div class="card span-6">
+      <h2>👥 Team Performance Distribution</h2>
+      <canvas id="distributionChart" height="100"></canvas>
+    </div>
+    
+    <div class="card span-6">
+      <h2>⚠️ Risk Distribution</h2>
+      <canvas id="riskChart" height="100"></canvas>
+    </div>
+      
+      <div class="card span-12">
+        <h2>🌟 Individual Agent Performance</h2>
+        <div class="agent-grid">
+          
+              <div class="agent-card high-risk">
+                <div class="agent-header">
+                  <div class="agent-name">Lewis Carney</div>
+                  <div class="risk-badge critical">
+                    82
+                  </div>
+                </div>
+                
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">16</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£149,500</span>
+                  </div>
+                </div>
+                
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-label">1,794% to revenue target</span>
+                </div>
+                
+                <div class="agent-trend ">
+                  WARM • WoW: -8.8%
+                </div>
+                
+                
+                  <div class="agent-alert">
+                    <strong>LOW ACTIVITY</strong>
+                    <br><small>Check technical access and system issues</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card high-risk">
+                <div class="agent-header">
+                  <div class="agent-name">Zayn Mahmood</div>
+                  <div class="risk-badge critical">
+                    80
+                  </div>
+                </div>
+                
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">12</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">1</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£885,817</span>
+                  </div>
+                </div>
+                
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label">0% to revenue target</span>
+                </div>
+                
+                <div class="agent-trend negative">
+                  COLD • WoW: 40.4%
+                </div>
+                
+                
+                  <div class="agent-alert">
+                    <strong>LOW ACTIVITY</strong>
+                    <br><small>Call immediately to check status</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card high-risk">
+                <div class="agent-header">
+                  <div class="agent-name">Leah Higginson</div>
+                  <div class="risk-badge high">
+                    70
+                  </div>
+                </div>
+                
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£1,305,360</span>
+                  </div>
+                </div>
+                
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label">0% to revenue target</span>
+                </div>
+                
+                <div class="agent-trend negative">
+                  COLD • WoW: 113.6%
+                </div>
+                
+                
+                  <div class="agent-alert">
+                    <strong>LOW ACTIVITY</strong>
+                    <br><small>Call immediately to check status</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card high-risk">
+                <div class="agent-header">
+                  <div class="agent-name">Tom Hepworth</div>
+                  <div class="risk-badge high">
+                    70
+                  </div>
+                </div>
+                
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">2</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£1,301,906</span>
+                  </div>
+                </div>
+                
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-label">1,270% to revenue target</span>
+                </div>
+                
+                <div class="agent-trend negative">
+                  COLD • WoW: 78.7%
+                </div>
+                
+                
+                  <div class="agent-alert">
+                    <strong>LOW ACTIVITY</strong>
+                    <br><small>Check technical access and system issues</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card ">
+                <div class="agent-header">
+                  <div class="agent-name">Mike Rea</div>
+                  <div class="risk-badge medium">
+                    55
+                  </div>
+                </div>
+                
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">50</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">2</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£0</span>
+                  </div>
+                </div>
+                
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label">0% to revenue target</span>
+                </div>
+                
+                <div class="agent-trend ">
+                  WARM • WoW: 27.0%
+                </div>
+                
+                
+              </div>
+            
+              <div class="agent-card ">
+                <div class="agent-header">
+                  <div class="agent-name">Luca Camilleri</div>
+                  <div class="risk-badge medium">
+                    55
+                  </div>
+                </div>
+                
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">65</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">2</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£597,384</span>
+                  </div>
+                </div>
+                
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-label">517% to revenue target</span>
+                </div>
+                
+                <div class="agent-trend ">
+                  WARM • WoW: 34.1%
+                </div>
+                
+                
+              </div>
+            
+              <div class="agent-card ">
+                <div class="agent-header">
+                  <div class="agent-name">Rio Duhaney</div>
+                  <div class="risk-badge low">
+                    32
+                  </div>
+                </div>
+                
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">74</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">1</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£0</span>
+                  </div>
+                </div>
+                
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label">0% to revenue target</span>
+                </div>
+                
+                <div class="agent-trend ">
+                  WARM • WoW: -20.7%
+                </div>
+                
+                
+              </div>
+            
+              <div class="agent-card ">
+                <div class="agent-header">
+                  <div class="agent-name">Jake Clay</div>
+                  <div class="risk-badge low">
+                    25
+                  </div>
+                </div>
+                
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">83</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£302,751</span>
+                  </div>
+                </div>
+                
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-label">1,090% to revenue target</span>
+                </div>
+                
+                <div class="agent-trend ">
+                  WARM • WoW: 65.7%
+                </div>
+                
+                
+              </div>
+            
+        </div>
+      </div>
+    
+      
+    <div class="card span-6">
+      <h2>🧠 Team Performance Analysis</h2>
+      <div class="md"><p>The team is dangerously polarized. While revenue is at 490% of MTD target, this is masking a critical failure in leading indicators, with first sits attainment at only 44%. Momentum is split, with 5 WARM agents and 3 COLD. Call volume shows mixed WoW trends, but bookings are a concern, with 5 of 8 agents showing a WoW decrease, signaling potential future revenue gaps and unsustainable reliance on early month performance.</li></ul></div>
+    </div>
+    
+    <div class="card span-6">
+      <h2>⚠️ Risk Assessment</h2>
+      <div class="md"><p>IMMEDIATE (action NOW): 1) Leah Higginson has made 0 calls today (risk score 70). 2) Zayn Mahmood has only 12 calls (risk score 80). Both are flagged for IMMEDIATE intervention for LOW_ACTIVITY. URGENT (today): Lewis Carney (risk score 82) also has critical LOW_ACTIVITY and requires a 1-on-1. HIGH: The team is tracking at only 44% of its first sits target, jeopardizing the Q4 pipeline despite current revenue success.</li></ul></div>
+    </div>
+    
+    <div class="card span-12">
+      <h2>💡 Recommended Actions</h2>
+      <div class="md"><p>LOW_ACTIVITY (Zayn, Leah, Lewis): Call Zayn and Leah immediately to diagnose the cause of their inactivity. For Lewis, check system access for technical blockers. CONVERSION_PROBLEM (Mike, Luca): Conduct an immediate review of their last 5 call recordings to diagnose objection handling. TEAM: Address the team-wide first sits gap of 42. A daily target of +2 sits per day is required to rebuild the pipeline and mitigate future revenue shortfalls.</li></ul></div>
+    </div>
+    </section>
+  </div></section><!-- END-PAGES --></div></body></html>
