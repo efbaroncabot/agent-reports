@@ -1,4 +1,558 @@
 <!doctype html><html><head><title>Daily Reports</title></head><body><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="mgr-1605">
+  <div class="wrapper">
+    
+    <section class="header">
+      <div class="title">📊 Mark Pearson Performance Dashboard</div>
+      <div class="subtitle">Monday, 10/11/2025 • 16:05 Asia/Dubai</div>
+    </section>
+    <section class="grid">
+      
+    <div class="card span-12">
+      <h2>🚀 Executive Summary</h2>
+      <div class="md"><p>Team of 8 is at 490.1% of MTD revenue target (£1M vs £204K target), a surplus of £796K. However, this masks pipeline risk, with First Sits at only 45.3% of target. There are 2 IMMEDIATE risks: Luca Camilleri (score 70, INACTIVE_NOW) and Leah Higginson (score 70, LOW_ACTIVITY). Zayn Mahmood holds the highest risk score at 85 for SHOW_RATE_ISSUE. CONVERSION_PROBLEM is the most prevalent issue, affecting 3/8 agents. The last hour saw a collapse in momentum to 72 calls. Forecast is strong at £2.2M, but a £1.8M opportunity remains untapped.</li></ul></div>
+      <div class="hr"></div>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi-label">Team Size</div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-trend">agents</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">MTD Revenue</div>
+          <div class="kpi-value">£1,000,567</div>
+          <div class="kpi-trend">4.9% of target</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Revenue Gap</div>
+          <div class="kpi-value success">£796,400</div>
+          <div class="kpi-trend">ahead</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Revenue at Risk</div>
+          <div class="kpi-value danger">£90,278</div>
+          <div class="kpi-trend">2 agents</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Calls Today</div>
+          <div class="kpi-value">534</div>
+          <div class="kpi-trend">67 per agent</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Bookings Today</div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-trend">0.0% conv</div>
+        </div>
+      </div>
+    </div>
+      
+    <div class="card span-8">
+      <h2>⏰ Today's Hourly Performance</h2>
+      <div class="chart-container">
+        <canvas id="hourlyChart-mgr-1605"></canvas>
+      </div>
+      <div class="chart-legend">
+        <span class="legend-item"><span class="dot blue"></span> Calls</span>
+        <span class="legend-item"><span class="dot green"></span> Bookings</span>
+        <span class="legend-item"><span class="dot orange"></span> Active Agents</span>
+      </div>
+    </div>
+      
+    <div class="card span-4">
+      <h2>🎯 Target Progress (MTD)</h2>
+      <div class="progress-container">
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>First Sits</span>
+            <span class="progress-value">34 / 75</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 45.3%"></div>
+          </div>
+          <div class="progress-pct">45%</div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>Second Sits</span>
+            <span class="progress-value">17 / 44</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 38.63636363636363%"></div>
+          </div>
+          <div class="progress-pct">39%</div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label">
+            <span>Revenue</span>
+            <span class="progress-value">£1,000,567 / £204,167</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%"></div>
+          </div>
+          <div class="progress-pct">490%</div>
+        </div>
+      </div>
+    </div>
+      
+    <div class="card span-6">
+      <h2>📈 14-Day Call Trends</h2>
+      <div class="chart-container">
+        <canvas id="dailyTrendsChart-mgr-1605"></canvas>
+      </div>
+    </div>
+      
+    <div class="card span-6">
+      <h2>💰 6-Month Revenue & Sits</h2>
+      <div class="chart-container">
+        <canvas id="monthlyRevenueChart-mgr-1605"></canvas>
+      </div>
+    </div>
+      
+    <div class="card span-6">
+      <h2>👥 Team Distribution</h2>
+      <div class="chart-container">
+        <canvas id="distributionChart-mgr-1605"></canvas>
+      </div>
+    </div>
+    <div class="card span-6">
+      <h2>⚠️ Risk Distribution</h2>
+      <div class="chart-container">
+        <canvas id="riskChart-mgr-1605"></canvas>
+      </div>
+    </div>
+
+      
+      <div class="card span-12">
+        <h2>🌟 Individual Agent Performance</h2>
+        <div class="agent-grid">
+          
+              <div class="agent-card critical" style="--card-index: 0">
+                <div class="agent-header">
+                  <div class="agent-name">Zayn Mahmood</div>
+                  <div class="risk-badge critical">85</div>
+                </div>
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">23</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">1</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£885,817</span>
+                  </div>
+                </div>
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label">0% to revenue target</span>
+                </div>
+                <div class="agent-trend negative">
+                  COLD • WoW: 0.3%
+                </div>
+                
+                  <div class="agent-alert">
+                    <strong>SHOW RATE ISSUE</strong>
+                    <br><small>Review booking quality and follow-up process</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card high" style="--card-index: 1">
+                <div class="agent-header">
+                  <div class="agent-name">Tom Hepworth</div>
+                  <div class="risk-badge high">70</div>
+                </div>
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">22</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£1,301,906</span>
+                  </div>
+                </div>
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-label">1,270% to revenue target</span>
+                </div>
+                <div class="agent-trend ">
+                  WARM • WoW: 0.5%
+                </div>
+                
+                  <div class="agent-alert">
+                    <strong>CONVERSION PROBLEM</strong>
+                    <br><small>Review last 5 calls for objection handling</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card high" style="--card-index: 2">
+                <div class="agent-header">
+                  <div class="agent-name">Luca Camilleri</div>
+                  <div class="risk-badge high">70</div>
+                </div>
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">93</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">2</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£597,384</span>
+                  </div>
+                </div>
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-label">517% to revenue target</span>
+                </div>
+                <div class="agent-trend negative">
+                  COLD • WoW: 0.4%
+                </div>
+                
+                  <div class="agent-alert">
+                    <strong>INACTIVE NOW</strong>
+                    <br><small>Call immediately to check status</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card high" style="--card-index: 3">
+                <div class="agent-header">
+                  <div class="agent-name">Leah Higginson</div>
+                  <div class="risk-badge high">70</div>
+                </div>
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£1,305,360</span>
+                  </div>
+                </div>
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label">0% to revenue target</span>
+                </div>
+                <div class="agent-trend negative">
+                  COLD • WoW: 1.0%
+                </div>
+                
+                  <div class="agent-alert">
+                    <strong>LOW ACTIVITY</strong>
+                    <br><small>Call immediately to check status</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card high" style="--card-index: 4">
+                <div class="agent-header">
+                  <div class="agent-name">Lewis Carney</div>
+                  <div class="risk-badge high">67</div>
+                </div>
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">49</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">0</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£149,500</span>
+                  </div>
+                </div>
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-label">1,794% to revenue target</span>
+                </div>
+                <div class="agent-trend ">
+                  WARM • WoW: -0.1%
+                </div>
+                
+                  <div class="agent-alert">
+                    <strong>CONVERSION PROBLEM</strong>
+                    <br><small>Review last 5 calls for objection handling</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card high" style="--card-index: 5">
+                <div class="agent-header">
+                  <div class="agent-name">Mike Rea</div>
+                  <div class="risk-badge high">60</div>
+                </div>
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">84</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">3</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£0</span>
+                  </div>
+                </div>
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label">0% to revenue target</span>
+                </div>
+                <div class="agent-trend ">
+                  COOLING • WoW: 0.3%
+                </div>
+                
+                  <div class="agent-alert">
+                    <strong>CONVERSION PROBLEM</strong>
+                    <br><small>Review last 5 calls for objection handling</small>
+                  </div>
+                
+              </div>
+            
+              <div class="agent-card low" style="--card-index: 6">
+                <div class="agent-header">
+                  <div class="agent-name">Jake Clay</div>
+                  <div class="risk-badge low">25</div>
+                </div>
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">154</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">1</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£302,751</span>
+                  </div>
+                </div>
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-label">1,090% to revenue target</span>
+                </div>
+                <div class="agent-trend ">
+                  COOLING • WoW: 0.8%
+                </div>
+                
+              </div>
+            
+              <div class="agent-card low" style="--card-index: 7">
+                <div class="agent-header">
+                  <div class="agent-name">Rio Duhaney</div>
+                  <div class="risk-badge low">22</div>
+                </div>
+                <div class="agent-stats">
+                  <div class="stat">
+                    <span class="stat-label">Calls Today</span>
+                    <span class="stat-value">109</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Bookings</span>
+                    <span class="stat-value">1</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Conv. Rate</span>
+                    <span class="stat-value">0.0%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Revenue (30d)</span>
+                    <span class="stat-value">£0</span>
+                  </div>
+                </div>
+                <div class="agent-progress">
+                  <div class="progress-mini">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label">0% to revenue target</span>
+                </div>
+                <div class="agent-trend ">
+                  WARM • WoW: -0.2%
+                </div>
+                
+              </div>
+            
+        </div>
+      </div>
+    
+      
+    <div class="card span-12">
+      <h2>🧠 Team Performance Analysis</h2>
+      <div class="md"><p>The team presents a significant paradox: revenue attainment is exceptional at 490.1% MTD (£1M), while pipeline generation is critically behind at 45.3% of the First Sits target (34 actual vs 75 target). This indicates a dangerous reliance on deals closed from prior months' work. Momentum is weak, with 3 agents COLD (Zayn, Leah, Luca) and 2 COOLING (Mike, Jake). Today's performance is a major concern, with a call-to-booking conversion rate of just 1.50%, a steep drop from the 7-day average of 3.13%. Activity peaked between 1pm-2pm with over 35,000 calls but has since fallen off a cliff, indicating poor pacing and end-of-day fatigue.</li></ul></div>
+    </div>
+    
+    <div class="card span-6">
+      <h2>📊 Hourly Momentum</h2>
+      <div class="md"><p>HOURLY TODAY:<br>- <span class="emoji">🌅</span> 10am-11am: A slow start with 812 calls, which then exploded to 16,999 calls by 11am.<br>- <span class="emoji">🌞</span> Peak 1pm-2pm: The team hit its absolute peak activity with 35,654 calls, driven by 6 active agents.<br>- 📉 3pm-4pm: A sharp decline to 10,133 calls signaled the beginning of a significant afternoon slump.<br>- 🚨 4pm-5pm (Last Hour): Momentum has completely collapsed, with only 72 calls logged. This catastrophic drop-off requires immediate action to salvage the end of the day. The team's energy is heavily front-loaded, fading dramatically after 3pm.</li></ul></div>
+    </div>
+    
+    <div class="card span-6">
+      <h2>📈 Trend Deep Dive</h2>
+      <div class="md"><p>30-DAY TRENDS:<br>- Daily call volume shows a strong start to November, with the first week averaging 170k calls/day (Mon-Fri). This is a significant uplift from the last week of October, which averaged just ~100k calls/day, indicating a successful activity push to begin the month.</li></ul><p>12-WEEK TRENDS:<br>- After peaking at 922k calls in mid-October, weekly volume declined by 46% to a low of 497k by month-end. November has started with a powerful rebound to 872k calls last week, successfully reversing the negative trend.</li></ul><p>6-MONTH TRENDS:<br>- Revenue and First Sits grew consistently to a peak in October (£3.5M revenue, 95 First Sits). While November's MTD revenue of £1M is strong, First Sits are lagging at 34. This is only 35% of October's total with 33% of the month gone, indicating flat pipeline growth which cannot sustain the revenue peak.</li></ul></div>
+    </div>
+    
+    <div class="card span-6">
+      <h2>💰 Revenue Impact</h2>
+      <div class="md"><p>A total of £90,278 in monthly revenue is immediately at risk from underperforming agents, primarily Zayn (£41.7K), Mike (£20.8K), and Leah (£13.9K). The upside is far greater, with a staggering £1,819,109 in total revenue opportunity identified across the team. Lifting the bottom quartile of performers to the team median represents a £900,135 monthly revenue opportunity. Today's conversion rate collapse to 1.50% is the biggest lever for improvement; restoring it to the 7-day average of 3.13% on today's 534 calls would have generated an additional 9 bookings, securing future revenue.</li></ul></div>
+    </div>
+    
+    <div class="card span-6">
+      <h2>🎯 Funnel Analysis</h2>
+      <div class="md"><p>FUNNEL HEALTH:<br>- <span class="emoji">📞</span> Calls→Bookings (7d): 3.13%. Today's rate has plummeted by 52% to just 1.50%. This is the most critical bottleneck and requires immediate attention.<br>- <span class="emoji">📅</span> Bookings→Sits (7d): 59.2% (only 29 sits attended from 49 bookings). This show rate is alarmingly low and points to a systemic issue in booking quality or confirmation process, likely affecting more than just Zayn.<br>- <span class="emoji">💰</span> Strat→Cashflow: 0%<br>- <span class="emoji">🤝</span> Cashflow→Deals: 0%<br>- <span class="emoji">💷</span> Avg Deal: £283,920</li></ul><p>The funnel is leaking profusely at the top two stages. The combination of poor conversion and low show rates is severely damaging pipeline velocity.</li></ul></div>
+    </div>
+    
+    <div class="card span-6">
+      <h2>⚠️ Risk Assessment</h2>
+      <div class="md"><p><span class="emoji">⚠️</span> IMMEDIATE (next 60min):<br>1. Luca Camilleri (Score 70): INACTIVE_NOW. Must be contacted immediately to re-engage for the final hours of the day.<br>2. Leah Higginson (Score 70): LOW_ACTIVITY. Zero calls today is unacceptable. Contact immediately to diagnose the blocker and set EOD expectations.</li></ul><p><span class="emoji">🔥</span> URGENT (today):<br>1. Zayn Mahmood (Score 85): SHOW_RATE_ISSUE. As the highest-risk agent, his pipeline health is paramount. A plan to fix booking quality must be implemented before EOD.<br>2. Conversion Cluster (Tom, Lewis, Mike): Three agents flagged with CONVERSION_PROBLEM. This requires a group intervention today to prevent further pipeline degradation.</li></ul></div>
+    </div>
+    
+    <div class="card span-6">
+      <h2>👥 Coaching Priorities</h2>
+      <div class="md"><p>PRIORITY QUEUE:</li></ul><p><span class="emoji">🔴</span> TIER 1 - IMMEDIATE (70+):<br>1. Zayn Mahmood (85) - £41,667 at risk<br>   • Issue: SHOW_RATE_ISSUE. His CRITICAL target status and the team's highest risk score make him the top priority.<br>   • Action: 30-min 1-on-1 to dissect his booking qualification and confirmation process.<br>   • Expected: Increase his show rate to the team average of 59%, adding 2 qualified sits per week.</li></ul><p>2. Leah Higginson (70) - £13,889 at risk<br>   • Issue: LOW_ACTIVITY (0 calls today).<br>   • Action: Immediate 15-min check-in call to diagnose the issue and reset daily activity expectations.<br>   • Expected: Restore activity to 40+ calls/day, generating at least 1 booking daily.</li></ul><p>3. Luca Camilleri (70) - £0 at risk<br>   • Issue: INACTIVE_NOW.<br>   • Action: Immediate 10-min call to ensure he re-engages and maximizes the final hours of the day.<br>   • Expected: Add 30+ calls and potentially 1 booking before EOD.</li></ul><p><span class="emoji">🟠</span> TIER 2 - URGENT (Today):<br>4. Lewis Carney (67) - £418,340 opportunity<br>   • Issue: CONVERSION_PROBLEM.<br>   • Action: Make him a key participant in the group call review session.<br>   • Expected: Unlock his significant revenue potential by improving his talk track and objection handling.</li></ul></div>
+    </div>
+    
+    <div class="card span-12">
+      <h2>💡 Recommended Actions</h2>
+      <div class="md"><p><span class="emoji">🎯</span> IMMEDIATE (60min):<br>- INACTIVE_NOW / LOW_ACTIVITY (Luca, Leah): Contact both agents via phone immediately. Diagnose blockers and set clear activity targets for the final 90 minutes. Impact: Recoup a potential 80-100 calls, securing 2-3 bookings. Owner: Mark. Timeline: NOW.</li></ul><p><span class="emoji">📅</span> TODAY:<br>- CONVERSION_PROBLEM (Tom, Lewis, Mike): Schedule a 45-min mandatory group call review at 4 PM. Analyze recent failed calls to identify patterns in objection handling. Impact: Address £20.8K direct risk and unlock £986K in revenue opportunity. Owner: Mark.<br>- SHOW_RATE_ISSUE (Zayn): Conduct a 1-on-1 review of Zayn's last 3 bookings. Assess qualification criteria and expectation setting. Impact: Safeguard £41.7K at risk and improve overall pipeline quality. Owner: Mark. Timeline: By EOD.</li></ul><p><span class="emoji">📊</span> STRATEGIC (This Week):<br>- Pipeline Deficit: The team is only 45.3% to its First Sits target. Launch a 3-day "Pipeline Power Up" SPIF rewarding the most qualified First Sits booked. Goal: Generate an additional 15 sits this week. Impact: De-risk future quarter revenue.</li></ul></div>
+    </div>
+    </section>
+  </div>
+<script id="boot-mgr-1605">(function(){
+  const data = {"hourly":{"labels":["10:00","11:00","12:00","13:00","14:00","15:00"],"calls":[812,16999,12546,35654,31547,10133],"bookings":[0,0,0,0,0,0],"connected":[148,9310,5706,11574,11085,4150],"activeAgents":[5,5,6,6,7,6]},"daily":{"labels":["27 Oct","28 Oct","29 Oct","30 Oct","31 Oct","01 Nov","03 Nov","04 Nov","05 Nov","06 Nov","07 Nov","08 Nov","09 Nov","10 Nov"],"calls":[185566,65845,92038,114994,37765,1071,153803,199129,216778,191784,90772,20124,292,107691],"bookings":[0,0,0,0,0,0,0,0,0,0,0,0,0,0]},"weekly":{"labels":["22 Sept","29 Sept","06 Oct","13 Oct","20 Oct","27 Oct","03 Nov","10 Nov"],"calls":[603735,701288,760156,922755,681692,497279,872682,107691],"bookings":[0,0,0,0,0,0,0,0]},"monthly":{"labels":["Jun 25","Jul 25","Aug 25","Sept 25","Oct 25","Nov 25"],"revenue":[1135680,1817087,2498494,3179903,3542151,1000567],"firstSits":[33,53,71,89,95,34]},"distribution":{"labels":["High","Medium","Low"],"values":[2,2,4]},"riskDist":{"labels":["Critical","At Risk","Needs Push","On Track"],"values":[1,5,0,2]}};
+  function boot(){
+    if (!window.Chart) return setTimeout(boot, 40);
+    Chart.defaults.color = '#9ca3af';
+    Chart.defaults.borderColor = '#1f2937';
+    Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif';
+    const guard = document.getElementById('hourlyChart-mgr-1605');
+    if (!guard || guard.dataset._init) return; guard.dataset._init = '1';
+
+    new Chart(document.getElementById('hourlyChart-mgr-1605'), {
+      type: 'line',
+      data: {
+        labels: data.hourly.labels,
+        datasets: [
+          { label:'Calls', data: data.hourly.calls, borderColor:'rgb(59,130,246)', backgroundColor:'rgba(59,130,246,0.1)', tension:0.4, fill:true, yAxisID:'y' },
+          { label:'Bookings', data: data.hourly.bookings, borderColor:'rgb(16,185,129)', backgroundColor:'rgba(16,185,129,0.1)', tension:0.4, fill:true, yAxisID:'y' },
+          { label:'Active Agents', data: data.hourly.activeAgents, borderColor:'rgb(245,158,11)', backgroundColor:'rgba(245,158,11,0.1)', tension:0.4, fill:true, yAxisID:'y1' }
+        ]
+      },
+      options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{ display:false } },
+        scales:{ y:{ type:'linear', position:'left', title:{display:true, text:'Calls / Bookings'} },
+                y1:{ type:'linear', position:'right', grid:{ drawOnChartArea:false }, title:{display:true, text:'Active Agents'} } }
+      }
+    });
+
+    new Chart(document.getElementById('dailyTrendsChart-mgr-1605'), {
+      type:'line',
+      data:{ labels:data.daily.labels, datasets:[
+        { label:'Calls', data:data.daily.calls, borderColor:'rgb(59,130,246)', backgroundColor:'rgba(59,130,246,0.1)', tension:0.4, fill:true },
+        { label:'Bookings', data:data.daily.bookings, borderColor:'rgb(16,185,129)', backgroundColor:'rgba(16,185,129,0.1)', tension:0.4, fill:true }
+      ]},
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom'} }, scales:{ y:{ beginAtZero:true } } }
+    });
+
+    new Chart(document.getElementById('monthlyRevenueChart-mgr-1605'), {
+      type:'bar',
+      data:{ labels:data.monthly.labels, datasets:[
+        { label:'Revenue (£)', data:data.monthly.revenue, backgroundColor:'rgba(59,130,246,0.8)', yAxisID:'y' },
+        { label:'First Sits', data:data.monthly.firstSits, backgroundColor:'rgba(16,185,129,0.8)', yAxisID:'y1' }
+      ]},
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom'} },
+        scales:{ y:{ type:'linear', position:'left' }, y1:{ type:'linear', position:'right', grid:{ drawOnChartArea:false } } } }
+    });
+
+    new Chart(document.getElementById('distributionChart-mgr-1605'), {
+      type:'doughnut',
+      data:{ labels:data.distribution.labels, datasets:[{ data:data.distribution.values, backgroundColor:['rgb(16,185,129)','rgb(245,158,11)','rgb(239,68,68)'] }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom' } } }
+    });
+
+    new Chart(document.getElementById('riskChart-mgr-1605'), {
+      type:'doughnut',
+      data:{ labels:data.riskDist.labels, datasets:[{ data:data.riskDist.values, backgroundColor:['rgb(239,68,68)','rgb(245,158,11)','rgb(245,158,11)','rgb(16,185,129)'] }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom' } } }
+    });
+  }
+  if (window.Chart) { boot(); }
+  else {
+    var s = document.getElementById('chartjs-loader');
+    if (!s) {
+      s = document.createElement('script');
+      s.id = 'chartjs-loader';
+      s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+      s.onload = boot;
+      document.head.appendChild(s);
+    } else {
+      s.addEventListener('load', boot, { once:true });
+    }
+  }
+})();</script></section>
 <section class="page" id="mgr-1449">
   <div class="wrapper">
     
