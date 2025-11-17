@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Manager Dashboard - 16:00</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+
+<style>
+.anomaly-section {
+  padding: 0;
+}
+
+.critical-anomalies {
+  background: rgba(239, 68, 68, 0.15);
+  border-left: 4px solid #ef4444;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 6px;
+}
+
+.notable-anomalies {
+  background: rgba(245, 158, 11, 0.15);
+  border-left: 4px solid #f59e0b;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 6px;
+}
+
+.hot-leads-section {
+  padding: 0;
+}
+
+.leads-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.leads-table th {
+  background: rgba(79, 140, 255, 0.2);
+  color: var(--text);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--line);
+}
+
+.leads-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.leads-table tr:hover {
+  background: rgba(79, 140, 255, 0.05);
+}
+
+.score-badge {
+  background: var(--success);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85em;
+  display: inline-block;
+}
+
+.idle-badge {
+  background: var(--danger);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85em;
+  display: inline-block;
+}
+
+.anomaly-section h4, .critical-anomalies h4, .notable-anomalies h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.anomaly-section ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.anomaly-section li {
+  margin: 6px 0;
+  line-height: 1.6;
+  color: var(--text);
+}
+</style>
+
+<style>:root{--bg:#0b0f1a;--panel:#121826;--text:#e7eaf0;--muted:#9aa3b2;--line:#1f2937;--accent:#4f8cff;--success:#10b981;--warning:#f59e0b;--danger:#ef4444}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font:14px system-ui,-apple-system,Segoe UI,Roboto,Arial}.dashboard{max-width:95%;width:100%;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#4f8cff,#764ba2);border-radius:12px;padding:20px 24px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center}.header-content{flex:1}.title{margin:0 0 6px 0;font-weight:800;font-size:1.6rem}.subtitle{opacity:.9}.header-actions{display:flex;gap:.75rem}.nav-btn{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;padding:.75rem 1.5rem;border-radius:.5rem;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .3s;display:flex;align-items:center;gap:.5rem}.nav-btn:hover{background:rgba(255,255,255,.3);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2)}.nav-btn:active{transform:translateY(0)}.nav-arrow{font-size:1.2rem;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.span-2{grid-column:1/-1}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}.card h2{margin:0 0 12px 0;color:var(--accent);font-size:1.1rem}.alert{padding:12px;border-left:4px solid;border-radius:6px;margin-bottom:12px}.alert-info{background:rgba(79,140,255,.12);border-color:#4f8cff}.alert-danger{background:rgba(239,68,68,.12);border-color:#ef4444}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.kpi-bands{display:flex;flex-direction:column;gap:12px}.kpi-row{display:flex;flex-direction:column;gap:8px}.kpi-title{font-weight:700;color:var(--muted)}.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini-kpi{border:1px solid var(--line);border-radius:10px;padding:12px;background:rgba(79,140,255,.06)}.mini-kpi.danger{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.4)}.kpi-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.kpi-value{font-size:1.35rem;font-weight:800;line-height:1}.kpi-note{font-size:.85rem;color:var(--muted)}.chart-wrapper{position:relative;height:320px}.progress-stack{display:flex;flex-direction:column;gap:12px}.progress-head{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted)}.progress-bar{height:8px;background:var(--line);border-radius:999px;overflow:hidden;margin:6px 0}.progress-fill{height:100%}.progress-fill.success{background:var(--success)}.progress-fill.warning{background:var(--warning)}.progress-fill.danger{background:var(--danger)}.progress-pct{text-align:right;font-size:.8rem;color:var(--muted)}.table-wrapper{overflow:auto}.data-table{width:100%;border-collapse:collapse}.data-table th{background:rgba(79,140,255,.12);text-align:left;padding:8px;border-bottom:2px solid var(--line)}.data-table td{padding:8px;border-bottom:1px solid var(--line);word-wrap:break-word;word-break:break-word;white-space:normal;max-width:300px}
+.data-table tr.even{background:rgba(255,255,255,.02)}.styled-list{list-style:none;padding:0;margin:0}.styled-list li{padding:6px 0;border-bottom:1px solid var(--line)}.subhead{margin:10px 0 6px 0;font-size:.95rem;color:var(--muted)}.muted{color:var(--muted)}.agent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}.agent-card{border:1px solid var(--line);border-radius:10px;padding:12px;background:rgba(79,140,255,.04)}.agent-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.agent-name{font-weight:700}.agent-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.stat{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:6px;text-align:center}.stat span{display:block;font-size:.65rem;color:var(--muted);text-transform:uppercase;line-height:1.2}.stat strong{display:block;font-size:1rem;font-weight:800}.conversion-funnel{display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}.funnel-stage{flex:1;text-align:center;background:rgba(16,185,129,.08);border-radius:6px;padding:6px}.stage-label{font-size:.65rem;color:var(--muted);display:block;margin-bottom:2px}.stage-pct{font-size:.9rem;color:var(--success);font-weight:700}@media(max-width:900px){.grid{grid-template-columns:1fr}.summary-grid{grid-template-columns:1fr}.header{flex-direction:column;gap:1rem}.header-actions{width:100%;justify-content:center}.nav-btn{flex:1}.dashboard{padding:10px}.data-table td{max-width:200px;font-size:.85rem}}
+@media(max-width:600px){.dashboard{padding:8px}.title{font-size:1.3rem}.card{padding:12px}.agent-grid{grid-template-columns:1fr}.data-table td{font-size:.8rem}}
+
+/* Data Quality Banner */
+.data-quality {
+  padding: 12px 20px;
+  margin: 0 0 20px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(15, 23, 42, 0.9);
+  border-left: 4px solid var(--accent);
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.data-quality.fresh {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: var(--success);
+}
+.data-quality.stale {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: var(--warning);
+}
+.data-quality.very-stale {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: var(--danger);
+}
+.data-quality .age {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* Tooltips */
+.has-tooltip {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+/* Heatmap */
+.heatmap-container { overflow-x: auto; }
+.heatmap {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.heatmap th,
+.heatmap td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid var(--line);
+}
+.heatmap th {
+  background: rgba(148, 163, 184, 0.12);
+  font-weight: 600;
+  color: var(--muted);
+}
+.heatmap .agent-name {
+  text-align: left;
+  font-weight: 500;
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text);
+}
+.heatmap-cell { position: relative; min-width: 60px; }
+
+.cell-calls { font-weight: 600; }
+.cell-bookings { font-size: 10px; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="dashboard">
+  <header class="header">
+    <div class="header-content">
+      <h1 class="title">📊 Manager Performance Dashboard</h1>
+      <div class="subtitle">Monday, 17/11/2025 • 16:00 Asia/Dubai</div>
+    </div>
+    <div class="header-actions">
+      <button class="nav-btn" onclick="navigatePeriod(-1)" title="Previous Hour">
+        <span class="nav-arrow">←</span> Previous
+      </button>
+      <button class="nav-btn" onclick="navigatePeriod(1)" title="Next Hour">
+        Next <span class="nav-arrow">→</span>
+      </button>
+    </div>
+  </header>
+<div class="data-quality very-stale">
+      ❌ <strong>Data Freshness:</strong> ERROR - Future timestamp detected (17 Nov, 20:00)
+      <span class="age">System time mismatch - check server timezone</span>
+    </div><main class="grid"><section class="card"><h2>🏆 Top Performers Today</h2><div class="styled-list"><div style="padding:10px; border-bottom:1px solid var(--line);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Charlotte Capes</strong>
+        <span style="color:var(--accent);">#1</span>
+      </div>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">
+        Calls: 169 | Bookings: 0 | Conv: 0.1%
+      </div>
+    </div><div style="padding:10px; border-bottom:1px solid var(--line);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Jake Clay</strong>
+        <span style="color:var(--accent);">#2</span>
+      </div>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">
+        Calls: 111 | Bookings: 1 | Conv: 0.4%
+      </div>
+    </div><div style="padding:10px; border-bottom:1px solid var(--line);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Zayn Mahmood</strong>
+        <span style="color:var(--accent);">#3</span>
+      </div>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">
+        Calls: 93 | Bookings: 1 | Conv: 0.8%
+      </div>
+    </div></div></section><section class="card"><h2>⚠️ Needs Attention</h2><div class="styled-list"><div style="padding:10px; border-bottom:1px solid var(--line);">
+      <strong>Tom Hepworth</strong>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">
+        Calls: 7 | Bookings: 0
+      </div>
+    </div><div style="padding:10px; border-bottom:1px solid var(--line);">
+      <strong>Luca Camilleri</strong>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">
+        Calls: 36 | Bookings: 0
+      </div>
+    </div><div style="padding:10px; border-bottom:1px solid var(--line);">
+      <strong>Lewis Carney</strong>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">
+        Calls: 55 | Bookings: 0
+      </div>
+    </div></div></section><section class="card span-2"><h2>🎯 Executive Summary</h2><div class="summary-grid"><div class="summary-left"><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Team State</td><td>🟢 On Track</td></tr><tr class="odd"><td>Calendar Impact</td><td>Clear</td></tr><tr class="even"><td>Critical Count</td><td>1</td></tr><tr class="odd"><td>Opportunity GBP</td><td>—</td></tr></tbody></table></div></div><div class="summary-right"><div class="kpi-bands"><div class="kpi-row"><div class="kpi-title">Revenue</div><div class="pair-grid"><div class="mini-kpi "><div class="kpi-label">MTD Revenue</div><div class="kpi-value">£1,302,363</div><div class="kpi-note">360.5% of £361,250</div></div><div class="mini-kpi "><div class="kpi-label">Revenue Gap</div><div class="kpi-value">£941,113</div><div class="kpi-note">ahead</div></div></div></div><div class="kpi-row"><div class="kpi-title">Volume</div><div class="pair-grid"><div class="mini-kpi "><div class="kpi-label">Calls Today</div><div class="kpi-value">618</div><div class="kpi-note">69 per agent</div></div><div class="mini-kpi "><div class="kpi-label">Bookings Today</div><div class="kpi-value">3</div><div class="kpi-note">0.5% conv</div></div></div></div><div class="kpi-row"><div class="kpi-title">Sits</div><div class="pair-grid"><div class="mini-kpi "><div class="kpi-label">First Sits Today</div><div class="kpi-value">2</div><div class="kpi-note">MTD 60</div></div><div class="mini-kpi "><div class="kpi-label">Second Sits Today</div><div class="kpi-value">2</div><div class="kpi-note">MTD 33</div></div></div></div> </div></div></div></section><section class="card"><h2>⏰ Today's Hourly Performance</h2><div class="chart-wrapper"><canvas id="hourlyChart"></canvas></div></section><section class="card"><h2>🎯 Target Progress</h2><div class="progress-stack"><div class="progress-item"><div class="progress-head"><span>First Sits</span><span>60 / 138</span></div><div class="progress-bar"><div class="progress-fill danger" style="width:43.47826086956522%"></div></div><div class="progress-pct">43.5%</div></div><div class="progress-item"><div class="progress-head"><span>Second Sits</span><span>33 / 81</span></div><div class="progress-bar"><div class="progress-fill danger" style="width:40.74074074074074%"></div></div><div class="progress-pct">40.7%</div></div><div class="progress-item"><div class="progress-head"><span>Revenue</span><span>£1,302,363 / £361,250</span></div><div class="progress-bar"><div class="progress-fill success" style="width:100%"></div></div><div class="progress-pct">360.5%</div></div></div></section><section class="card"><h2>📈 14‑Day Call & Booking Trends</h2><div class="chart-wrapper"><canvas id="dailyChart"></canvas></div></section><section class="card"><h2>📊 8‑Week Activity Trends</h2><div class="chart-wrapper"><canvas id="weeklyChart"></canvas></div></section><section class="card span-2"><h2>💰 6‑Month Revenue & Sits</h2><div class="chart-wrapper"><canvas id="monthlyChart"></canvas></div></section><section class="card"><h2>💰 Money Analysis (Key)</h2><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Revenue Actual (MTD)</td><td>£1,302,363</td></tr><tr class="odd"><td>Revenue Target (MTD)</td><td>£361,250</td></tr><tr class="even"><td>Gap</td><td>£941,113 (360.5%)</td></tr><tr class="odd"><td>Daily Pace Needed</td><td>£0/day</td></tr><tr class="even"><td>Probability</td><td>—</td></tr></tbody></table></div></section><section class="card"><h2>📊 Performance Metrics (Key)</h2><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Calls Today</td><td>618</td></tr><tr class="odd"><td>Bookings Today</td><td>3 (0.5% conv)</td></tr><tr class="even"><td>Available Calling Hours</td><td>7h / 8h</td></tr><tr class="odd"><td>Calls Per Avail Hour</td><td>88.3</td></tr><tr class="even"><td>Best Hour</td><td>14:00 (167 calls)</td></tr><tr class="odd"><td>Worst Hour</td><td>12:00 (65 calls)</td></tr></tbody></table></div></section><section class="card"><h2>📅 Calendar Intelligence</h2><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Team Meeting Load</td><td>0 meetings in next 2 hours</td></tr><tr class="odd"><td>Agents In Meetings Now</td><td>lewis.carney@baroncabot.com</td></tr></tbody></table></div><p class="muted">No upcoming meetings in next 2 hours.</p></section><section class="card"><h2>🔍 Root Cause</h2><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Systemic Patterns</td><td>1 agents with extreme call volume deviation</td></tr><tr class="odd"><td>Positive Insights</td><td>Team performing as expected</td></tr></tbody></table></div></section><section class="card"><h2>⚡ Action Plan</h2><h3 class="subhead">Immediate Next 60 min</h3><div class="table-wrapper"><table class="data-table"><thead><tr><th>Action</th><th>Priority</th></tr></thead><tbody><tr class="even"><td>Leah Higginson: Call 7 hot leads</td><td>HIGH</td></tr><tr class="odd"><td>Rio Duhaney: Call 1 hot leads</td><td>HIGH</td></tr><tr class="even"><td>Zayn Mahmood: Call 1 hot leads</td><td>HIGH</td></tr><tr class="odd"><td>Follow up: lewis.carney@baroncabot.com</td><td>MEDIUM</td></tr></tbody></table></div><h3 class="subhead">Today</h3><div class="table-wrapper"><table class="data-table"><thead><tr><th>Action</th><th>Reason</th></tr></thead><tbody><tr class="even"><td>Check in: Tom Hepworth, Leah Higginson</td><td>Low activity today</td></tr></tbody></table></div><h3 class="subhead">This Week</h3><div class="table-wrapper"><table class="data-table"><thead><tr><th>Action</th><th>Reason</th></tr></thead><tbody><tr class="even"><td>Target coaching: Leah Higginson, Charlotte Capes, Zayn Mahmood</td><td>Behind pace for monthly target</td></tr></tbody></table></div></section><section class="card span-2"><h2>👥 Individual Performance</h2><div class="agent-grid"><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Tom Hepworth</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>7</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>1</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£1,069,908</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">100.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+  </div><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Leah Higginson</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£459,995</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">3.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+  </div><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Jake Clay</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>111</strong></div>
+      <div class="stat"><span>Strategy</span><strong>1</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£302,751</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">0.4%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">62.5%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+  </div><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Luca Camilleri</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>36</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>1</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£301,316</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">55.6%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">25.0%</strong>
+      </div>
+    </div>
+  </div><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Zayn Mahmood</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>93</strong></div>
+      <div class="stat"><span>Strategy</span><strong>1</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£297,500</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">0.8%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">66.7%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">33.3%</strong>
+      </div>
+    </div>
+  </div><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Lewis Carney</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>55</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>1</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£149,500</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">0.4%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">100.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+  </div><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Rio Duhaney</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>70</strong></div>
+      <div class="stat"><span>Strategy</span><strong>1</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>1</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£0</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">0.4%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+  </div><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Mike Rea</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>77</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£0</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">0.5%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+  </div><div class="agent-card">
+    <div class="agent-head"><span class="agent-name">Charlotte Capes</span></div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>169</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sit</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sit</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£0</strong></div>
+    </div>
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <strong class="stage-pct">0.1%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <strong class="stage-pct">100.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+  </div></div></section><section class="card span-2"><h2>🔥 Hourly Activity Heatmap (Business Hours 10-18)</h2>
+<div class="heatmap-container"><table class="heatmap"><thead><tr><th>Agent</th><th>10:00</th><th>11:00</th><th>12:00</th><th>13:00</th><th>14:00</th><th>15:00</th><th>16:00</th><th>17:00</th></tr></thead><tbody><tr><td class="agent-name">Mike Rea</td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Mike Rea at 10:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.85);color:#f9fafb;" title="Mike Rea at 11:00 - 51 calls, 0 bookings">
+        <div class="cell-calls">51</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.16749999999999998);color:#e5e7eb;" title="Mike Rea at 12:00 - 1 calls, 0 bookings">
+        <div class="cell-calls">1</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.5175);color:#f9fafb;" title="Mike Rea at 13:00 - 21 calls, 0 bookings">
+        <div class="cell-calls">21</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.20249999999999999);color:#e5e7eb;" title="Mike Rea at 14:00 - 3 calls, 0 bookings">
+        <div class="cell-calls">3</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Mike Rea at 15:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Mike Rea at 16:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Mike Rea at 17:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td></tr><tr><td class="agent-name">Jake Clay</td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Jake Clay at 10:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.16749999999999998);color:#e5e7eb;" title="Jake Clay at 11:00 - 1 calls, 1 bookings">
+        <div class="cell-calls">1</div>
+        <div class="cell-bookings">📅1</div>
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.5175);color:#f9fafb;" title="Jake Clay at 12:00 - 21 calls, 0 bookings">
+        <div class="cell-calls">21</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.5);color:#f9fafb;" title="Jake Clay at 13:00 - 20 calls, 0 bookings">
+        <div class="cell-calls">20</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.85);color:#f9fafb;" title="Jake Clay at 14:00 - 51 calls, 0 bookings">
+        <div class="cell-calls">51</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.46499999999999997);color:#e5e7eb;" title="Jake Clay at 15:00 - 18 calls, 0 bookings">
+        <div class="cell-calls">18</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Jake Clay at 16:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Jake Clay at 17:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td></tr><tr><td class="agent-name">Rio Duhaney</td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Rio Duhaney at 10:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.32499999999999996);color:#e5e7eb;" title="Rio Duhaney at 11:00 - 10 calls, 0 bookings">
+        <div class="cell-calls">10</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.21999999999999997);color:#e5e7eb;" title="Rio Duhaney at 12:00 - 4 calls, 0 bookings">
+        <div class="cell-calls">4</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.85);color:#f9fafb;" title="Rio Duhaney at 13:00 - 41 calls, 0 bookings">
+        <div class="cell-calls">41</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.36);color:#e5e7eb;" title="Rio Duhaney at 14:00 - 12 calls, 1 bookings">
+        <div class="cell-calls">12</div>
+        <div class="cell-bookings">📅1</div>
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.20249999999999999);color:#e5e7eb;" title="Rio Duhaney at 15:00 - 3 calls, 0 bookings">
+        <div class="cell-calls">3</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Rio Duhaney at 16:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Rio Duhaney at 17:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td></tr><tr><td class="agent-name">Lewis Carney</td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Lewis Carney at 10:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.85);color:#f9fafb;" title="Lewis Carney at 11:00 - 40 calls, 0 bookings">
+        <div class="cell-calls">40</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.29);color:#e5e7eb;" title="Lewis Carney at 12:00 - 8 calls, 0 bookings">
+        <div class="cell-calls">8</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.21999999999999997);color:#e5e7eb;" title="Lewis Carney at 13:00 - 4 calls, 0 bookings">
+        <div class="cell-calls">4</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.16749999999999998);color:#e5e7eb;" title="Lewis Carney at 14:00 - 1 calls, 0 bookings">
+        <div class="cell-calls">1</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.185);color:#e5e7eb;" title="Lewis Carney at 15:00 - 2 calls, 0 bookings">
+        <div class="cell-calls">2</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Lewis Carney at 16:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Lewis Carney at 17:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td></tr><tr><td class="agent-name">Tom Hepworth</td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Tom Hepworth at 10:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.16749999999999998);color:#e5e7eb;" title="Tom Hepworth at 11:00 - 1 calls, 0 bookings">
+        <div class="cell-calls">1</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.185);color:#e5e7eb;" title="Tom Hepworth at 12:00 - 2 calls, 0 bookings">
+        <div class="cell-calls">2</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.20249999999999999);color:#e5e7eb;" title="Tom Hepworth at 13:00 - 3 calls, 0 bookings">
+        <div class="cell-calls">3</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.16749999999999998);color:#e5e7eb;" title="Tom Hepworth at 14:00 - 1 calls, 0 bookings">
+        <div class="cell-calls">1</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Tom Hepworth at 15:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Tom Hepworth at 16:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Tom Hepworth at 17:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td></tr><tr><td class="agent-name">Zayn Mahmood</td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Zayn Mahmood at 10:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.37749999999999995);color:#e5e7eb;" title="Zayn Mahmood at 11:00 - 13 calls, 0 bookings">
+        <div class="cell-calls">13</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.36);color:#e5e7eb;" title="Zayn Mahmood at 12:00 - 12 calls, 0 bookings">
+        <div class="cell-calls">12</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.5175);color:#f9fafb;" title="Zayn Mahmood at 13:00 - 21 calls, 1 bookings">
+        <div class="cell-calls">21</div>
+        <div class="cell-bookings">📅1</div>
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.48249999999999993);color:#f9fafb;" title="Zayn Mahmood at 14:00 - 19 calls, 0 bookings">
+        <div class="cell-calls">19</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.6399999999999999);color:#f9fafb;" title="Zayn Mahmood at 15:00 - 28 calls, 0 bookings">
+        <div class="cell-calls">28</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Zayn Mahmood at 16:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Zayn Mahmood at 17:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td></tr><tr><td class="agent-name">Luca Camilleri</td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Luca Camilleri at 10:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.20249999999999999);color:#e5e7eb;" title="Luca Camilleri at 11:00 - 3 calls, 0 bookings">
+        <div class="cell-calls">3</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.4475);color:#e5e7eb;" title="Luca Camilleri at 12:00 - 17 calls, 0 bookings">
+        <div class="cell-calls">17</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Luca Camilleri at 13:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.20249999999999999);color:#e5e7eb;" title="Luca Camilleri at 14:00 - 3 calls, 0 bookings">
+        <div class="cell-calls">3</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.37749999999999995);color:#e5e7eb;" title="Luca Camilleri at 15:00 - 13 calls, 0 bookings">
+        <div class="cell-calls">13</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Luca Camilleri at 16:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Luca Camilleri at 17:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td></tr><tr><td class="agent-name">Charlotte Capes</td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Charlotte Capes at 10:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Charlotte Capes at 11:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Charlotte Capes at 12:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.4125);color:#e5e7eb;" title="Charlotte Capes at 13:00 - 15 calls, 0 bookings">
+        <div class="cell-calls">15</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.85);color:#f9fafb;" title="Charlotte Capes at 14:00 - 77 calls, 0 bookings">
+        <div class="cell-calls">77</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(79, 140, 255, 0.85);color:#f9fafb;" title="Charlotte Capes at 15:00 - 77 calls, 0 bookings">
+        <div class="cell-calls">77</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Charlotte Capes at 16:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td><td class="heatmap-cell" style="background-color:rgba(15, 23, 42, 0.7);color:#9aa3b2;" title="Charlotte Capes at 17:00 - 0 calls, 0 bookings">
+        <div class="cell-calls">0</div>
+        
+      </td></tr></tbody></table></div>
+</section></main></div>
+<script>
+function navigatePeriod(hourOffset){
+ const currentUrl=window.location.pathname;
+ const dirPath=currentUrl.substring(0,currentUrl.lastIndexOf('/')+1);
+ 
+ const managerSlug='manager';
+ const currentFile=currentUrl.substring(currentUrl.lastIndexOf('/')+1);
+ const match=currentFile.match(/(\d{2}-\d{2}-\d{4})-(\d{4})\.html$/);
+ if(!match)return;
+ 
+ const [,dateStr,currentHour]=match;
+ const prefix=managerSlug+'-dashboard-'+dateStr+'-';
+ const suffix='.html';
+
+ fetch(dirPath)
+   .then(r=>r.text())
+   .then(html=>{
+     const files=[];
+     const regex=new RegExp(prefix+'(\\d{4})'+suffix,'g');
+     let m;
+     while((m=regex.exec(html))!==null){
+       files.push(parseInt(m[1]));
+     }
+     
+     if(files.length===0){
+       const targetHour=parseInt(currentHour)+hourOffset*100;
+       window.location.href=dirPath+prefix+String(targetHour).padStart(4,'0')+suffix;
+       return;
+     }
+     
+     files.sort((a,b)=>a-b);
+     const currentIdx=files.indexOf(parseInt(currentHour));
+     
+     if(currentIdx===-1){
+       const targetIdx=hourOffset>0?files.length-1:0;
+       window.location.href=dirPath+prefix+String(files[targetIdx]).padStart(4,'0')+suffix;
+       return;
+     }
+     
+     const targetIdx=currentIdx+hourOffset;
+     if(targetIdx<0||targetIdx>=files.length){
+       alert('No '+(hourOffset>0?'next':'previous')+' report available');
+       return;
+     }
+     
+     window.location.href=dirPath+prefix+String(files[targetIdx]).padStart(4,'0')+suffix;
+   })
+   .catch(()=>{
+     const targetHour=parseInt(currentHour)+hourOffset*100;
+     const targetUrl=dirPath+prefix+String(targetHour).padStart(4,'0')+suffix;
+     
+     fetch(targetUrl,{method:'HEAD'})
+       .then(r=>{
+         if(r.ok){
+           window.location.href=targetUrl;
+         }else{
+           alert('No '+(hourOffset>0?'next':'previous')+' report available');
+         }
+       })
+       .catch(()=>alert('No '+(hourOffset>0?'next':'previous')+' report available'));
+   });
+
+}
+
+window.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    if(!window.Chart){console.error('Chart.js not loaded');return;}
+    Chart.defaults.color='#9aa3b2';Chart.defaults.borderColor='#1f2937';
+    function sc(id,cfg){const c=document.getElementById(id);if(!c){console.warn('Canvas not found:',id);return null;}try{return new Chart(c,cfg);}catch(e){console.error('Chart failed:',id,e);return null;}}
+    sc('hourlyChart',{type:'line',data:{labels:["11:00","12:00","13:00","14:00","15:00"],datasets:[{label:'Calls',data:[119,65,125,167,141],tension:.35,fill:true,borderColor:'#4f8cff',backgroundColor:'rgba(79,140,255,.12)',yAxisID:'y'},{label:'Bookings',data:[1,0,1,1,0],tension:.35,fill:true,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.12)',yAxisID:'y'},{label:'Active',data:[7,7,7,8,6],tension:.35,fill:true,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.12)',yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,title:{display:true,text:'Calls/Bookings'}},y1:{beginAtZero:true,position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Active'}}}}});
+    sc('dailyChart',{type:'line',data:{labels:["04 Nov","05 Nov","06 Nov","07 Nov","08 Nov","09 Nov","10 Nov","11 Nov","12 Nov","13 Nov","14 Nov","15 Nov","16 Nov","17 Nov"],datasets:[{label:'Calls',data:[1347,1352,1188,760,145,1,1152,945,1663,966,847,459,19,618],tension:.35,fill:true,borderColor:'#4f8cff',backgroundColor:'rgba(79,140,255,.12)',yAxisID:'y'},{label:'Bookings',data:[17,9,16,6,3,0,12,10,19,9,8,3,1,3],tension:.35,fill:true,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.12)',yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,position:'left',title:{display:true,text:'Calls'}},y1:{beginAtZero:true,position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Bookings'}}}}});
+    sc('weeklyChart',{type:'bar',data:{labels:["29 Sept","06 Oct","13 Oct","20 Oct","27 Oct","03 Nov","10 Nov","17 Nov"],datasets:[{label:'Calls',data:[3968,5281,6524,5882,4215,6042,6051,618],backgroundColor:'rgba(79,140,255,.85)',yAxisID:'y'},{label:'Bookings',data:[41,55,59,59,53,62,61,3],backgroundColor:'rgba(16,185,129,.85)',yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,position:'left',title:{display:true,text:'Calls'}},y1:{beginAtZero:true,position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Bookings'}}}}});
+    sc('monthlyChart',{type:'bar',data:{labels:["Jun 25","Jul 25","Aug 25","Sept 25","Oct 25","Nov 25"],datasets:[{label:'Revenue',data:[645243,1032387,1419533,1806680,1278607,1302363],yAxisID:'y',backgroundColor:'rgba(79,140,255,.85)'},{label:'First Sits',data:[32,48,67,83,58,60],yAxisID:'y1',backgroundColor:'rgba(16,185,129,.85)'},{label:'Second Sits',data:[18,27,40,51,37,33],yAxisID:'y1',backgroundColor:'rgba(245,158,11,.85)'},{label:'Third Sits',data:[8,9,13,15,10,13],yAxisID:'y1',backgroundColor:'rgba(236,72,153,.85)'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{position:'left',title:{display:true,text:'Revenue (£)'}},y1:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Sits'}}}}});
+  },100);
+});
+</script>
+</body>
+</html>
