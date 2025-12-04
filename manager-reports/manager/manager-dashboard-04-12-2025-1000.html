@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Manager Dashboard - 10:00</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+
+<style>
+.anomaly-section {
+  padding: 0;
+}
+
+.critical-anomalies {
+  background: rgba(239, 68, 68, 0.15);
+  border-left: 4px solid #ef4444;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 6px;
+}
+
+.notable-anomalies {
+  background: rgba(245, 158, 11, 0.15);
+  border-left: 4px solid #f59e0b;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 6px;
+}
+
+.hot-leads-section {
+  padding: 0;
+}
+
+.leads-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.leads-table th {
+  background: rgba(79, 140, 255, 0.2);
+  color: var(--text);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--line);
+}
+
+.leads-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.leads-table tr:hover {
+  background: rgba(79, 140, 255, 0.05);
+}
+
+.score-badge {
+  background: var(--success);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85em;
+  display: inline-block;
+}
+
+.idle-badge {
+  background: var(--danger);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85em;
+  display: inline-block;
+}
+
+.anomaly-section h4, .critical-anomalies h4, .notable-anomalies h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.anomaly-section ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.anomaly-section li {
+  margin: 6px 0;
+  line-height: 1.6;
+  color: var(--text);
+}
+</style>
+
+<style>:root{--bg:#0b0f1a;--panel:#121826;--text:#e7eaf0;--muted:#9aa3b2;--line:#1f2937;--accent:#4f8cff;--success:#10b981;--warning:#f59e0b;--danger:#ef4444}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font:14px system-ui,-apple-system,Segoe UI,Roboto,Arial}.dashboard{max-width:95%;width:100%;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#4f8cff,#764ba2);border-radius:12px;padding:20px 24px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center}.header-content{flex:1}.title{margin:0 0 6px 0;font-weight:800;font-size:1.6rem}.subtitle{opacity:.9}.header-actions{display:flex;gap:.75rem}.nav-btn{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;padding:.75rem 1.5rem;border-radius:.5rem;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .3s;display:flex;align-items:center;gap:.5rem}.nav-btn:hover{background:rgba(255,255,255,.3);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2)}.nav-btn:active{transform:translateY(0)}.nav-arrow{font-size:1.2rem;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.span-2{grid-column:1/-1}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}.card h2{margin:0 0 12px 0;color:var(--accent);font-size:1.1rem}.alert{padding:12px;border-left:4px solid;border-radius:6px;margin-bottom:12px}.alert-info{background:rgba(79,140,255,.12);border-color:#4f8cff}.alert-danger{background:rgba(239,68,68,.12);border-color:#ef4444}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.kpi-bands{display:flex;flex-direction:column;gap:12px}.kpi-row{display:flex;flex-direction:column;gap:8px}.kpi-title{font-weight:700;color:var(--muted)}.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini-kpi{border:1px solid var(--line);border-radius:10px;padding:12px;background:rgba(79,140,255,.06)}.mini-kpi.danger{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.4)}.kpi-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.kpi-value{font-size:1.35rem;font-weight:800;line-height:1}.kpi-note{font-size:.85rem;color:var(--muted)}.chart-wrapper{position:relative;height:320px}.progress-stack{display:flex;flex-direction:column;gap:12px}.progress-head{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted)}.progress-bar{height:8px;background:var(--line);border-radius:999px;overflow:hidden;margin:6px 0}.progress-fill{height:100%}.progress-fill.success{background:var(--success)}.progress-fill.warning{background:var(--warning)}.progress-fill.danger{background:var(--danger)}.progress-pct{text-align:right;font-size:.8rem;color:var(--muted)}.table-wrapper{overflow:auto}.data-table{width:100%;border-collapse:collapse}.data-table th{background:rgba(79,140,255,.12);text-align:left;padding:8px;border-bottom:2px solid var(--line)}.data-table td{padding:8px;border-bottom:1px solid var(--line);word-wrap:break-word;word-break:break-word;white-space:normal;max-width:300px}
+.data-table tr.even{background:rgba(255,255,255,.02)}.styled-list{list-style:none;padding:0;margin:0}.styled-list li{padding:6px 0;border-bottom:1px solid var(--line)}.subhead{margin:10px 0 6px 0;font-size:.95rem;color:var(--muted)}.muted{color:var(--muted)}.agent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}.agent-card{border:1px solid var(--line);border-radius:10px;padding:12px;background:rgba(79,140,255,.04)}.agent-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.agent-name{font-weight:700}.agent-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.stat{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:6px;text-align:center}.stat span{display:block;font-size:.65rem;color:var(--muted);text-transform:uppercase;line-height:1.2}.stat strong{display:block;font-size:1rem;font-weight:800}.conversion-funnel{display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}.funnel-stage{flex:1;text-align:center;background:rgba(16,185,129,.08);border-radius:6px;padding:6px}.stage-label{font-size:.65rem;color:var(--muted);display:block;margin-bottom:2px}.stage-pct{font-size:.9rem;color:var(--success);font-weight:700}@media(max-width:900px){.grid{grid-template-columns:1fr}.summary-grid{grid-template-columns:1fr}.header{flex-direction:column;gap:1rem}.header-actions{width:100%;justify-content:center}.nav-btn{flex:1}.dashboard{padding:10px}.data-table td{max-width:200px;font-size:.85rem}}
+@media(max-width:600px){.dashboard{padding:8px}.title{font-size:1.3rem}.card{padding:12px}.agent-grid{grid-template-columns:1fr}.data-table td{font-size:.8rem}}
+
+/* Data Quality Banner */
+.data-quality {
+  padding: 12px 20px;
+  margin: 0 0 20px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(15, 23, 42, 0.9);
+  border-left: 4px solid var(--accent);
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.data-quality.fresh {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: var(--success);
+}
+.data-quality.stale {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: var(--warning);
+}
+.data-quality.very-stale {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: var(--danger);
+}
+.data-quality .age {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* Tooltips */
+.has-tooltip {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+/* Heatmap */
+.heatmap-container { overflow-x: auto; }
+.heatmap {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.heatmap th,
+.heatmap td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid var(--line);
+}
+.heatmap th {
+  background: rgba(148, 163, 184, 0.12);
+  font-weight: 600;
+  color: var(--muted);
+}
+.heatmap .agent-name {
+  text-align: left;
+  font-weight: 500;
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text);
+}
+.heatmap-cell { position: relative; min-width: 60px; }
+
+.cell-calls { font-weight: 600; }
+.cell-bookings { font-size: 10px; margin-top: 2px; }
+
+/* Smart Target Styling */
+.agent-card.smart-target-high {
+  border-left: 4px solid var(--danger);
+}
+
+.agent-card.smart-target-medium {
+  border-left: 4px solid var(--warning);
+}
+
+.agent-card.smart-target-low {
+  border-left: 4px solid var(--success);
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(79, 140, 255, 0.15);
+  white-space: nowrap;
+}
+
+.status-badge.critical {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+}
+
+.status-badge.behind,
+.status-badge.push-needed {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+}
+
+.status-badge.on-track {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+}
+
+.progress-mini {
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 4px 0;
+}
+
+.progress-fill-mini {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.progress-fill-mini.success {
+  background: var(--success);
+}
+
+.progress-fill-mini.warning {
+  background: var(--warning);
+}
+
+.smart-target-display {
+  margin-top: 12px;
+  padding: 10px;
+  background: rgba(79, 140, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.target-priority {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.target-priority.high {
+  color: var(--danger);
+}
+
+.target-priority.medium {
+  color: var(--warning);
+}
+
+.target-priority.low {
+  color: var(--success);
+}
+
+.target-message {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.target-hourly {
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+}
+
+</style>
+</head>
+<body>
+<div class="dashboard">
+  <header class="header">
+    <div class="header-content">
+      <h1 class="title">📊 Manager Performance Dashboard</h1>
+      <div class="subtitle">Thursday, 04/12/2025 • 10:00 Asia/Dubai</div>
+    </div>
+    <div class="header-actions">
+      <button class="nav-btn" onclick="navigatePeriod(-1)" title="Previous Hour">
+        <span class="nav-arrow">←</span> Previous
+      </button>
+      <button class="nav-btn" onclick="navigatePeriod(1)" title="Next Hour">
+        Next <span class="nav-arrow">→</span>
+      </button>
+    </div>
+  </header>
+<div class="data-quality very-stale">
+      ❌ <strong>Data Freshness:</strong> Timestamp is ahead of the dashboard clock (04 Dec, 14:00)
+      <span class="age">(~240min ahead – check how <code>timestamp_dubai</code> is generated)</span>
+    </div><main class="grid"><section class="card"><h2>🏆 Top Performers Today</h2><div class="styled-list"><div style="padding:10px; border-bottom:1px solid var(--line);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Zayn Mahmood</strong>
+        <span style="color:var(--accent);">#1</span>
+      </div>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">
+        Calls: 1 | Bookings: 0 | Conv: 1.7%
+      </div>
+    </div></div></section><section class="card"><h2>⚠️ Needs Attention</h2><div class="styled-list"><div style="padding:10px; border-bottom:1px solid var(--line);">
+      <strong>Zayn Mahmood</strong>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">
+        Calls: 1 | Bookings: 0
+      </div>
+    </div></div></section><section class="card span-2"><h2>🎯 Executive Summary</h2><div class="summary-grid"><div class="summary-left"><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Team State</td><td>🟢 On Track</td></tr><tr class="odd"><td>Calendar Impact</td><td>1 meeting in next 2h</td></tr><tr class="even"><td>Critical Count</td><td>0</td></tr><tr class="odd"><td>Opportunity GBP</td><td>—</td></tr></tbody></table></div></div><div class="summary-right"><div class="kpi-bands"><div class="kpi-row"><div class="kpi-title">Revenue</div><div class="pair-grid"><div class="mini-kpi "><div class="kpi-label">MTD Revenue</div><div class="kpi-value">£875,865</div><div class="kpi-note">999.5% of £87,634</div></div><div class="mini-kpi "><div class="kpi-label">Revenue Gap</div><div class="kpi-value">£788,231</div><div class="kpi-note">ahead</div></div></div></div><div class="kpi-row"><div class="kpi-title">Volume</div><div class="pair-grid"><div class="mini-kpi "><div class="kpi-label">Calls Today</div><div class="kpi-value">1</div><div class="kpi-note">0 per agent</div></div><div class="mini-kpi "><div class="kpi-label">Bookings Today</div><div class="kpi-value">4</div><div class="kpi-note">400.0% conv</div></div></div></div><div class="kpi-row"><div class="kpi-title">Sats</div><div class="pair-grid"><div class="mini-kpi "><div class="kpi-label">First Sats Today</div><div class="kpi-value">0</div><div class="kpi-note">MTD 9</div></div><div class="mini-kpi "><div class="kpi-label">Second Sats Today</div><div class="kpi-value">0</div><div class="kpi-note">MTD 2</div></div></div></div> </div></div></div></section><section class="card"><h2>⏰ Today's Hourly Performance</h2><div class="chart-wrapper"><canvas id="hourlyChart"></canvas></div></section><section class="card"><h2>🎯 Target Progress</h2><div class="progress-stack"><div class="progress-item"><div class="progress-head"><span>First Sats</span><span>9 / 35</span></div><div class="progress-bar"><div class="progress-fill danger" style="width:25.71428571428571%"></div></div><div class="progress-pct">25.7%</div></div><div class="progress-item"><div class="progress-head"><span>Second Sats</span><span>2 / 20</span></div><div class="progress-bar"><div class="progress-fill danger" style="width:10%"></div></div><div class="progress-pct">10.0%</div></div><div class="progress-item"><div class="progress-head"><span>Revenue</span><span>£875,865 / £87,634</span></div><div class="progress-bar"><div class="progress-fill success" style="width:100%"></div></div><div class="progress-pct">999.5%</div></div></div></section><section class="card"><h2>📈 14‑Day Call & Booking Trends</h2><div class="chart-wrapper"><canvas id="dailyChart"></canvas></div></section><section class="card"><h2>📊 8‑Week Activity Trends</h2><div class="chart-wrapper"><canvas id="weeklyChart"></canvas></div></section><section class="card span-2"><h2>💰 6‑Month Revenue & Sats</h2><div class="chart-wrapper"><canvas id="monthlyChart"></canvas></div></section><section class="card"><h2>💰 Money Analysis (Key)</h2><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Revenue Actual (MTD)</td><td>£875,865</td></tr><tr class="odd"><td>Revenue Target (MTD)</td><td>£87,634</td></tr><tr class="even"><td>Gap</td><td>£788,231 (999.5%)</td></tr><tr class="odd"><td>Daily Pace Needed</td><td>£0/day</td></tr><tr class="even"><td>Probability</td><td>—</td></tr></tbody></table></div></section><section class="card"><h2>📊 Performance Metrics (Key)</h2><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Calls Today</td><td>1</td></tr><tr class="odd"><td>Bookings Today</td><td>4 (400.0% conv)</td></tr><tr class="even"><td>Available Calling Hours</td><td>1h / 8h</td></tr><tr class="odd"><td>Calls Per Avail Hour</td><td>1.0</td></tr><tr class="even"><td>Best Hour</td><td>—</td></tr><tr class="odd"><td>Worst Hour</td><td>—</td></tr></tbody></table></div></section><section class="card"><h2>📅 Calendar Intelligence</h2><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Team Meeting Load</td><td>1 meeting in next 2 hours</td></tr><tr class="odd"><td>Agents In Meetings Now</td><td>None</td></tr></tbody></table></div><div class="table-wrapper"><table class="data-table"><thead><tr><th>Time</th><th>Agent</th><th>Title</th><th>Duration</th></tr></thead><tbody><tr class="even"><td>12:00</td><td>leah.higginson@baroncabot.com</td><td>9am WAT: UK Property Strategy Meeting - </td><td>60min</td></tr></tbody></table></div></section><section class="card"><h2>🔍 Root Cause</h2><div class="table-wrapper"><table class="data-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr class="even"><td>Systemic Patterns</td><td>Team calls 30% below daily average; 1 agents with extreme call volume deviation</td></tr><tr class="odd"><td>Positive Insights</td><td>Team performing as expected</td></tr></tbody></table></div></section><section class="card"><h2>⚡ Action Plan</h2><h3 class="subhead">Immediate Next 60 min</h3><div class="table-wrapper"><table class="data-table"><thead><tr><th>Action</th><th>Priority</th></tr></thead><tbody><tr class="even"><td>Monitor current performance</td><td>LOW</td></tr></tbody></table></div><h3 class="subhead">Today</h3><div class="table-wrapper"><table class="data-table"><thead><tr><th>Action</th><th>Reason</th></tr></thead><tbody><tr class="even"><td>Check in: Rio Duhaney, Tom Hepworth, Luca Camilleri</td><td>Low activity today</td></tr></tbody></table></div><h3 class="subhead">This Week</h3><div class="table-wrapper"><table class="data-table"><thead><tr><th>Action</th><th>Reason</th></tr></thead><tbody><tr class="even"><td>Target coaching: Kelsey-Ellie Ashford, Jake Clay, Luca Camilleri</td><td>Behind pace for monthly target</td></tr></tbody></table></div></section><section class="card span-2"><h2>👥 Individual Performance</h2><div class="agent-grid"><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Rio Duhaney</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£1,627,196</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 10%"></div>
+        </div>
+        <strong class="stage-pct">1.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 40%"></div>
+        </div>
+        <strong class="stage-pct">40.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 100%"></div>
+        </div>
+        <strong class="stage-pct">100.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Tom Hepworth</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>2</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£930,497</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 10%"></div>
+        </div>
+        <strong class="stage-pct">1.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 18.2%"></div>
+        </div>
+        <strong class="stage-pct">18.2%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Luca Camilleri</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£773,240</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 8%"></div>
+        </div>
+        <strong class="stage-pct">0.8%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 76.9%"></div>
+        </div>
+        <strong class="stage-pct">76.9%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Jake Clay</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£685,206</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 9%"></div>
+        </div>
+        <strong class="stage-pct">0.9%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 33.3%"></div>
+        </div>
+        <strong class="stage-pct">33.3%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Zayn Mahmood</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>1</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£398,000</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 17%"></div>
+        </div>
+        <strong class="stage-pct">1.7%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 66.7%"></div>
+        </div>
+        <strong class="stage-pct">66.7%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 50%"></div>
+        </div>
+        <strong class="stage-pct">50.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Lewis Carney</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>1</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£382,915</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 5%"></div>
+        </div>
+        <strong class="stage-pct">0.5%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Leah Higginson</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>1</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£168,500</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 25%"></div>
+        </div>
+        <strong class="stage-pct">2.5%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 38.5%"></div>
+        </div>
+        <strong class="stage-pct">38.5%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Mike Rea</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£0</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 7%"></div>
+        </div>
+        <strong class="stage-pct">0.7%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 62.5%"></div>
+        </div>
+        <strong class="stage-pct">62.5%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Charlotte Capes</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£0</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 2%"></div>
+        </div>
+        <strong class="stage-pct">0.2%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 25%"></div>
+        </div>
+        <strong class="stage-pct">25.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+
+    
+  </div><div class="agent-card ">
+    <div class="agent-head">
+      <span class="agent-name">Kelsey-Ellie Ashford</span>
+      <span class="status-badge on-track">🟢 On Track</span>
+    </div>
+    <div class="agent-stats">
+      <div class="stat"><span>Calls</span><strong>0</strong></div>
+      <div class="stat"><span>Strategy</span><strong>0</strong></div>
+      <div class="stat"><span>1st Sat</span><strong>0</strong></div>
+      <div class="stat"><span>2nd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>3rd Sat</span><strong>0</strong></div>
+      <div class="stat"><span>Rev 30d</span><strong>£0</strong></div>
+    </div>
+
+    <div class="conversion-funnel">
+      <div class="funnel-stage">
+        <span class="stage-label">Calls→Strategy <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini" style="width: 20%"></div>
+        </div>
+        <strong class="stage-pct">2.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">Strategy→1st <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini success" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+      <div class="funnel-stage">
+        <span class="stage-label">1st→2nd <small>(7d)</small></span>
+        <div class="progress-mini">
+          <div class="progress-fill-mini warning" style="width: 0%"></div>
+        </div>
+        <strong class="stage-pct">0.0%</strong>
+      </div>
+    </div>
+
+    
+  </div></div></section><section class="card span-2"><h2>🔥 Hourly Activity Heatmap (Business Hours 10-18)</h2>
+<div class="heatmap-container"><table class="heatmap"><thead><tr><th>Agent</th><th>10:00</th><th>11:00</th><th>12:00</th><th>13:00</th><th>14:00</th><th>15:00</th><th>16:00</th><th>17:00</th></tr></thead><tbody><tr><td class="agent-name">Lewis Carney</td><td class="heatmap-cell" style="background:rgba(15, 23, 42, 0.7);border:1px solid #ddd;padding:6px;text-align:center;position:relative;">
+        <div class="cell-calls" style="font-weight:600;font-size:1.1em;color:#9aa3b2;">0</div>
+        
+        
+        
+      </td><td class="heatmap-cell" style="background:rgba(15, 23, 42, 0.7);border:1px solid #ddd;padding:6px;text-align:center;position:relative;">
+        <div class="cell-calls" style="font-weight:600;font-size:1.1em;color:#9aa3b2;">0</div>
+        <div class="cell-bookings" style="color:#0066cc;font-size:0.85em;margin-top:2px;">📅1</div>
+        
+        
+      </td><td class="heatmap-cell" style="background:rgba(15, 23, 42, 0.7);border:1px solid #ddd;padding:6px;text-align:center;position:relative;">
+        <div class="cell-calls" style="font-weight:600;font-size:1.1em;color:#9aa3b2;">0</div>
+        
+        
+        
+      </td><td class="heatmap-cell" style="background:rgba(15, 23, 42, 0.7);border:1px solid #ddd;padding:6px;text-align:center;position:relative;">
+        <div class="cell-calls" style="font-weight:600;font-size:1.1em;color:#9aa3b2;">0</div>
+        
+        
+        
+      </td><td class="heatmap-cell" style="background:rgba(15, 23, 42, 0.7);border:1px solid #ddd;padding:6px;text-align:center;position:relative;">
+        <div class="cell-calls" style="font-weight:600;font-size:1.1em;color:#9aa3b2;">0</div>
+        
+        
+        
+      </td><td class="heatmap-cell" style="background:rgba(15, 23, 42, 0.7);border:1px solid #ddd;padding:6px;text-align:center;position:relative;">
+        <div class="cell-calls" style="font-weight:600;font-size:1.1em;color:#9aa3b2;">0</div>
+        
+        
+        
+      </td><td class="heatmap-cell" style="background:rgba(15, 23, 42, 0.7);border:1px solid #ddd;padding:6px;text-align:center;position:relative;">
+        <div class="cell-calls" style="font-weight:600;font-size:1.1em;color:#9aa3b2;">0</div>
+        
+        
+        
+      </td><td class="heatmap-cell" style="background:rgba(15, 23, 42, 0.7);border:1px solid #ddd;padding:6px;text-align:center;position:relative;">
+        <div class="cell-calls" style="font-weight:600;font-size:1.1em;color:#9aa3b2;">0</div>
+        
+        
+        
+      </td></tr></tbody></table></div>
+</section></main></div>
+<script>
+function navigatePeriod(hourOffset){
+ const currentUrl=window.location.pathname;
+ const dirPath=currentUrl.substring(0,currentUrl.lastIndexOf('/')+1);
+ 
+ const managerSlug='manager';
+ const currentFile=currentUrl.substring(currentUrl.lastIndexOf('/')+1);
+ const match=currentFile.match(/(\d{2}-\d{2}-\d{4})-(\d{4})\.html$/);
+ if(!match)return;
+ 
+ const [,dateStr,currentHour]=match;
+ const prefix=managerSlug+'-dashboard-'+dateStr+'-';
+ const suffix='.html';
+
+ fetch(dirPath)
+   .then(r=>r.text())
+   .then(html=>{
+     const files=[];
+     const regex=new RegExp(prefix+'(\\d{4})'+suffix,'g');
+     let m;
+     while((m=regex.exec(html))!==null){
+       files.push(parseInt(m[1]));
+     }
+     
+     if(files.length===0){
+       const targetHour=parseInt(currentHour)+hourOffset*100;
+       window.location.href=dirPath+prefix+String(targetHour).padStart(4,'0')+suffix;
+       return;
+     }
+     
+     files.sort((a,b)=>a-b);
+     const currentIdx=files.indexOf(parseInt(currentHour));
+     
+     if(currentIdx===-1){
+       const targetIdx=hourOffset>0?files.length-1:0;
+       window.location.href=dirPath+prefix+String(files[targetIdx]).padStart(4,'0')+suffix;
+       return;
+     }
+     
+     const targetIdx=currentIdx+hourOffset;
+     if(targetIdx<0||targetIdx>=files.length){
+       alert('No '+(hourOffset>0?'next':'previous')+' report available');
+       return;
+     }
+     
+     window.location.href=dirPath+prefix+String(files[targetIdx]).padStart(4,'0')+suffix;
+   })
+   .catch(()=>{
+     const targetHour=parseInt(currentHour)+hourOffset*100;
+     const targetUrl=dirPath+prefix+String(targetHour).padStart(4,'0')+suffix;
+     
+     fetch(targetUrl,{method:'HEAD'})
+       .then(r=>{
+         if(r.ok){
+           window.location.href=targetUrl;
+         }else{
+           alert('No '+(hourOffset>0?'next':'previous')+' report available');
+         }
+       })
+       .catch(()=>alert('No '+(hourOffset>0?'next':'previous')+' report available'));
+   });
+
+}
+
+window.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    if(!window.Chart){console.error('Chart.js not loaded');return;}
+    Chart.defaults.color='#9aa3b2';Chart.defaults.borderColor='#1f2937';
+    function sc(id,cfg){const c=document.getElementById(id);if(!c){console.warn('Canvas not found:',id);return null;}try{return new Chart(c,cfg);}catch(e){console.error('Chart failed:',id,e);return null;}}
+    sc('hourlyChart',{type:'line',data:{labels:["11:00"],datasets:[{label:'Calls',data:[0],tension:.35,fill:true,borderColor:'#4f8cff',backgroundColor:'rgba(79,140,255,.12)',yAxisID:'y'},{label:'Bookings',data:[1],tension:.35,fill:true,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.12)',yAxisID:'y'},{label:'Active',data:[1],tension:.35,fill:true,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.12)',yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,title:{display:true,text:'Calls/Bookings'}},y1:{beginAtZero:true,position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Active'}}}}});
+    sc('dailyChart',{type:'line',data:{labels:["17 Nov","18 Nov","19 Nov","20 Nov","21 Nov","24 Nov","25 Nov","26 Nov","27 Nov","28 Nov","01 Dec","02 Dec","03 Dec","04 Dec"],datasets:[{label:'Calls',data:[1209,1786,1311,1169,1008,1087,1153,1523,1117,745,119,397,1140,1],tension:.35,fill:true,borderColor:'#4f8cff',backgroundColor:'rgba(79,140,255,.12)',yAxisID:'y'},{label:'Bookings',data:[15,15,17,14,10,18,13,18,15,10,7,13,19,4],tension:.35,fill:true,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.12)',yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,position:'left',title:{display:true,text:'Calls'}},y1:{beginAtZero:true,position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Bookings'}}}}});
+    sc('weeklyChart',{type:'bar',data:{labels:["13 Oct","20 Oct","27 Oct","03 Nov","10 Nov","17 Nov","24 Nov","01 Dec"],datasets:[{label:'Calls',data:[8403,7155,5105,7449,7223,6828,5838,1657],backgroundColor:'rgba(79,140,255,.85)',yAxisID:'y'},{label:'Bookings',data:[61,71,52,69,74,80,79,43],backgroundColor:'rgba(16,185,129,.85)',yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,position:'left',title:{display:true,text:'Calls'}},y1:{beginAtZero:true,position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Bookings'}}}}});
+    sc('monthlyChart',{type:'bar',data:{labels:["Jul 25","Aug 25","Sept 25","Oct 25","Nov 25","Dec 25"],datasets:[{label:'Revenue',data:[1241389,1986221,2731054,3475888,4089689,875865],yAxisID:'y',backgroundColor:'rgba(79,140,255,.85)'},{label:'First Sats',data:[32,48,68,85,113,9],yAxisID:'y1',backgroundColor:'rgba(16,185,129,.85)'},{label:'Second Sats',data:[16,23,32,42,57,2],yAxisID:'y1',backgroundColor:'rgba(245,158,11,.85)'},{label:'Third Sats',data:[6,8,10,12,16,2],yAxisID:'y1',backgroundColor:'rgba(236,72,153,.85)'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{position:'left',title:{display:true,text:'Revenue (£)'}},y1:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Sats'}}}}});
+  },100);
+});
+</script>
+</body>
+</html>
