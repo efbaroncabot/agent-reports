@@ -1,4 +1,802 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rio Duhaney</title><style>body{background:#0b1220;color:#e5e7eb;font-family:sans-serif;margin:0;padding:12px}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}.kpi{display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding:6px 0;font-weight:700}.lbl{color:#9ca3af;font-weight:400}table{width:100%;font-size:0.85em;border-collapse:collapse}td,th{padding:6px;text-align:left;border-bottom:1px solid #374151}canvas{width:100%!important;height:180px!important}.badge{background:#1f2937;padding:2px 6px;border-radius:4px;font-size:0.8em} .page{display:none} .page:target{display:block} .nav{position:sticky;top:0;background:#111827;padding:10px;display:flex;gap:10px;justify-content:center;z-index:9} button{background:#374151;border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer}</style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body><div class="nav"><button onclick="h(-1)">←</button><span id="lbl" style="font-weight:bold;align-self:center">--:--</span><button onclick="h(1)">→</button></div><div id="pages"></div><script>const ps=()=>Array.from(document.querySelectorAll('.page')); function h(d){let i=Math.max(0,Math.min(ps().length-1, ps().findIndex(p=>'#'+p.id===location.hash)+d)); location.hash=ps()[i].id;} window.addEventListener('hashchange',()=>{const p=document.querySelector(location.hash); if(p){ps().forEach(x=>x.style.display='none');p.style.display='block';document.getElementById('lbl').innerText=p.dataset.hour.replace(/(..)(..)/,'$1:$2')}}); if(location.hash) window.dispatchEvent(new Event('hashchange')); else if(ps().length) location.hash=ps()[0].id;</script><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="h1724" data-hour="1724">
+<div class="dashboard-grid">
+
+  <!-- HEADER -->
+  <div class="header-section">
+    <div class="header-title">
+      <h1>Rio Duhaney</h1>
+      <div class="header-meta">
+        <span>📅 2026-01-13</span>
+        <span>⏰ 17:24</span>
+      </div>
+    </div>
+    <div class="header-badges">
+      <div class="badge danger">
+        <span>Behind</span>
+        <span>69%</span>
+      </div>
+      <div class="badge rank">#4 of 7</div>
+    </div>
+  </div>
+  
+  <!-- AI Coach Output (Full Width) -->
+  <div class="card col-12">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">🤖</div> AI Coach Guidance</div>
+    </div>
+    <div class="ai-content">Rio, you're at 2 bookings, needing 6 more to hit your 8-booking target today. This 16:00-17:00 hour is your final clear window before your 17:00 external meeting. Each booking is worth £2339.
+
+Last hour, despite your 15:00 internal meeting, you made 25 calls, connecting with 8 prospects (32% rate). No new bookings, but solid activity to build pipeline.
+
+Your mission: secure a booking. You have a clear 19 minutes left in this hour. Push for 13+ dials. Prioritize Iriso-owubo BC for a follow-up on UK market conditions. Then, focus on reactivating stale deals or high-score leads. For qualified conversations, book a first meeting for tomorrow. Suggest 10:00 or 14:00 tomorrow. These are prime slots to kickstart your day and leverage historically strong connect rates.
+
+Status — Calls:112 | Connected:39 | Booked:2
+Δ since last: +25 calls, +8 connected, +0 booked</div>
+  </div>
+
+  <!-- GAMIFICATION ROW: Snake Board (8 cols) + Leaderboard (4 cols) -->
+  <div class="card col-8">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">🎲</div> Team Race Board</div>
+      <div class="card-value">Pos: 41/100</div>
+    </div>
+    <div class="snake-container">
+      <div class="snake-board" id="snakeBoard-h1724">
+        <div class="snake-cell finish" data-cell="100">
+      <span class="cell-num">100</span>
+      <span class="cell-icon">🏆</span>
+    </div><div class="snake-cell " data-cell="99">
+      <span class="cell-num">99</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="98">
+      <span class="cell-num">98</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell " data-cell="97">
+      <span class="cell-num">97</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="96">
+      <span class="cell-num">96</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="95">
+      <span class="cell-num">95</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell " data-cell="94">
+      <span class="cell-num">94</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="93">
+      <span class="cell-num">93</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell " data-cell="92">
+      <span class="cell-num">92</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="91">
+      <span class="cell-num">91</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="81">
+      <span class="cell-num">81</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="82">
+      <span class="cell-num">82</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="83">
+      <span class="cell-num">83</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="84">
+      <span class="cell-num">84</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="85">
+      <span class="cell-num">85</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="86">
+      <span class="cell-num">86</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="87">
+      <span class="cell-num">87</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell " data-cell="88">
+      <span class="cell-num">88</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="89">
+      <span class="cell-num">89</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="90">
+      <span class="cell-num">90</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell ladder" data-cell="80">
+      <span class="cell-num">80</span>
+      <span class="cell-icon">🪜</span>
+    </div><div class="snake-cell " data-cell="79">
+      <span class="cell-num">79</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="78">
+      <span class="cell-num">78</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="77">
+      <span class="cell-num">77</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="76">
+      <span class="cell-num">76</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell star" data-cell="75">
+      <span class="cell-num">75</span>
+      <span class="cell-icon">⭐</span>
+    </div><div class="snake-cell " data-cell="74">
+      <span class="cell-num">74</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="73">
+      <span class="cell-num">73</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="72">
+      <span class="cell-num">72</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell ladder" data-cell="71">
+      <span class="cell-num">71</span>
+      <span class="cell-icon">🪜</span>
+    </div><div class="snake-cell " data-cell="61">
+      <span class="cell-num">61</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="62">
+      <span class="cell-num">62</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell " data-cell="63">
+      <span class="cell-num">63</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="64">
+      <span class="cell-num">64</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell " data-cell="65">
+      <span class="cell-num">65</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="66">
+      <span class="cell-num">66</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="67">
+      <span class="cell-num">67</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="68">
+      <span class="cell-num">68</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="69">
+      <span class="cell-num">69</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="70">
+      <span class="cell-num">70</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="60">
+      <span class="cell-num">60</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="59">
+      <span class="cell-num">59</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="58">
+      <span class="cell-num">58</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="57">
+      <span class="cell-num">57</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="56">
+      <span class="cell-num">56</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="55">
+      <span class="cell-num">55</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="54">
+      <span class="cell-num">54</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="53">
+      <span class="cell-num">53</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="52">
+      <span class="cell-num">52</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell ladder" data-cell="51">
+      <span class="cell-num">51</span>
+      <span class="cell-icon">🪜</span>
+    </div><div class="snake-cell " data-cell="41">
+      <span class="cell-num">41</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="42">
+      <span class="cell-num">42</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="43">
+      <span class="cell-num">43</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="44">
+      <span class="cell-num">44</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="45">
+      <span class="cell-num">45</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="46">
+      <span class="cell-num">46</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="47">
+      <span class="cell-num">47</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell " data-cell="48">
+      <span class="cell-num">48</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="49">
+      <span class="cell-num">49</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell star" data-cell="50">
+      <span class="cell-num">50</span>
+      <span class="cell-icon">⭐</span>
+    </div><div class="snake-cell " data-cell="40">
+      <span class="cell-num">40</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="39">
+      <span class="cell-num">39</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="38">
+      <span class="cell-num">38</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="37">
+      <span class="cell-num">37</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell ladder" data-cell="36">
+      <span class="cell-num">36</span>
+      <span class="cell-icon">🪜</span>
+    </div><div class="snake-cell " data-cell="35">
+      <span class="cell-num">35</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="34">
+      <span class="cell-num">34</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="33">
+      <span class="cell-num">33</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="32">
+      <span class="cell-num">32</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="31">
+      <span class="cell-num">31</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell ladder" data-cell="21">
+      <span class="cell-num">21</span>
+      <span class="cell-icon">🪜</span>
+    </div><div class="snake-cell " data-cell="22">
+      <span class="cell-num">22</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="23">
+      <span class="cell-num">23</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="24">
+      <span class="cell-num">24</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell star" data-cell="25">
+      <span class="cell-num">25</span>
+      <span class="cell-icon">⭐</span>
+    </div><div class="snake-cell " data-cell="26">
+      <span class="cell-num">26</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="27">
+      <span class="cell-num">27</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell ladder" data-cell="28">
+      <span class="cell-num">28</span>
+      <span class="cell-icon">🪜</span>
+    </div><div class="snake-cell " data-cell="29">
+      <span class="cell-num">29</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="30">
+      <span class="cell-num">30</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="20">
+      <span class="cell-num">20</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="19">
+      <span class="cell-num">19</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="18">
+      <span class="cell-num">18</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="17">
+      <span class="cell-num">17</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell snake" data-cell="16">
+      <span class="cell-num">16</span>
+      <span class="cell-icon">🐍</span>
+    </div><div class="snake-cell " data-cell="15">
+      <span class="cell-num">15</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="14">
+      <span class="cell-num">14</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="13">
+      <span class="cell-num">13</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="12">
+      <span class="cell-num">12</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="11">
+      <span class="cell-num">11</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell start" data-cell="1">
+      <span class="cell-num">1</span>
+      <span class="cell-icon">🚀</span>
+    </div><div class="snake-cell " data-cell="2">
+      <span class="cell-num">2</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="3">
+      <span class="cell-num">3</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell ladder" data-cell="4">
+      <span class="cell-num">4</span>
+      <span class="cell-icon">🪜</span>
+    </div><div class="snake-cell " data-cell="5">
+      <span class="cell-num">5</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="6">
+      <span class="cell-num">6</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="7">
+      <span class="cell-num">7</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="8">
+      <span class="cell-num">8</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="9">
+      <span class="cell-num">9</span>
+      <span class="cell-icon"></span>
+    </div><div class="snake-cell " data-cell="10">
+      <span class="cell-num">10</span>
+      <span class="cell-icon"></span>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">🏆</div> Leaderboard</div>
+    </div>
+    <div class="leaderboard-list">
+      
+    <div class="lb-item ">
+      <div class="lb-rank gold">1</div>
+      <div class="lb-details">
+        <div class="lb-name">Charlotte Capes</div>
+        <div class="lb-sub">199 calls • 0 booked</div>
+      </div>
+      <div class="lb-score">
+        <div class="lb-pct" style="color: var(--warning)">60%</div>
+        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width: 60%; background: var(--warning)"></div></div>
+      </div>
+    </div>
+    <div class="lb-item ">
+      <div class="lb-rank silver">2</div>
+      <div class="lb-details">
+        <div class="lb-name">Luca Camilleri</div>
+        <div class="lb-sub">136 calls • 0 booked</div>
+      </div>
+      <div class="lb-score">
+        <div class="lb-pct" style="color: var(--warning)">50%</div>
+        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width: 50%; background: var(--warning)"></div></div>
+      </div>
+    </div>
+    <div class="lb-item ">
+      <div class="lb-rank bronze">3</div>
+      <div class="lb-details">
+        <div class="lb-name">Jake Clay</div>
+        <div class="lb-sub">114 calls • 0 booked</div>
+      </div>
+      <div class="lb-score">
+        <div class="lb-pct" style="color: var(--danger)">42%</div>
+        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width: 42%; background: var(--danger)"></div></div>
+      </div>
+    </div>
+    <div class="lb-item me">
+      <div class="lb-rank normal">4</div>
+      <div class="lb-details">
+        <div class="lb-name">Rio Duhaney (You)</div>
+        <div class="lb-sub">112 calls • 0 booked</div>
+      </div>
+      <div class="lb-score">
+        <div class="lb-pct" style="color: var(--primary)">41%</div>
+        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width: 41%; background: var(--primary)"></div></div>
+      </div>
+    </div>
+    <div class="lb-item ">
+      <div class="lb-rank normal">5</div>
+      <div class="lb-details">
+        <div class="lb-name">Lewis Carney</div>
+        <div class="lb-sub">87 calls • 0 booked</div>
+      </div>
+      <div class="lb-score">
+        <div class="lb-pct" style="color: var(--danger)">32%</div>
+        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width: 32%; background: var(--danger)"></div></div>
+      </div>
+    </div>
+    <div class="lb-item ">
+      <div class="lb-rank normal">6</div>
+      <div class="lb-details">
+        <div class="lb-name">Leah Higginson</div>
+        <div class="lb-sub">24 calls • 0 booked</div>
+      </div>
+      <div class="lb-score">
+        <div class="lb-pct" style="color: var(--danger)">9%</div>
+        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width: 9%; background: var(--danger)"></div></div>
+      </div>
+    </div>
+    <div class="lb-item ">
+      <div class="lb-rank normal">7</div>
+      <div class="lb-details">
+        <div class="lb-name">Mike Rea</div>
+        <div class="lb-sub">0 calls • 0 booked</div>
+      </div>
+      <div class="lb-score">
+        <div class="lb-pct" style="color: var(--danger)">0%</div>
+        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width: 0%; background: var(--danger)"></div></div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- METRICS ROW 1: Targets, Pace, Hourly -->
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">🎯</div> Today's Targets</div>
+    </div>
+    <div class="rings-container">
+      
+    <div class="ring-wrapper">
+      <div class="progress-ring">
+        <svg viewBox="0 0 100 100">
+          <circle class="bg" cx="50" cy="50" r="40"/>
+          <circle class="progress" cx="50" cy="50" r="40"
+           stroke="#EF4444" 
+            stroke-dasharray="251.32741228718345" 
+            stroke-dashoffset="78.63618421255433"/>
+        </svg>
+        <div class="ring-content">
+          <div class="ring-val" style="color: #EF4444">112</div>
+        </div>
+      </div>
+      <div class="ring-label">Calls</div>
+    </div>
+      
+    <div class="ring-wrapper">
+      <div class="progress-ring">
+        <svg viewBox="0 0 100 100">
+          <circle class="bg" cx="50" cy="50" r="40"/>
+          <circle class="progress" cx="50" cy="50" r="40"
+           stroke="#ec4899" 
+            stroke-dasharray="251.32741228718345" 
+            stroke-dashoffset="188.49555921538757"/>
+        </svg>
+        <div class="ring-content">
+          <div class="ring-val" style="color: #ec4899">2</div>
+        </div>
+      </div>
+      <div class="ring-label">Booked</div>
+    </div>
+      
+    <div class="ring-wrapper">
+      <div class="progress-ring">
+        <svg viewBox="0 0 100 100">
+          <circle class="bg" cx="50" cy="50" r="40"/>
+          <circle class="progress" cx="50" cy="50" r="40"
+           stroke="#10b981" 
+            stroke-dasharray="251.32741228718345" 
+            stroke-dashoffset="251.32741228718345"/>
+        </svg>
+        <div class="ring-content">
+          <div class="ring-val" style="color: #10b981">0</div>
+        </div>
+      </div>
+      <div class="ring-label">Sats</div>
+    </div>
+    </div>
+  </div>
+
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">📈</div> Pace vs Target</div>
+      <div class="card-value" style="color: #EF4444">112/163</div>
+    </div>
+    <div class="chart-box"><canvas id="paceChart-h1724"></canvas></div>
+  </div>
+
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">⏰</div> Hourly Activity</div>
+      <div class="card-value">32 this hr</div>
+    </div>
+    <div class="chart-box"><canvas id="hourlyChart-h1724"></canvas></div>
+  </div>
+
+  <!-- METRICS ROW 2: Quick Stats (Full Width of its col), Funnel, Comparison -->
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">⚡</div> Quick Stats</div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-val" style="color: var(--primary)">112</div>
+        <div class="stat-lbl">Calls</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color: var(--purple)">39</div>
+        <div class="stat-lbl">Connects</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color: var(--pink)">2</div>
+        <div class="stat-lbl">Booked</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color: var(--success)">0</div>
+        <div class="stat-lbl">Sats</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color: var(--cyan)">34.8%</div>
+        <div class="stat-lbl">Conn %</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color: var(--warning)">#1 of 7</div>
+        <div class="stat-lbl">Rank 30d</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">🔻</div> Today's Funnel</div>
+    </div>
+    <div class="chart-box"><canvas id="funnelChart-h1724"></canvas></div>
+  </div>
+
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">⚔️</div> You vs Team</div>
+    </div>
+    <div class="chart-box"><canvas id="comparisonChart-h1724"></canvas></div>
+  </div>
+
+  <!-- METRICS ROW 3: Trends & Pipeline -->
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">📞</div> Connect Trend</div>
+      <div class="card-value">34.8%</div>
+    </div>
+    <div class="chart-box"><canvas id="connectTrendChart-h1724"></canvas></div>
+  </div>
+
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">💰</div> Pipeline Stages</div>
+    </div>
+    <div class="chart-box"><canvas id="pipelineChart-h1724"></canvas></div>
+  </div>
+
+  <div class="card col-4">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">📊</div> Call Outcomes</div>
+    </div>
+    <div class="chart-box"><canvas id="callDistChart-h1724"></canvas></div>
+  </div>
+
+  <!-- METRICS ROW 4: Advanced -->
+  <div class="card col-6">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">📆</div> MTD Progress</div>
+      <div class="card-value">£0</div>
+    </div>
+    <div class="chart-box tall"><canvas id="mtdChart-h1724"></canvas></div>
+  </div>
+
+  <div class="card col-6">
+    <div class="card-header">
+      <div class="card-title"><div class="card-icon">🎯</div> Performance Radar</div>
+    </div>
+    <div class="chart-box tall"><canvas id="radarChart-h1724"></canvas></div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const playerPositions = [{"name":"Charlotte Capes","pos":60,"rank":1,"isMe":false},{"name":"Luca Camilleri","pos":50,"rank":2,"isMe":false},{"name":"Jake Clay","pos":42,"rank":3,"isMe":false},{"name":"Rio Duhaney","pos":41,"rank":4,"isMe":true},{"name":"Lewis Carney","pos":32,"rank":5,"isMe":false},{"name":"Leah Higginson","pos":9,"rank":6,"isMe":false},{"name":"Mike Rea","pos":1,"rank":7,"isMe":false}];
+  const chartData = {"pace":{"labels":["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"],"actual":[1,10,22,43,67,102,112,112],"expected":[20,41,61,82,102,122,143,163]},"hourly":{"labels":["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"],"calls":[1,9,12,21,24,35,10,0],"connected":[0,5,1,7,13,9,4,0]},"comparison":{"labels":["Calls","Connect %","Booked"],"you":[112,35,2],"team":[113,15,1]},"funnelToday":{"labels":["Calls","Connected","Booked","Sats"],"values":[112,39,2,0],"colors":["#3b82f6","#8b5cf6","#ec4899","#10b981"]},"connectTrend":{"labels":["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"],"data":[0,56,8,33,54,26,40,null]},"pipeline":{"labels":["583192764","862115036","1876144355","2280951006","closedlost","qualifiedtobuy"],"values":[1,3,1,1,80,16]},"conversions":{"labels":["Connect","Book","Sat"],"values":[34.82142857142857,5.128205128205128,0],"colors":["#06b6d4","#8b5cf6","#10b981"]},"hourlyBookings":{"labels":["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"],"data":[0,0,0,0,0,0,0,0]},"callDist":{"labels":["Connected","No Answer","Busy","Other"],"values":[39,34,17,23],"colors":["#10b981","#f59e0b","#ef4444","#64748b"]},"mtdProgress":{"labels":["Calls","Booked","Sats","Revenue"],"current":[0,20,2,0],"target":[0,26,25,100]},"teamDist":{"labels":["Charlotte","Luca","Jake","Rio","Lewis","Leah","Mike"],"calls":[199,136,114,112,87,24,0],"booked":[0,0,0,0,0,0,0]},"targetPct":{"calls":68.71165644171779,"booked":25}};
+  const uId = 'h1724';
+  const pacingColor = '#EF4444';
+
+  // Place player tokens on snake board
+  function placeTokens() {
+    const board = document.getElementById('snakeBoard-' + uId);
+    if (!board) return;
+
+    playerPositions.forEach((player, idx) => {
+      const cell = board.querySelector('[data-cell="' + player.pos + '"]');
+      if (!cell) return;
+
+      const token = document.createElement('div');
+      token.className = 'player-token ' + (player.isMe ? 'me' : player.rank <= 3 ? 'top3' : 'other');
+      token.textContent = player.rank;
+      token.title = player.name + ' (' + player.pos + '%)';
+      
+      // Offset multiple tokens on same cell
+      const existing = cell.querySelectorAll('.player-token').length;
+      // Slight random offset to prevent perfect stacking
+      const offX = (existing * 4) % 12;
+      const offY = (existing * 4) % 12;
+      token.style.transform = 'translate(' + offX + 'px, ' + -offY + 'px)' + (player.isMe ? ' scale(1.2)' : ' scale(0.9)');
+      
+      cell.appendChild(token);
+    });
+  }
+
+  // Initialize all charts
+  function initCharts() {
+    if (typeof Chart === 'undefined') {
+      setTimeout(initCharts, 100);
+      return;
+    }
+
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.1)';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    
+    const commonOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { 
+          backgroundColor: 'rgba(15, 23, 42, 0.95)', 
+          padding: 12, 
+          cornerRadius: 8,
+          titleFont: { size: 13, weight: 700 },
+          bodyFont: { size: 12 }
+        }
+      }
+    };
+
+    const gridOptions = {
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(148, 163, 184, 0.1)' } },
+        x: { grid: { display: false } }
+      }
+    };
+
+    // 1. Pace Chart
+    const paceCtx = document.getElementById('paceChart-' + uId);
+    if (paceCtx) new Chart(paceCtx, {
+      type: 'line',
+      data: {
+        labels: chartData.pace.labels,
+        datasets: [
+          { label: 'Target', data: chartData.pace.expected, borderColor: '#64748b', borderDash: [5,5], borderWidth: 2, pointRadius: 0, fill: false },
+          { label: 'Actual', data: chartData.pace.actual, borderColor: pacingColor, backgroundColor: pacingColor + '22', borderWidth: 3, pointRadius: 3, fill: true, tension: 0.3 }
+        ]
+      },
+      options: { ...commonOptions, ...gridOptions, plugins: { ...commonOptions.plugins, legend: { display: true, position: 'top' } } }
+    });
+
+    // 2. Hourly Activity
+    const hourlyCtx = document.getElementById('hourlyChart-' + uId);
+    if (hourlyCtx) new Chart(hourlyCtx, {
+      type: 'bar',
+      data: {
+        labels: chartData.hourly.labels,
+        datasets: [
+          { label: 'Calls', data: chartData.hourly.calls, backgroundColor: '#3b82f6', borderRadius: 4 },
+          { label: 'Connected', data: chartData.hourly.connected, backgroundColor: '#10b981', borderRadius: 4 }
+        ]
+      },
+      options: { ...commonOptions, ...gridOptions, plugins: { ...commonOptions.plugins, legend: { display: true, position: 'top' } } }
+    });
+
+    // 3. Comparison
+    const compCtx = document.getElementById('comparisonChart-' + uId);
+    if (compCtx) new Chart(compCtx, {
+      type: 'bar',
+      data: {
+        labels: chartData.comparison.labels,
+        datasets: [
+          { label: 'You', data: chartData.comparison.you, backgroundColor: '#3b82f6', borderRadius: 6 },
+          { label: 'Team Avg', data: chartData.comparison.team, backgroundColor: '#64748b', borderRadius: 6 }
+        ]
+      },
+      options: { ...commonOptions, ...gridOptions, plugins: { ...commonOptions.plugins, legend: { display: true, position: 'top' } } }
+    });
+
+    // 4. Funnel
+    const funnelCtx = document.getElementById('funnelChart-' + uId);
+    if (funnelCtx) new Chart(funnelCtx, {
+      type: 'bar',
+      data: {
+        labels: chartData.funnelToday.labels,
+        datasets: [{ data: chartData.funnelToday.values, backgroundColor: chartData.funnelToday.colors, borderRadius: 6 }]
+      },
+      options: { ...commonOptions, indexAxis: 'y', scales: { x: { beginAtZero: true, grid: { color: 'rgba(148,163,184,0.1)' } }, y: { grid: { display: false } } } }
+    });
+
+    // 5. Connect Trend
+    const connectCtx = document.getElementById('connectTrendChart-' + uId);
+    if (connectCtx) new Chart(connectCtx, {
+      type: 'line',
+      data: {
+        labels: chartData.connectTrend.labels,
+        datasets: [{ data: chartData.connectTrend.data, borderColor: '#06b6d4', backgroundColor: '#06b6d422', fill: true, tension: 0.4, pointRadius: 3 }]
+      },
+      options: { ...commonOptions, ...gridOptions }
+    });
+
+    // 6. Conversions
+    const convCtx = document.getElementById('conversionChart-' + uId);
+    if (convCtx) new Chart(convCtx, {
+      type: 'bar',
+      data: {
+        labels: chartData.conversions.labels,
+        datasets: [{ data: chartData.conversions.values, backgroundColor: chartData.conversions.colors, borderRadius: 6 }]
+      },
+      options: { ...commonOptions, ...gridOptions }
+    });
+
+    // 7. Call Distribution
+    const distCtx = document.getElementById('callDistChart-' + uId);
+    if (distCtx) new Chart(distCtx, {
+      type: 'doughnut',
+      data: {
+        labels: chartData.callDist.labels,
+        datasets: [{ data: chartData.callDist.values, backgroundColor: chartData.callDist.colors, borderWidth: 0 }]
+      },
+      options: { ...commonOptions, cutout: '65%', plugins: { ...commonOptions.plugins, legend: { display: true, position: 'right' } } }
+    });
+
+    // 8. Pipeline
+    const pipeCtx = document.getElementById('pipelineChart-' + uId);
+    if (pipeCtx) new Chart(pipeCtx, {
+      type: 'bar',
+      data: {
+        labels: chartData.pipeline.labels,
+        datasets: [{ data: chartData.pipeline.values, backgroundColor: ['#3b82f6','#8b5cf6','#ec4899','#f59e0b','#10b981','#06b6d4'], borderRadius: 6 }]
+      },
+      options: { ...commonOptions, ...gridOptions }
+    });
+
+    // 11. MTD Progress
+    const mtdCtx = document.getElementById('mtdChart-' + uId);
+    if (mtdCtx) new Chart(mtdCtx, {
+      type: 'bar',
+      data: {
+        labels: chartData.mtdProgress.labels,
+        datasets: [
+          { label: 'Current', data: chartData.mtdProgress.current, backgroundColor: '#3b82f6', borderRadius: 6 },
+          { label: 'Target', data: chartData.mtdProgress.target, backgroundColor: '#374151', borderRadius: 6 }
+        ]
+      },
+      options: { ...commonOptions, ...gridOptions, plugins: { ...commonOptions.plugins, legend: { display: true, position: 'top' } } }
+    });
+
+    // 12. Radar
+    const radarCtx = document.getElementById('radarChart-' + uId);
+    if (radarCtx) new Chart(radarCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Calls', 'Connect %', 'Book Rate', 'Sat Rate', 'Pace'],
+        datasets: [
+          { label: 'You', data: [chartData.targetPct.calls, chartData.comparison.you[1], chartData.conversions.values[1], chartData.conversions.values[2], chartData.targetPct.calls], backgroundColor: '#3b82f644', borderColor: '#3b82f6', borderWidth: 2 },
+          { label: 'Target', data: [100, 25, 15, 70, 100], backgroundColor: '#64748b22', borderColor: '#64748b', borderWidth: 1, borderDash: [5,5] }
+        ]
+      },
+      options: { ...commonOptions, scales: { r: { beginAtZero: true, max: 150, grid: { color: 'rgba(148,163,184,0.2)' }, pointLabels: { color: '#94a3b8', font: { size: 11 } } } }, plugins: { ...commonOptions.plugins, legend: { display: true, position: 'top' } } }
+    });
+  }
+
+  // Run
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => { placeTokens(); initCharts(); });
+  } else {
+    placeTokens();
+    initCharts();
+  }
+})();
+</script>
+</section>
+
 <section class="page" id="h1707" data-hour="1707">
 <div class="dashboard-header">
   <div class="header-left">
