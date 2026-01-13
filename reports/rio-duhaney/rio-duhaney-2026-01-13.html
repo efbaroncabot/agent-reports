@@ -1,4 +1,292 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rio Duhaney</title><style>body{background:#0b1220;color:#e5e7eb;font-family:sans-serif;margin:0;padding:12px}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}.kpi{display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding:6px 0;font-weight:700}.lbl{color:#9ca3af;font-weight:400}table{width:100%;font-size:0.85em;border-collapse:collapse}td,th{padding:6px;text-align:left;border-bottom:1px solid #374151}canvas{width:100%!important;height:180px!important}.badge{background:#1f2937;padding:2px 6px;border-radius:4px;font-size:0.8em} .page{display:none} .page:target{display:block} .nav{position:sticky;top:0;background:#111827;padding:10px;display:flex;gap:10px;justify-content:center;z-index:9} button{background:#374151;border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer}</style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body><div class="nav"><button onclick="h(-1)">←</button><span id="lbl" style="font-weight:bold;align-self:center">--:--</span><button onclick="h(1)">→</button></div><div id="pages"></div><script>const ps=()=>Array.from(document.querySelectorAll('.page')); function h(d){let i=Math.max(0,Math.min(ps().length-1, ps().findIndex(p=>'#'+p.id===location.hash)+d)); location.hash=ps()[i].id;} window.addEventListener('hashchange',()=>{const p=document.querySelector(location.hash); if(p){ps().forEach(x=>x.style.display='none');p.style.display='block';document.getElementById('lbl').innerText=p.dataset.hour.replace(/(..)(..)/,'$1:$2')}}); if(location.hash) window.dispatchEvent(new Event('hashchange')); else if(ps().length) location.hash=ps()[0].id;</script><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="h1619" data-hour="1619">
+<div class="header">
+  <div>
+    <h2>Rio Duhaney</h2>
+    <div class="header-sub">2026-01-13 • 16:19 Dubai Time</div>
+  </div>
+  <div class="badge" style="color: #EF4444">
+    #5 of 7 • Behind
+  </div>
+</div>
+
+<div class="grid">
+  
+  <!-- AI Coach Output Card -->
+  <div class="card ai-output-card">
+    <div class="card-header">
+      <span>🤖 AI Coach Guidance</span>
+      <span class="value" style="color: var(--muted);">16:19</span>
+    </div>
+    <div class="ai-output-content">We're at 1 booking, needing 6 more to hit your 7-booking target today. This 11:00-12:00 hour is a high-potential window to drive bookings and catch up.
+
+Last hour (10:00-11:00) showed no recorded activity. We need to ensure full engagement and maximize every minute this hour.
+
+Your mission: 25+ dials. Prioritize following up with Chawasarira Kuguyo regarding the UK property investment and your 11 stale deals (>14 days). For qualified conversations, propose 12:00, 14:00, or 16:00 today. These are clear slots before and after your 15:00 external meeting, allowing immediate follow-up and securing a same-day commitment.
+
+Status — Calls:10 | Connected:5 | Booked:1
+Δ since last: +0 calls, +0 connected, +0 booked</div>
+  </div>
+
+  <!-- Snake Race Leaderboard -->
+  <div class="card">
+    <div class="card-header">
+      <span>🏁 Team Race - Day Progress</span>
+      <span class="value">Your Position: <strong style="color: var(--accent)">#5</strong></span>
+    </div>
+    <div class="snake-container">
+      
+        <div class="snake-item ">
+          <div class="snake-position gold">1</div>
+          <div class="snake-name">Jake Clay</div>
+          <div class="snake-bar-wrapper">
+            <div class="snake-bar-fill" style="width: 60%; background: var(--warning);"></div>
+          </div>
+          <div class="snake-pct" style="color: var(--warning)">60%</div>
+        </div>
+        <div class="snake-item ">
+          <div class="snake-position silver">2</div>
+          <div class="snake-name">Charlotte Capes</div>
+          <div class="snake-bar-wrapper">
+            <div class="snake-bar-fill" style="width: 60%; background: var(--warning);"></div>
+          </div>
+          <div class="snake-pct" style="color: var(--warning)">60%</div>
+        </div>
+        <div class="snake-item ">
+          <div class="snake-position bronze">3</div>
+          <div class="snake-name">Luca Camilleri</div>
+          <div class="snake-bar-wrapper">
+            <div class="snake-bar-fill" style="width: 60%; background: var(--warning);"></div>
+          </div>
+          <div class="snake-pct" style="color: var(--warning)">60%</div>
+        </div>
+        <div class="snake-item ">
+          <div class="snake-position other">4</div>
+          <div class="snake-name">Lewis Carney</div>
+          <div class="snake-bar-wrapper">
+            <div class="snake-bar-fill" style="width: 60%; background: var(--warning);"></div>
+          </div>
+          <div class="snake-pct" style="color: var(--warning)">60%</div>
+        </div>
+        <div class="snake-item is-me">
+          <div class="snake-position other">5</div>
+          <div class="snake-name">Rio Duhaney (You)</div>
+          <div class="snake-bar-wrapper">
+            <div class="snake-bar-fill" style="width: 32%; background: var(--accent);"></div>
+          </div>
+          <div class="snake-pct" style="color: var(--accent)">32%</div>
+        </div>
+        <div class="snake-item ">
+          <div class="snake-position other">6</div>
+          <div class="snake-name">Leah Higginson</div>
+          <div class="snake-bar-wrapper">
+            <div class="snake-bar-fill" style="width: 6%; background: var(--danger);"></div>
+          </div>
+          <div class="snake-pct" style="color: var(--danger)">6%</div>
+        </div>
+        <div class="snake-item ">
+          <div class="snake-position other">7</div>
+          <div class="snake-name">Mike Rea</div>
+          <div class="snake-bar-wrapper">
+            <div class="snake-bar-fill" style="width: 0%; background: var(--danger);"></div>
+          </div>
+          <div class="snake-pct" style="color: var(--danger)">0%</div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Pace vs Target Chart -->
+  <div class="card">
+    <div class="card-header">
+      <span>📈 Your Pace vs Target</span>
+      <span class="value" style="color: #EF4444">10/19 calls</span>
+    </div>
+    <div class="chart-container">
+      <canvas id="paceChart-h1619"></canvas>
+    </div>
+    <div class="metrics-row">
+      <div class="metric">
+        <span class="val" style="color: var(--accent)">10</span>
+        <span class="lbl">Calls</span>
+      </div>
+      <div class="metric">
+        <span class="val" style="color: var(--success)">5</span>
+        <span class="lbl">Connected</span>
+      </div>
+      <div class="metric">
+        <span class="val" style="color: #8b5cf6">1</span>
+        <span class="lbl">Booked</span>
+      </div>
+      <div class="metric">
+        <span class="val" style="color: #EF4444">53%</span>
+        <span class="lbl">Pace</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agent vs Team Comparison -->
+  <div class="card">
+    <div class="card-header">
+      <span>⚔️ You vs Team Average</span>
+      <span class="value" style="color: var(--muted)">Today's Performance</span>
+    </div>
+    <div class="chart-container">
+      <canvas id="compareChart-h1619"></canvas>
+    </div>
+    <div class="metrics-row">
+      <div class="metric">
+        <span class="val" style="color: var(--danger)">
+          ↓ 18
+        </span>
+        <span class="lbl">vs Avg Calls</span>
+      </div>
+      <div class="metric">
+        <span class="val" style="color: var(--success)">
+          ↑ 0
+        </span>
+        <span class="lbl">vs Avg Booked</span>
+      </div>
+      <div class="metric">
+        <span class="val">#1 of 7</span>
+        <span class="lbl">30d Rank</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // Wait for Chart.js to load
+  function initCharts() {
+    if (typeof Chart === 'undefined') {
+      setTimeout(initCharts, 100);
+      return;
+    }
+
+    const paceData = {"labels":["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"],"actual":[1,10,10,10,10,10,10,null],"expected":[2,5,7,10,12,14,17,19]};
+    const compareData = {"labels":["Calls","Connect %","Booked"],"you":[10,50,1],"team":[28,15,1]};
+
+    // Chart defaults
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.1)';
+
+    // Pace Chart
+    const paceCtx = document.getElementById('paceChart-h1619');
+    if (paceCtx && !paceCtx.dataset.rendered) {
+      new Chart(paceCtx, {
+        type: 'line',
+        data: {
+          labels: paceData.labels,
+          datasets: [
+            {
+              label: 'Target Pace',
+              data: paceData.expected,
+              borderColor: '#64748b',
+              borderDash: [5, 5],
+              borderWidth: 2,
+              pointRadius: 0,
+              fill: false
+            },
+            {
+              label: 'Your Actual',
+              data: paceData.actual,
+              borderColor: '#EF4444',
+              backgroundColor: '#EF444422',
+              borderWidth: 3,
+              pointRadius: 4,
+              pointBackgroundColor: '#EF4444',
+              fill: true,
+              tension: 0.3
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { intersect: false, mode: 'index' },
+          plugins: {
+            legend: { position: 'top', labels: { usePointStyle: true, padding: 15 } },
+            tooltip: {
+              backgroundColor: 'rgba(30, 41, 59, 0.95)',
+              padding: 12,
+              cornerRadius: 8
+            }
+          },
+          scales: {
+            y: { 
+              beginAtZero: true,
+              grid: { color: 'rgba(148, 163, 184, 0.1)' },
+              title: { display: true, text: 'Cumulative Calls' }
+            },
+            x: { 
+              grid: { display: false },
+              title: { display: true, text: 'Hour' }
+            }
+          }
+        }
+      });
+      paceCtx.dataset.rendered = 'true';
+    }
+
+    // Comparison Chart
+    const compareCtx = document.getElementById('compareChart-h1619');
+    if (compareCtx && !compareCtx.dataset.rendered) {
+      new Chart(compareCtx, {
+        type: 'bar',
+        data: {
+          labels: compareData.labels,
+          datasets: [
+            {
+              label: 'You',
+              data: compareData.you,
+              backgroundColor: '#3b82f6',
+              borderRadius: 6,
+              barThickness: 40
+            },
+            {
+              label: 'Team Average',
+              data: compareData.team,
+              backgroundColor: '#64748b',
+              borderRadius: 6,
+              barThickness: 40
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { usePointStyle: true, padding: 15 } },
+            tooltip: {
+              backgroundColor: 'rgba(30, 41, 59, 0.95)',
+              padding: 12,
+              cornerRadius: 8
+            }
+          },
+          scales: {
+            y: { 
+              beginAtZero: true,
+              grid: { color: 'rgba(148, 163, 184, 0.1)' }
+            },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+      compareCtx.dataset.rendered = 'true';
+    }
+  }
+
+  // Run initialization
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCharts);
+  } else {
+    initCharts();
+  }
+})();
+</script>
+</section>
+
 <section class="page" id="h1610" data-hour="1610">
 <div class="header">
   <div>
