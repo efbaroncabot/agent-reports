@@ -1,4 +1,128 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jake Clay</title><style>body{background:#0b1220;color:#e5e7eb;font-family:sans-serif;margin:0;padding:12px}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}.kpi{display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding:6px 0;font-weight:700}.lbl{color:#9ca3af;font-weight:400}table{width:100%;font-size:0.85em;border-collapse:collapse}td,th{padding:6px;text-align:left;border-bottom:1px solid #374151}canvas{width:100%!important;height:180px!important}.badge{background:#1f2937;padding:2px 6px;border-radius:4px;font-size:0.8em} .page{display:none} .page:target{display:block} .nav{position:sticky;top:0;background:#111827;padding:10px;display:flex;gap:10px;justify-content:center;z-index:9} button{background:#374151;border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer}</style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body><div class="nav"><button onclick="h(-1)">←</button><span id="lbl" style="font-weight:bold;align-self:center">--:--</span><button onclick="h(1)">→</button></div><div id="pages"></div><script>const ps=()=>Array.from(document.querySelectorAll('.page')); function h(d){let i=Math.max(0,Math.min(ps().length-1, ps().findIndex(p=>'#'+p.id===location.hash)+d)); location.hash=ps()[i].id;} window.addEventListener('hashchange',()=>{const p=document.querySelector(location.hash); if(p){ps().forEach(x=>x.style.display='none');p.style.display='block';document.getElementById('lbl').innerText=p.dataset.hour.replace(/(..)(..)/,'$1:$2')}}); if(location.hash) window.dispatchEvent(new Event('hashchange')); else if(ps().length) location.hash=ps()[0].id;</script><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="h1555" data-hour="1555">
+<div class="header">
+  <div>
+    <h2>Jake Clay</h2>
+    <div style="color:#94a3b8;margin-top:4px;">2026-01-13 • 15:55</div>
+  </div>
+  <div class="badge" style="color:#EF4444">Behind (52%)</div>
+</div>
+
+<div class="grid">
+  <!-- 1. Activity -->
+  <div class="card">
+    <div class="card-head">
+      <span>Activity</span>
+      <span style="color:#EF4444">79/151 calls</span>
+    </div>
+    <div class="chart-box"><canvas data-cfg="eyJ0eXBlIjoiYmFyIiwiZGF0YSI6eyJsYWJlbHMiOlsiMTE6MDAiLCIxMjowMCJdLCJkYXRhc2V0cyI6W3sibGFiZWwiOiJDYWxscyIsImRhdGEiOls2MiwxN10sImJhY2tncm91bmRDb2xvciI6IiMzYjgyZjYiLCJib3JkZXJSYWRpdXMiOjR9LHsibGFiZWwiOiJDb25uZWN0ZWQiLCJkYXRhIjpbNSwxXSwidHlwZSI6ImxpbmUiLCJib3JkZXJDb2xvciI6IiMxMGI5ODEiLCJib3JkZXJXaWR0aCI6MiwidGVuc2lvbiI6MC40fV19LCJvcHRpb25zIjp7InJlc3BvbnNpdmUiOnRydWUsIm1haW50YWluQXNwZWN0UmF0aW8iOmZhbHNlLCJwbHVnaW5zIjp7ImxlZ2VuZCI6eyJwb3NpdGlvbiI6InRvcCIsImxhYmVscyI6eyJjb2xvciI6IiM5NGEzYjgiLCJmb250Ijp7InNpemUiOjExfX19LCJ0b29sdGlwIjp7ImJhY2tncm91bmRDb2xvciI6InJnYmEoMzAsIDQxLCA1OSwgMC45KSIsInRpdGxlQ29sb3IiOiIjZjhmYWZjIiwiYm9keUNvbG9yIjoiI2Y4ZmFmYyIsImJvcmRlckNvbG9yIjoiIzMzNDE1NSIsImJvcmRlcldpZHRoIjoxfX0sInNjYWxlcyI6eyJ5Ijp7ImJlZ2luQXRaZXJvIjp0cnVlLCJncmlkIjp7ImNvbG9yIjoicmdiYSgxNDgsIDE2MywgMTg0LCAwLjEpIn0sInRpY2tzIjp7ImNvbG9yIjoiIzk0YTNiOCJ9fSwieCI6eyJncmlkIjp7ImRpc3BsYXkiOmZhbHNlfSwidGlja3MiOnsiY29sb3IiOiIjOTRhM2I4In19fX19"></canvas></div>
+    <div class="metrics">
+      <div class="metric"><span class="val">73</span><span class="lbl">Hour</span></div>
+      <div class="metric"><span class="val">6</span><span class="lbl">Conn</span></div>
+      <div class="metric"><span class="val">7.6%</span><span class="lbl">Rate</span></div>
+    </div>
+  </div>
+
+  <!-- 2. Funnel -->
+  <div class="card">
+    <div class="card-head">
+      <span>Funnel</span>
+      <span style="color:#8b5cf6">EV: £82</span>
+    </div>
+    <div class="chart-box"><canvas data-cfg="eyJ0eXBlIjoiYmFyIiwiZGF0YSI6eyJsYWJlbHMiOlsiQ2FsbHMiLCJDb25uZWN0ZWQiLCJCb29rZWQiLCJTYXRzIl0sImRhdGFzZXRzIjpbeyJsYWJlbCI6IkFjdHVhbCIsImRhdGEiOls3OSw2LDAsMF0sImJhY2tncm91bmRDb2xvciI6WyIjM2I4MmY2IiwiIzhiNWNmNiIsIiNlYzQ4OTkiLCIjMTBiOTgxIl0sImJvcmRlclJhZGl1cyI6NH1dfSwib3B0aW9ucyI6eyJyZXNwb25zaXZlIjp0cnVlLCJtYWludGFpbkFzcGVjdFJhdGlvIjpmYWxzZSwicGx1Z2lucyI6eyJsZWdlbmQiOnsicG9zaXRpb24iOiJ0b3AiLCJsYWJlbHMiOnsiY29sb3IiOiIjOTRhM2I4IiwiZm9udCI6eyJzaXplIjoxMX19fSwidG9vbHRpcCI6eyJiYWNrZ3JvdW5kQ29sb3IiOiJyZ2JhKDMwLCA0MSwgNTksIDAuOSkiLCJ0aXRsZUNvbG9yIjoiI2Y4ZmFmYyIsImJvZHlDb2xvciI6IiNmOGZhZmMiLCJib3JkZXJDb2xvciI6IiMzMzQxNTUiLCJib3JkZXJXaWR0aCI6MX19LCJzY2FsZXMiOnsieCI6eyJiZWdpbkF0WmVybyI6dHJ1ZSwiZ3JpZCI6eyJjb2xvciI6InJnYmEoMTQ4LCAxNjMsIDE4NCwgMC4xKSJ9LCJ0aWNrcyI6eyJjb2xvciI6IiM5NGEzYjgifX0sInkiOnsiZ3JpZCI6eyJkaXNwbGF5IjpmYWxzZX0sInRpY2tzIjp7ImNvbG9yIjoiIzk0YTNiOCJ9fX0sImluZGV4QXhpcyI6InkifX0="></canvas></div>
+    <div class="metrics">
+      <div class="metric"><span class="val" style="color:#3b82f6">79</span><span class="lbl">Calls</span></div><div class="metric"><span class="val" style="color:#8b5cf6">6</span><span class="lbl">Connected</span></div><div class="metric"><span class="val" style="color:#ec4899">0</span><span class="lbl">Booked</span></div><div class="metric"><span class="val" style="color:#10b981">0</span><span class="lbl">Sats</span></div>
+    </div>
+  </div>
+
+  <!-- 3. Pacing -->
+  <div class="card">
+    <div class="card-head">
+      <span>Pace vs Target</span>
+      <span style="color:#EF4444">Behind</span>
+    </div>
+    <div class="chart-box"><canvas data-cfg="eyJ0eXBlIjoibGluZSIsImRhdGEiOnsibGFiZWxzIjpbIjEwOjAwIiwiMTE6MDAiLCIxMjowMCIsIjEzOjAwIiwiMTQ6MDAiLCIxNTowMCIsIjE2OjAwIiwiMTc6MDAiXSwiZGF0YXNldHMiOlt7ImxhYmVsIjoiVGFyZ2V0IiwiZGF0YSI6WzE5LDM4LDU3LDc2LDk0LDExMywxMzIsMTUxXSwiYm9yZGVyQ29sb3IiOiIjOTRhM2I4IiwiYm9yZGVyRGFzaCI6WzUsNV0sImJvcmRlcldpZHRoIjoyLCJwb2ludFJhZGl1cyI6MH0seyJsYWJlbCI6IkFjdHVhbCIsImRhdGEiOlswLDYyLDc5LDc5LDc5LDc5LG51bGwsbnVsbF0sImJvcmRlckNvbG9yIjoiI0VGNDQ0NCIsImJhY2tncm91bmRDb2xvciI6InJnYmEoNTksIDEzMCwgMjQ2LCAwLjEpIiwiZmlsbCI6dHJ1ZSwidGVuc2lvbiI6MC4yfV19LCJvcHRpb25zIjp7InJlc3BvbnNpdmUiOnRydWUsIm1haW50YWluQXNwZWN0UmF0aW8iOmZhbHNlLCJwbHVnaW5zIjp7ImxlZ2VuZCI6eyJwb3NpdGlvbiI6InRvcCIsImxhYmVscyI6eyJjb2xvciI6IiM5NGEzYjgiLCJmb250Ijp7InNpemUiOjExfX19LCJ0b29sdGlwIjp7ImJhY2tncm91bmRDb2xvciI6InJnYmEoMzAsIDQxLCA1OSwgMC45KSIsInRpdGxlQ29sb3IiOiIjZjhmYWZjIiwiYm9keUNvbG9yIjoiI2Y4ZmFmYyIsImJvcmRlckNvbG9yIjoiIzMzNDE1NSIsImJvcmRlcldpZHRoIjoxfX0sInNjYWxlcyI6eyJ5Ijp7ImJlZ2luQXRaZXJvIjp0cnVlLCJncmlkIjp7ImNvbG9yIjoicmdiYSgxNDgsIDE2MywgMTg0LCAwLjEpIn0sInRpY2tzIjp7ImNvbG9yIjoiIzk0YTNiOCJ9fSwieCI6eyJncmlkIjp7ImRpc3BsYXkiOmZhbHNlfSwidGlja3MiOnsiY29sb3IiOiIjOTRhM2I4In19fX19"></canvas></div>
+    <div style="margin-top:15px;color:#94a3b8;font-size:0.9em;">
+      Next Mtg: <b>42m</b> (Development Selection & Next Steps (12PM GMT))
+    </div>
+  </div>
+
+  <!-- 4. Revenue -->
+  <div class="card">
+    <div class="card-head">
+      <span>Revenue</span>
+      <span style="color:#10b981">£0</span>
+    </div>
+    <div class="chart-box"><canvas data-cfg="eyJ0eXBlIjoibGluZSIsImRhdGEiOnsibGFiZWxzIjpbXSwiZGF0YXNldHMiOlt7ImxhYmVsIjoiUmV2ZW51ZSIsImRhdGEiOltdLCJib3JkZXJDb2xvciI6IiMxMGI5ODEiLCJiYWNrZ3JvdW5kQ29sb3IiOiJyZ2JhKDE2LCAxODUsIDEyOSwgMC4xKSIsImZpbGwiOnRydWUsInRlbnNpb24iOjAuM31dfSwib3B0aW9ucyI6eyJyZXNwb25zaXZlIjp0cnVlLCJtYWludGFpbkFzcGVjdFJhdGlvIjpmYWxzZSwicGx1Z2lucyI6eyJsZWdlbmQiOnsicG9zaXRpb24iOiJ0b3AiLCJsYWJlbHMiOnsiY29sb3IiOiIjOTRhM2I4IiwiZm9udCI6eyJzaXplIjoxMX19fSwidG9vbHRpcCI6eyJiYWNrZ3JvdW5kQ29sb3IiOiJyZ2JhKDMwLCA0MSwgNTksIDAuOSkiLCJ0aXRsZUNvbG9yIjoiI2Y4ZmFmYyIsImJvZHlDb2xvciI6IiNmOGZhZmMiLCJib3JkZXJDb2xvciI6IiMzMzQxNTUiLCJib3JkZXJXaWR0aCI6MX19LCJzY2FsZXMiOnsieSI6eyJiZWdpbkF0WmVybyI6dHJ1ZSwiZ3JpZCI6eyJjb2xvciI6InJnYmEoMTQ4LCAxNjMsIDE4NCwgMC4xKSJ9LCJ0aWNrcyI6eyJjb2xvciI6IiM5NGEzYjgifX0sIngiOnsiZ3JpZCI6eyJkaXNwbGF5IjpmYWxzZX0sInRpY2tzIjp7ImNvbG9yIjoiIzk0YTNiOCJ9fX19fQ=="></canvas></div>
+    <div class="metrics">
+      <div class="metric"><span class="val">23</span><span class="lbl">Booked</span></div>
+      <div class="metric"><span class="val">9</span><span class="lbl">Sats</span></div>
+      <div class="metric"><span class="val">#2 of 7</span><span class="lbl">Rank</span></div>
+    </div>
+  </div>
+
+  <!-- 5. Team -->
+  <div class="card">
+    <div class="card-head">
+      <span>Team Leaderboard</span>
+      <span>7 Reps</span>
+    </div>
+    <div style="max-height:220px;overflow-y:auto;margin-bottom:15px;">
+      
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Rio Duhaney
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:4%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">4%</div>
+        </div>
+        <div class="snake-row me">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Jake Clay
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:31%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">31%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Leah Higginson
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:1%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">1%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Charlotte Capes
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:37%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">37%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Luca Camilleri
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:14%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">14%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Mike Rea
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:0%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">0%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Lewis Carney
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:9%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">9%</div>
+        </div>
+    </div>
+    <div class="chart-box" style="height:150px"><canvas data-cfg="eyJ0eXBlIjoiYmFyIiwiZGF0YSI6eyJsYWJlbHMiOlsiQ2FsbHMiLCJDb25uZWN0ICUiLCJCb29rZWQiXSwiZGF0YXNldHMiOlt7ImxhYmVsIjoiWW91IiwiZGF0YSI6Wzc5LDAuMDc2LDBdLCJiYWNrZ3JvdW5kQ29sb3IiOiIjM2I4MmY2IiwiYm9yZGVyUmFkaXVzIjo0fSx7ImxhYmVsIjoiVGVhbSBBdmciLCJkYXRhIjpbMjgsMCwwXSwiYmFja2dyb3VuZENvbG9yIjoiIzY0NzQ4YiIsImJvcmRlclJhZGl1cyI6NH1dfSwib3B0aW9ucyI6eyJyZXNwb25zaXZlIjp0cnVlLCJtYWludGFpbkFzcGVjdFJhdGlvIjpmYWxzZSwicGx1Z2lucyI6eyJsZWdlbmQiOnsicG9zaXRpb24iOiJ0b3AiLCJsYWJlbHMiOnsiY29sb3IiOiIjOTRhM2I4IiwiZm9udCI6eyJzaXplIjoxMX19fSwidG9vbHRpcCI6eyJiYWNrZ3JvdW5kQ29sb3IiOiJyZ2JhKDMwLCA0MSwgNTksIDAuOSkiLCJ0aXRsZUNvbG9yIjoiI2Y4ZmFmYyIsImJvZHlDb2xvciI6IiNmOGZhZmMiLCJib3JkZXJDb2xvciI6IiMzMzQxNTUiLCJib3JkZXJXaWR0aCI6MX19LCJzY2FsZXMiOnsieSI6eyJiZWdpbkF0WmVybyI6dHJ1ZSwiZ3JpZCI6eyJjb2xvciI6InJnYmEoMTQ4LCAxNjMsIDE4NCwgMC4xKSJ9LCJ0aWNrcyI6eyJjb2xvciI6IiM5NGEzYjgifX0sIngiOnsiZ3JpZCI6eyJkaXNwbGF5IjpmYWxzZX0sInRpY2tzIjp7ImNvbG9yIjoiIzk0YTNiOCJ9fX19fQ=="></canvas></div>
+  </div>
+</div>
+</section>
 <section class="page" id="h1239" data-hour="1239">
 <div class="header">
   <div>
