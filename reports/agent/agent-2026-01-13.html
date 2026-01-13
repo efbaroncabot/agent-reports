@@ -14,6 +14,195 @@ table { width: 100%; font-size: 0.85em; border-collapse: collapse; }
 td, th { text-align: left; padding: 8px 0; border-bottom: 1px solid #334155; color: var(--muted); }
 td { color: var(--text); }
  .page{display:none} .page:target{display:block} .nav{position:sticky;top:0;background:var(--bg);padding:10px;display:flex;gap:10px;justify-content:center;z-index:9;border-bottom:1px solid #334155} button{background:#334155;border:none;color:#fff;padding:6px 12px;border-radius:4px;cursor:pointer}</style></head><body><div class="nav"><button onclick="h(-1)">←</button><span id="lbl" style="font-weight:bold;align-self:center">--:--</span><button onclick="h(1)">→</button></div><div id="pages"></div><script>const ps=()=>Array.from(document.querySelectorAll('.page')); function h(d){let i=Math.max(0,Math.min(ps().length-1, ps().findIndex(p=>'#'+p.id===location.hash)+d)); location.hash=ps()[i].id;} window.addEventListener('hashchange',()=>{const p=document.querySelector(location.hash); if(p){ps().forEach(x=>x.style.display='none');p.style.display='block';document.getElementById('lbl').innerText=p.dataset.hour.replace(/(..)(..)/,'$1:$2')}}); if(location.hash) window.dispatchEvent(new Event('hashchange')); else if(ps().length) location.hash=ps()[0].id;</script><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="h1458" data-hour="1458">
+<div class="dashboard-header">
+  <div class="agent-info">
+    <h2>Sales Agent Dashboard</h2>
+    <div class="subtitle">2026-01-13 • Last updated: 14:58 (DXB)</div>
+  </div>
+  <div class="status-badge" style="color:#EF4444">Behind • 0%</div>
+</div>
+
+<div class="dashboard-grid">
+  <!-- Activity & Trends Card -->
+  <div class="dashboard-card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Activity & Trends</div>
+        <div class="card-subtitle">Hourly call performance</div>
+      </div>
+      <div style="color:#EF4444; font-weight:600">0/60 calls</div>
+    </div>
+    <div class="chart-container">
+      <canvas data-chart-config='{"type":"bar","data":{"labels":["09:00","10:00","11:00","12:00","13:00","14:58"],"datasets":[{"label":"Calls Made","data":[12,18,15,8,20,0],"backgroundColor":"#3b82f6","borderColor":"#2563eb","borderWidth":1,"borderRadius":4,"order":2},{"label":"Connected","data":[3,5,4,2,6,0],"type":"line","borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","borderWidth":2,"tension":0.4,"fill":true,"order":1}]},"options":{"responsive":true,"maintainAspectRatio":false,"plugins":{"legend":{"position":"top","labels":{"color":"#94a3b8","font":{"size":11}}},"tooltip":{"backgroundColor":"rgba(30, 41, 59, 0.9)","titleColor":"#f8fafc","bodyColor":"#f8fafc","borderColor":"#334155","borderWidth":1}},"scales":{"y":{"beginAtZero":true,"grid":{"color":"rgba(148, 163, 184, 0.1)"},"ticks":{"color":"#94a3b8"}},"x":{"grid":{"display":false},"ticks":{"color":"#94a3b8"}}}}}'></canvas>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 0%; background: #EF4444;"></div>
+    </div>
+    <div class="metric-grid">
+      <div class="metric-box">
+        <span class="metric-value">0</span>
+        <span class="metric-label">This Hour</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-value">0</span>
+        <span class="metric-label">Connected</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-value">0.0%</span>
+        <span class="metric-label">Connect Rate</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-value">0.0</span>
+        <span class="metric-label">Free Hours</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sales Funnel Card -->
+  <div class="dashboard-card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Sales Funnel</div>
+        <div class="card-subtitle">Today's conversion progress</div>
+      </div>
+      <div style="color:#8b5cf6; font-weight:600">EV/Call: £0</div>
+    </div>
+    <div class="chart-container">
+      <canvas data-chart-config='{"type":"bar","data":{"labels":["Calls","Connected","Booked","Sats"],"datasets":[{"label":"Actual","data":[0,0,0,0],"backgroundColor":["#3b82f6","#8b5cf6","#ec4899","#10b981"],"borderColor":["#3b82f6","#8b5cf6","#ec4899","#10b981"],"borderWidth":1},{"label":"Target","data":[60,null,null,null],"backgroundColor":"rgba(148, 163, 184, 0.3)","borderColor":"#94a3b8","borderWidth":1,"borderDash":[5,5]}]},"options":{"responsive":true,"maintainAspectRatio":false,"plugins":{"legend":{"position":"top","labels":{"color":"#94a3b8","font":{"size":11}}},"tooltip":{"backgroundColor":"rgba(30, 41, 59, 0.9)","titleColor":"#f8fafc","bodyColor":"#f8fafc","borderColor":"#334155","borderWidth":1}},"scales":{"x":{"beginAtZero":true,"grid":{"color":"rgba(148, 163, 184, 0.1)"},"ticks":{"color":"#94a3b8"}},"y":{"grid":{"display":false},"ticks":{"color":"#94a3b8"}}},"indexAxis":"y"}}'></canvas>
+    </div>
+    <div class="kpi-row">
+      
+        <div class="kpi-item">
+          <div class="kpi-value" style="color:#3b82f6">0</div>
+          <div class="kpi-label">Calls</div>
+        </div>
+      
+        <div class="kpi-item">
+          <div class="kpi-value" style="color:#8b5cf6">0</div>
+          <div class="kpi-label">Connected</div>
+        </div>
+      
+        <div class="kpi-item">
+          <div class="kpi-value" style="color:#ec4899">0</div>
+          <div class="kpi-label">Booked</div>
+        </div>
+      
+        <div class="kpi-item">
+          <div class="kpi-value" style="color:#10b981">0</div>
+          <div class="kpi-label">Sats</div>
+        </div>
+      
+    </div>
+  </div>
+
+  <!-- Revenue Performance Card -->
+  <div class="dashboard-card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Revenue Performance</div>
+        <div class="card-subtitle">MTD trend vs target</div>
+      </div>
+      <div style="color:#10b981; font-weight:600">£0</div>
+    </div>
+    <div class="chart-container">
+      <canvas data-chart-config='{"type":"line","data":{"labels":["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Today"],"datasets":[{"label":"Daily Revenue (GBP)","data":[42000,38500,41000,46700,39200,45500,0],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","borderWidth":3,"tension":0.4,"fill":true,"pointBackgroundColor":"#10b981","pointBorderColor":"#0f172a","pointBorderWidth":2,"pointRadius":4,"pointHoverRadius":6}]},"options":{"responsive":true,"maintainAspectRatio":false,"plugins":{"legend":{"position":"top","labels":{"color":"#94a3b8","font":{"size":11}}},"tooltip":{"backgroundColor":"rgba(30, 41, 59, 0.9)","titleColor":"#f8fafc","bodyColor":"#f8fafc","borderColor":"#334155","borderWidth":1}},"scales":{"y":{"beginAtZero":false,"grid":{"color":"rgba(148, 163, 184, 0.1)"},"ticks":{"color":"#94a3b8"}},"x":{"grid":{"display":false},"ticks":{"color":"#94a3b8"}}}}}'></canvas>
+    </div>
+    <div class="metric-grid">
+      <div class="metric-box">
+        <span class="metric-value">0</span>
+        <span class="metric-label">Booked MTD</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-value">0</span>
+        <span class="metric-label">Sats MTD</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-value">£0</span>
+        <span class="metric-label">Avg Deal</span>
+      </div>
+      <div class="metric-box">
+        <span class="metric-value">N/A</span>
+        <span class="metric-label">Team Rank</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pipeline Health Card -->
+  <div class="dashboard-card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Pipeline Health</div>
+        <div class="card-subtitle">Deals by stage</div>
+      </div>
+      <div style="color:#f59e0b; font-weight:600">18 deals</div>
+    </div>
+    <div class="chart-container">
+      <canvas data-chart-config='{"type":"doughnut","data":{"labels":["Discovery","Strategy","Cashflow","Reservation"],"datasets":[{"data":[8,5,3,2],"backgroundColor":["#3b82f6","#8b5cf6","#ec4899","#10b981"],"borderColor":"rgba(15, 23, 42, 0.8)","borderWidth":2,"hoverOffset":15}]},"options":{"responsive":true,"maintainAspectRatio":false,"plugins":{"legend":{"position":"right","labels":{"color":"#94a3b8","padding":15,"font":{"size":11}}},"tooltip":{"callbacks":{}}},"scales":{},"cutout":"65%"}}'></canvas>
+    </div>
+    <div style="margin-top: 16px; font-size: 0.85em;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+        <span>Total Value:</span>
+        <span style="font-weight:600">£615,000</span>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <span>Next Meeting:</span>
+        <span>None scheduled</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Insight Card -->
+  <div class="dashboard-card insight-card">
+    <div class="card-header">
+      <div class="card-title">💡 AI Insight & Recommendations</div>
+    </div>
+    <div class="insight-content">
+      ⚡ No calls logged yet. Start dialing immediately to hit today's target.
+    </div>
+    <div style="margin-top: 12px; font-size: 0.85em; color: var(--muted);">
+      No external meetings scheduled.
+      Focus time available.
+    </div>
+    <div style="margin-top: 16px; display: flex; gap: 12px; font-size: 0.85em;">
+      <div style="flex:1; background: rgba(30,41,59,0.7); padding: 12px; border-radius: 8px;">
+        <div style="font-weight:600; margin-bottom:4px;">Priority Actions</div>
+        <div>• Call back 3 connected leads from today</div>
+        <div>• Review 2 stale deals (>14 days)</div>
+      </div>
+      <div style="flex:1; background: rgba(30,41,59,0.7); padding: 12px; border-radius: 8px;">
+        <div style="font-weight:600; margin-bottom:4px;">Quick Stats</div>
+        <div>• Daily Goal: <span class="highlight">0</span> bookings</div>
+        <div>• Free Hours: <span class="highlight">0.0</span> today</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Initialize charts for this specific page
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all charts in the current container
+    const container = document.currentScript.closest('.page') || document.body;
+    const containerId = 'chart-container-' + Date.now();
+    container.id = containerId;
+    
+    // Initialize charts after a small delay to ensure DOM is ready
+    setTimeout(() => {
+      const chartCanvases = container.querySelectorAll('[data-chart-config]');
+      chartCanvases.forEach((canvas, index) => {
+        try {
+          const config = JSON.parse(canvas.dataset.chartConfig);
+          const ctx = canvas.getContext('2d');
+          new Chart(ctx, config);
+        } catch (error) {
+          console.error('Chart initialization error:', error);
+        }
+      });
+    }, 100);
+  });
+</script>
+</section>
 <section class="page" id="h1450" data-hour="1450">
 <div class="dashboard-header">
   <div class="agent-info">
