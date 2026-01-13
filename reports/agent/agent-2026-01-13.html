@@ -14,6 +14,61 @@ table { width: 100%; font-size: 0.85em; border-collapse: collapse; }
 td, th { text-align: left; padding: 8px 0; border-bottom: 1px solid #334155; color: var(--muted); }
 td { color: var(--text); }
  .page{display:none} .page:target{display:block} .nav{position:sticky;top:0;background:var(--bg);padding:10px;display:flex;gap:10px;justify-content:center;z-index:9;border-bottom:1px solid #334155} button{background:#334155;border:none;color:#fff;padding:6px 12px;border-radius:4px;cursor:pointer}</style></head><body><div class="nav"><button onclick="h(-1)">←</button><span id="lbl" style="font-weight:bold;align-self:center">--:--</span><button onclick="h(1)">→</button></div><div id="pages"></div><script>const ps=()=>Array.from(document.querySelectorAll('.page')); function h(d){let i=Math.max(0,Math.min(ps().length-1, ps().findIndex(p=>'#'+p.id===location.hash)+d)); location.hash=ps()[i].id;} window.addEventListener('hashchange',()=>{const p=document.querySelector(location.hash); if(p){ps().forEach(x=>x.style.display='none');p.style.display='block';document.getElementById('lbl').innerText=p.dataset.hour.replace(/(..)(..)/,'$1:$2')}}); if(location.hash) window.dispatchEvent(new Event('hashchange')); else if(ps().length) location.hash=ps()[0].id;</script><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="h1441" data-hour="1441">
+<div class="head">
+  <div>
+    <h2 style="margin:0; font-size:1.2em">Agent</h2>
+    <div style="color:var(--muted); font-size:0.85em; margin-top:4px">2026-01-13 • 14:41</div>
+  </div>
+  <div class="badge" style="color:#EF4444">Behind</div>
+</div>
+
+<div class="grid">
+  <!-- Activity Card -->
+  <div class="card">
+    <span class="label">Activity Pulse</span>
+    <div class="big">0 <span style="font-size:0.5em; color:var(--muted)">CALLS</span></div>
+    <div class="sub">Target: 60 | Connected: 0</div>
+    <div class="bar-bg">
+      <div class="bar-fill" style="width:0%; background:#EF4444"></div>
+    </div>
+    <div style="margin-top:12px; font-size:0.85em">
+      Last Hour: <strong>0 calls</strong> (0% pickup)
+    </div>
+  </div>
+
+  <!-- Results Card -->
+  <div class="card">
+    <span class="label">Results (MTD)</span>
+    <div class="big">0 <span style="font-size:0.5em; color:var(--muted)">BOOKED</span></div>
+    <div class="sub">Rev: £0</div>
+    <div style="display:flex; justify-content:space-between; margin-top:12px; font-size:0.85em; border-top:1px solid #334155; padding-top:8px">
+      <span>Call → Book</span>
+      <span style="color:var(--success)">0%</span>
+    </div>
+  </div>
+
+  <!-- Insight Card -->
+  <div class="card" style="grid-column: 1 / -1; background: rgba(59, 130, 246, 0.1); border-color: var(--accent);">
+    <span class="label" style="color:var(--accent)">💡 AI Insight</span>
+    <div style="font-size:1em; font-weight:500;">⚡ No calls logged yet. Start dialing immediately.</div>
+    <div style="margin-top:8px; font-size:0.85em; color:var(--muted)">
+      Pipeline Risk: 0 deals stale (>14d) represents 0% of pipeline.
+    </div>
+  </div>
+
+  <!-- Deals Table -->
+  <div class="card">
+    <span class="label">Recent Activity</span>
+    <table>
+      <thead><tr><th>Name</th><th>Stage</th><th style="text-align:right">Value</th></tr></thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
 <section class="page" id="h1434" data-hour="1434">
 <div class="head">
   <div>
