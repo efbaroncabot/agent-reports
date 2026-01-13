@@ -1,36 +1,182 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lewis Carney</title><style>body{background:#0b1220;color:#e5e7eb;font-family:sans-serif;margin:0;padding:12px}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}.kpi{display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding:6px 0;font-weight:700}.lbl{color:#9ca3af;font-weight:400}table{width:100%;font-size:0.85em;border-collapse:collapse}td,th{padding:6px;text-align:left;border-bottom:1px solid #374151}canvas{width:100%!important;height:180px!important}.badge{background:#1f2937;padding:2px 6px;border-radius:4px;font-size:0.8em} .page{display:none} .page:target{display:block} .nav{position:sticky;top:0;background:#111827;padding:10px;display:flex;gap:10px;justify-content:center;z-index:9} button{background:#374151;border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer}</style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body><div class="nav"><button onclick="h(-1)">←</button><span id="lbl" style="font-weight:bold;align-self:center">--:--</span><button onclick="h(1)">→</button></div><div id="pages"></div><script>const ps=()=>Array.from(document.querySelectorAll('.page')); function h(d){let i=Math.max(0,Math.min(ps().length-1, ps().findIndex(p=>'#'+p.id===location.hash)+d)); location.hash=ps()[i].id;} window.addEventListener('hashchange',()=>{const p=document.querySelector(location.hash); if(p){ps().forEach(x=>x.style.display='none');p.style.display='block';document.getElementById('lbl').innerText=p.dataset.hour.replace(/(..)(..)/,'$1:$2')}}); if(location.hash) window.dispatchEvent(new Event('hashchange')); else if(ps().length) location.hash=ps()[0].id;</script><div id="pages"><!-- BEGIN-PAGES -->
 <section class="page" id="h1239" data-hour="1239">
-<div class="grid">
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <h2 style="margin:0">Lewis Carney</h2><span class="badge">12:39</span>
+<div class="header">
+  <div>
+    <h1>Lewis Carney</h1>
+    <span style="color: var(--text-muted); font-size: 0.85rem;">2026-01-13 • 12:39 (Dubai)</span>
+  </div>
+  <div style="text-align:right">
+    <div class="badge" style="background:#10B98120; color:#10B981">
+      <span class="status-dot" style="background:#10B981"></span> On Track
     </div>
-    <div class="kpi"><span class="lbl">Calls Today</span><span>22</span></div>
-    <div class="kpi"><span class="lbl">Revenue MTD</span><span>£0</span></div>
-    <div class="kpi"><span class="lbl">Dial Target</span><span>5</span></div>
   </div>
-  <div class="card"><canvas id="h1239_pace"></canvas></div>
-  <div class="card"><canvas id="h1239_funnel"></canvas></div>
-  <div class="card" style="grid-column:1/-1">
-    <h3 style="margin-top:0;color:#9ca3af">AI Analysis</h3>
-    <div style="white-space:pre-wrap;font-family:monospace;color:#d1d5db">
+</div>
 
-</div>
-  </div>
+<div class="grid">
+  <!-- Card 1: Activity Pulse -->
   <div class="card">
-    <h3 style="margin-top:0;color:#9ca3af">Priorities</h3>
-    <table><thead><tr><th>Name</th><th>Score</th><th>Src</th></tr></thead><tbody>
-      <tr><td>No leads</td></tr>
-    </tbody></table>
+    <div class="card-title">
+      <span>Activity Pulse</span>
+      <span style="color:#10B981">+0.3% vs Avg</span>
+    </div>
+    <div class="metric-big">22 <span style="font-size:1rem; color:var(--text-muted)">calls</span></div>
+    <div class="metric-sub">
+      Target: 42 | Connected: 8
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 52.38095238095239%; background: var(--accent)"></div>
+    </div>
+    <div style="margin-top:12px; font-size:0.85rem; color:var(--text-muted)">
+      Last Hour: <strong>13 calls</strong> (55.6% pickup rate)
+    </div>
   </div>
-  <div class="card"><h3 style="margin-top:0;color:#9ca3af">Team Activity (7d)</h3><canvas id="h1239_team"></canvas></div>
+
+  <!-- Card 2: Business Results -->
+  <div class="card">
+    <div class="card-title">
+      <span>Performance</span>
+      <span>MTD</span>
+    </div>
+    <div class="metric-big">14 <span style="font-size:1rem; color:var(--text-muted)">booked</span></div>
+    <div class="metric-sub">
+      Revenue: £0
+    </div>
+    <div class="list-item" style="margin-top:8px">
+      <span>Conversion (Call→Book)</span>
+      <span class="trend-up">
+        1.4%
+      </span>
+    </div>
+    <div class="list-item">
+      <span>Show Rate</span>
+      <span>64.3%</span>
+    </div>
+  </div>
+
+  <!-- Card 3: Strategic Focus -->
+  <div class="card" style="grid-column: 1 / -1;">
+    <div class="card-title"><span>💡 AI Strategic Insight</span></div>
+    <div style="font-size: 0.95rem; margin-bottom: 12px;">
+      🔥 Market is hot! Prioritize dialing new leads now.
+    </div>
+    
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 12px;">
+      <!-- Schedule Context -->
+      <div style="background: #0f172a; padding: 10px; border-radius: 8px;">
+        <strong style="color:var(--text-muted); font-size:0.8rem">BEST TIME TO CALL TODAY</strong>
+        <div style="font-size:1.1rem; font-weight:600; margin-top:4px">
+          18:00 
+          <span style="font-size:0.8rem; font-weight:400; color:var(--success)">
+            (53% pickup)
+          </span>
+        </div>
+      </div>
+
+      <!-- Pipeline Context -->
+      <div style="background: #0f172a; padding: 10px; border-radius: 8px;">
+        <strong style="color:var(--text-muted); font-size:0.8rem">PIPELINE RISK</strong>
+        <div style="font-size:1.1rem; font-weight:600; margin-top:4px">
+          16 Deals
+          <span style="font-size:0.8rem; font-weight:400; color:var(--danger)">
+            (44% Stale >14d)
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4: Recent Wins/Activity -->
+  <div class="card">
+    <div class="card-title"><span>Recent Deal Activity</span></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stage</th>
+          <th style="text-align:right">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td>Holland Mulenga</td>
+            <td style="color:var(--text-muted)">Decisionmakerboughtin</td>
+            <td style="text-align:right">-</td>
+          </tr>
+        
+          <tr>
+            <td>Samson Shiberu</td>
+            <td style="color:var(--text-muted)">Qualifiedtobuy</td>
+            <td style="text-align:right">-</td>
+          </tr>
+        
+          <tr>
+            <td>Gift Kalembe</td>
+            <td style="color:var(--text-muted)">Presentationscheduled</td>
+            <td style="text-align:right">-</td>
+          </tr>
+        
+          <tr>
+            <td>Ashton Sunga</td>
+            <td style="color:var(--text-muted)">Qualifiedtobuy</td>
+            <td style="text-align:right">-</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Card 5: Team Context -->
+  <div class="card">
+    <div class="card-title"><span>Team Standing</span></div>
+    <div style="text-align:center; padding: 10px 0;">
+      <div style="font-size:0.9rem; color:var(--text-muted)">Revenue Rank (30d)</div>
+      <div style="font-size:2rem; font-weight:800; color:var(--accent)">#7 of 7</div>
+      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px">
+        Top: Rio Duhaney 
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Charts Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="card" style="margin-top:16px">
+  <div class="card-title"><span>Conversion Funnel (30 Days)</span></div>
+  <canvas id="h1239_funnel" style="height:200px; width:100%"></canvas>
+</div>
+
 <script>
 (function(){
-  const D={"h1239_pace":{"type":"doughnut","data":{"datasets":[{"data":[13,0],"backgroundColor":["#009E73","#ffffff10"]}]},"options":{"cutout":"70%"}},"h1239_funnel":{"type":"bar","data":{"labels":["Bk","St","Cf","Dl"],"datasets":[{"data":[0,0,0,0],"backgroundColor":["#E69F00","#56B4E9","#009E73","#0072B2"]}]}},"h1239_team":{"type":"bar","data":{"labels":[],"datasets":[{"data":[],"backgroundColor":[]}]},"options":{"indexAxis":"y"}}};
-  Object.entries(D).forEach(([id,cfg])=>{
-    const el=document.getElementById(id);
-    if(el) new Chart(el,{...cfg,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},...cfg.options}});
-  });
+  const ctx = document.getElementById('h1239_funnel');
+  if(ctx) {
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Calls', 'Booked', 'Show', 'Cashflow'],
+        datasets: [{
+          label: 'Conversion %',
+          data: [
+            100, 
+            0.9, 
+            56.5, 
+            22.2
+          ],
+          backgroundColor: ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+          x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+        }
+      }
+    });
+  }
 })();
-</script></section><!-- END-PAGES --></div></body></html>
+</script>
+</section><!-- END-PAGES --></div></body></html>
