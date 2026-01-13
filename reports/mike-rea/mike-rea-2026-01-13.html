@@ -1,4 +1,128 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mike Rea</title><style>body{background:#0b1220;color:#e5e7eb;font-family:sans-serif;margin:0;padding:12px}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}.kpi{display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding:6px 0;font-weight:700}.lbl{color:#9ca3af;font-weight:400}table{width:100%;font-size:0.85em;border-collapse:collapse}td,th{padding:6px;text-align:left;border-bottom:1px solid #374151}canvas{width:100%!important;height:180px!important}.badge{background:#1f2937;padding:2px 6px;border-radius:4px;font-size:0.8em} .page{display:none} .page:target{display:block} .nav{position:sticky;top:0;background:#111827;padding:10px;display:flex;gap:10px;justify-content:center;z-index:9} button{background:#374151;border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer}</style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body><div class="nav"><button onclick="h(-1)">←</button><span id="lbl" style="font-weight:bold;align-self:center">--:--</span><button onclick="h(1)">→</button></div><div id="pages"></div><script>const ps=()=>Array.from(document.querySelectorAll('.page')); function h(d){let i=Math.max(0,Math.min(ps().length-1, ps().findIndex(p=>'#'+p.id===location.hash)+d)); location.hash=ps()[i].id;} window.addEventListener('hashchange',()=>{const p=document.querySelector(location.hash); if(p){ps().forEach(x=>x.style.display='none');p.style.display='block';document.getElementById('lbl').innerText=p.dataset.hour.replace(/(..)(..)/,'$1:$2')}}); if(location.hash) window.dispatchEvent(new Event('hashchange')); else if(ps().length) location.hash=ps()[0].id;</script><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="h1555" data-hour="1555">
+<div class="header">
+  <div>
+    <h2>Mike Rea</h2>
+    <div style="color:#94a3b8;margin-top:4px;">2026-01-13 • 15:55</div>
+  </div>
+  <div class="badge" style="color:#10B981">On Track (0%)</div>
+</div>
+
+<div class="grid">
+  <!-- 1. Activity -->
+  <div class="card">
+    <div class="card-head">
+      <span>Activity</span>
+      <span style="color:#10B981">0/0 calls</span>
+    </div>
+    <div class="chart-box"><canvas data-cfg="eyJ0eXBlIjoiYmFyIiwiZGF0YSI6eyJsYWJlbHMiOltdLCJkYXRhc2V0cyI6W3sibGFiZWwiOiJDYWxscyIsImRhdGEiOltdLCJiYWNrZ3JvdW5kQ29sb3IiOiIjM2I4MmY2IiwiYm9yZGVyUmFkaXVzIjo0fSx7ImxhYmVsIjoiQ29ubmVjdGVkIiwiZGF0YSI6W10sInR5cGUiOiJsaW5lIiwiYm9yZGVyQ29sb3IiOiIjMTBiOTgxIiwiYm9yZGVyV2lkdGgiOjIsInRlbnNpb24iOjAuNH1dfSwib3B0aW9ucyI6eyJyZXNwb25zaXZlIjp0cnVlLCJtYWludGFpbkFzcGVjdFJhdGlvIjpmYWxzZSwicGx1Z2lucyI6eyJsZWdlbmQiOnsicG9zaXRpb24iOiJ0b3AiLCJsYWJlbHMiOnsiY29sb3IiOiIjOTRhM2I4IiwiZm9udCI6eyJzaXplIjoxMX19fSwidG9vbHRpcCI6eyJiYWNrZ3JvdW5kQ29sb3IiOiJyZ2JhKDMwLCA0MSwgNTksIDAuOSkiLCJ0aXRsZUNvbG9yIjoiI2Y4ZmFmYyIsImJvZHlDb2xvciI6IiNmOGZhZmMiLCJib3JkZXJDb2xvciI6IiMzMzQxNTUiLCJib3JkZXJXaWR0aCI6MX19LCJzY2FsZXMiOnsieSI6eyJiZWdpbkF0WmVybyI6dHJ1ZSwiZ3JpZCI6eyJjb2xvciI6InJnYmEoMTQ4LCAxNjMsIDE4NCwgMC4xKSJ9LCJ0aWNrcyI6eyJjb2xvciI6IiM5NGEzYjgifX0sIngiOnsiZ3JpZCI6eyJkaXNwbGF5IjpmYWxzZX0sInRpY2tzIjp7ImNvbG9yIjoiIzk0YTNiOCJ9fX19fQ=="></canvas></div>
+    <div class="metrics">
+      <div class="metric"><span class="val">0</span><span class="lbl">Hour</span></div>
+      <div class="metric"><span class="val">0</span><span class="lbl">Conn</span></div>
+      <div class="metric"><span class="val">0.0%</span><span class="lbl">Rate</span></div>
+    </div>
+  </div>
+
+  <!-- 2. Funnel -->
+  <div class="card">
+    <div class="card-head">
+      <span>Funnel</span>
+      <span style="color:#8b5cf6">EV: £0</span>
+    </div>
+    <div class="chart-box"><canvas data-cfg="eyJ0eXBlIjoiYmFyIiwiZGF0YSI6eyJsYWJlbHMiOlsiQ2FsbHMiLCJDb25uZWN0ZWQiLCJCb29rZWQiLCJTYXRzIl0sImRhdGFzZXRzIjpbeyJsYWJlbCI6IkFjdHVhbCIsImRhdGEiOlswLDAsMCwwXSwiYmFja2dyb3VuZENvbG9yIjpbIiMzYjgyZjYiLCIjOGI1Y2Y2IiwiI2VjNDg5OSIsIiMxMGI5ODEiXSwiYm9yZGVyUmFkaXVzIjo0fV19LCJvcHRpb25zIjp7InJlc3BvbnNpdmUiOnRydWUsIm1haW50YWluQXNwZWN0UmF0aW8iOmZhbHNlLCJwbHVnaW5zIjp7ImxlZ2VuZCI6eyJwb3NpdGlvbiI6InRvcCIsImxhYmVscyI6eyJjb2xvciI6IiM5NGEzYjgiLCJmb250Ijp7InNpemUiOjExfX19LCJ0b29sdGlwIjp7ImJhY2tncm91bmRDb2xvciI6InJnYmEoMzAsIDQxLCA1OSwgMC45KSIsInRpdGxlQ29sb3IiOiIjZjhmYWZjIiwiYm9keUNvbG9yIjoiI2Y4ZmFmYyIsImJvcmRlckNvbG9yIjoiIzMzNDE1NSIsImJvcmRlcldpZHRoIjoxfX0sInNjYWxlcyI6eyJ4Ijp7ImJlZ2luQXRaZXJvIjp0cnVlLCJncmlkIjp7ImNvbG9yIjoicmdiYSgxNDgsIDE2MywgMTg0LCAwLjEpIn0sInRpY2tzIjp7ImNvbG9yIjoiIzk0YTNiOCJ9fSwieSI6eyJncmlkIjp7ImRpc3BsYXkiOmZhbHNlfSwidGlja3MiOnsiY29sb3IiOiIjOTRhM2I4In19fSwiaW5kZXhBeGlzIjoieSJ9fQ=="></canvas></div>
+    <div class="metrics">
+      <div class="metric"><span class="val" style="color:#3b82f6">0</span><span class="lbl">Calls</span></div><div class="metric"><span class="val" style="color:#8b5cf6">0</span><span class="lbl">Connected</span></div><div class="metric"><span class="val" style="color:#ec4899">0</span><span class="lbl">Booked</span></div><div class="metric"><span class="val" style="color:#10b981">0</span><span class="lbl">Sats</span></div>
+    </div>
+  </div>
+
+  <!-- 3. Pacing -->
+  <div class="card">
+    <div class="card-head">
+      <span>Pace vs Target</span>
+      <span style="color:#10B981">On Track</span>
+    </div>
+    <div class="chart-box"><canvas data-cfg="eyJ0eXBlIjoibGluZSIsImRhdGEiOnsibGFiZWxzIjpbIjEwOjAwIiwiMTE6MDAiLCIxMjowMCIsIjEzOjAwIiwiMTQ6MDAiLCIxNTowMCIsIjE2OjAwIiwiMTc6MDAiXSwiZGF0YXNldHMiOlt7ImxhYmVsIjoiVGFyZ2V0IiwiZGF0YSI6WzAsMCwwLDAsMCwwLDAsMF0sImJvcmRlckNvbG9yIjoiIzk0YTNiOCIsImJvcmRlckRhc2giOls1LDVdLCJib3JkZXJXaWR0aCI6MiwicG9pbnRSYWRpdXMiOjB9LHsibGFiZWwiOiJBY3R1YWwiLCJkYXRhIjpbMCwwLDAsMCwwLDAsbnVsbCxudWxsXSwiYm9yZGVyQ29sb3IiOiIjMTBCOTgxIiwiYmFja2dyb3VuZENvbG9yIjoicmdiYSg1OSwgMTMwLCAyNDYsIDAuMSkiLCJmaWxsIjp0cnVlLCJ0ZW5zaW9uIjowLjJ9XX0sIm9wdGlvbnMiOnsicmVzcG9uc2l2ZSI6dHJ1ZSwibWFpbnRhaW5Bc3BlY3RSYXRpbyI6ZmFsc2UsInBsdWdpbnMiOnsibGVnZW5kIjp7InBvc2l0aW9uIjoidG9wIiwibGFiZWxzIjp7ImNvbG9yIjoiIzk0YTNiOCIsImZvbnQiOnsic2l6ZSI6MTF9fX0sInRvb2x0aXAiOnsiYmFja2dyb3VuZENvbG9yIjoicmdiYSgzMCwgNDEsIDU5LCAwLjkpIiwidGl0bGVDb2xvciI6IiNmOGZhZmMiLCJib2R5Q29sb3IiOiIjZjhmYWZjIiwiYm9yZGVyQ29sb3IiOiIjMzM0MTU1IiwiYm9yZGVyV2lkdGgiOjF9fSwic2NhbGVzIjp7InkiOnsiYmVnaW5BdFplcm8iOnRydWUsImdyaWQiOnsiY29sb3IiOiJyZ2JhKDE0OCwgMTYzLCAxODQsIDAuMSkifSwidGlja3MiOnsiY29sb3IiOiIjOTRhM2I4In19LCJ4Ijp7ImdyaWQiOnsiZGlzcGxheSI6ZmFsc2V9LCJ0aWNrcyI6eyJjb2xvciI6IiM5NGEzYjgifX19fX0="></canvas></div>
+    <div style="margin-top:15px;color:#94a3b8;font-size:0.9em;">
+      Next Mtg: <b>162m</b> (Cash-Flow Analysis with Jake (3:00PM WAT))
+    </div>
+  </div>
+
+  <!-- 4. Revenue -->
+  <div class="card">
+    <div class="card-head">
+      <span>Revenue</span>
+      <span style="color:#10b981">£0</span>
+    </div>
+    <div class="chart-box"><canvas data-cfg="eyJ0eXBlIjoibGluZSIsImRhdGEiOnsibGFiZWxzIjpbXSwiZGF0YXNldHMiOlt7ImxhYmVsIjoiUmV2ZW51ZSIsImRhdGEiOltdLCJib3JkZXJDb2xvciI6IiMxMGI5ODEiLCJiYWNrZ3JvdW5kQ29sb3IiOiJyZ2JhKDE2LCAxODUsIDEyOSwgMC4xKSIsImZpbGwiOnRydWUsInRlbnNpb24iOjAuM31dfSwib3B0aW9ucyI6eyJyZXNwb25zaXZlIjp0cnVlLCJtYWludGFpbkFzcGVjdFJhdGlvIjpmYWxzZSwicGx1Z2lucyI6eyJsZWdlbmQiOnsicG9zaXRpb24iOiJ0b3AiLCJsYWJlbHMiOnsiY29sb3IiOiIjOTRhM2I4IiwiZm9udCI6eyJzaXplIjoxMX19fSwidG9vbHRpcCI6eyJiYWNrZ3JvdW5kQ29sb3IiOiJyZ2JhKDMwLCA0MSwgNTksIDAuOSkiLCJ0aXRsZUNvbG9yIjoiI2Y4ZmFmYyIsImJvZHlDb2xvciI6IiNmOGZhZmMiLCJib3JkZXJDb2xvciI6IiMzMzQxNTUiLCJib3JkZXJXaWR0aCI6MX19LCJzY2FsZXMiOnsieSI6eyJiZWdpbkF0WmVybyI6dHJ1ZSwiZ3JpZCI6eyJjb2xvciI6InJnYmEoMTQ4LCAxNjMsIDE4NCwgMC4xKSJ9LCJ0aWNrcyI6eyJjb2xvciI6IiM5NGEzYjgifX0sIngiOnsiZ3JpZCI6eyJkaXNwbGF5IjpmYWxzZX0sInRpY2tzIjp7ImNvbG9yIjoiIzk0YTNiOCJ9fX19fQ=="></canvas></div>
+    <div class="metrics">
+      <div class="metric"><span class="val">7</span><span class="lbl">Booked</span></div>
+      <div class="metric"><span class="val">0</span><span class="lbl">Sats</span></div>
+      <div class="metric"><span class="val">#6 of 7</span><span class="lbl">Rank</span></div>
+    </div>
+  </div>
+
+  <!-- 5. Team -->
+  <div class="card">
+    <div class="card-head">
+      <span>Team Leaderboard</span>
+      <span>7 Reps</span>
+    </div>
+    <div style="max-height:220px;overflow-y:auto;margin-bottom:15px;">
+      
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Rio Duhaney
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:60%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">60%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Jake Clay
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:60%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">60%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Leah Higginson
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:60%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">60%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Charlotte Capes
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:60%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">60%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Luca Camilleri
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:60%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">60%</div>
+        </div>
+        <div class="snake-row me">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Mike Rea
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:0%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">0%</div>
+        </div>
+        <div class="snake-row ">
+          <div style="width:100px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Lewis Carney
+          </div>
+          <div class="snake-bar"><div class="snake-fill" style="width:60%"></div></div>
+          <div style="width:35px;text-align:right;font-size:0.9em;color:#94a3b8;">60%</div>
+        </div>
+    </div>
+    <div class="chart-box" style="height:150px"><canvas data-cfg="eyJ0eXBlIjoiYmFyIiwiZGF0YSI6eyJsYWJlbHMiOlsiQ2FsbHMiLCJDb25uZWN0ICUiLCJCb29rZWQiXSwiZGF0YXNldHMiOlt7ImxhYmVsIjoiWW91IiwiZGF0YSI6WzAsMCwwXSwiYmFja2dyb3VuZENvbG9yIjoiIzNiODJmNiIsImJvcmRlclJhZGl1cyI6NH0seyJsYWJlbCI6IlRlYW0gQXZnIiwiZGF0YSI6WzI4LDAsMF0sImJhY2tncm91bmRDb2xvciI6IiM2NDc0OGIiLCJib3JkZXJSYWRpdXMiOjR9XX0sIm9wdGlvbnMiOnsicmVzcG9uc2l2ZSI6dHJ1ZSwibWFpbnRhaW5Bc3BlY3RSYXRpbyI6ZmFsc2UsInBsdWdpbnMiOnsibGVnZW5kIjp7InBvc2l0aW9uIjoidG9wIiwibGFiZWxzIjp7ImNvbG9yIjoiIzk0YTNiOCIsImZvbnQiOnsic2l6ZSI6MTF9fX0sInRvb2x0aXAiOnsiYmFja2dyb3VuZENvbG9yIjoicmdiYSgzMCwgNDEsIDU5LCAwLjkpIiwidGl0bGVDb2xvciI6IiNmOGZhZmMiLCJib2R5Q29sb3IiOiIjZjhmYWZjIiwiYm9yZGVyQ29sb3IiOiIjMzM0MTU1IiwiYm9yZGVyV2lkdGgiOjF9fSwic2NhbGVzIjp7InkiOnsiYmVnaW5BdFplcm8iOnRydWUsImdyaWQiOnsiY29sb3IiOiJyZ2JhKDE0OCwgMTYzLCAxODQsIDAuMSkifSwidGlja3MiOnsiY29sb3IiOiIjOTRhM2I4In19LCJ4Ijp7ImdyaWQiOnsiZGlzcGxheSI6ZmFsc2V9LCJ0aWNrcyI6eyJjb2xvciI6IiM5NGEzYjgifX19fX0="></canvas></div>
+  </div>
+</div>
+</section>
 <section class="page" id="h1239" data-hour="1239">
 <div class="header">
   <div>
