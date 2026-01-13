@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jake Clay</title><style>body{background:#0b1220;color:#e5e7eb;font-family:sans-serif;margin:0;padding:12px}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}.kpi{display:flex;justify-content:space-between;border-bottom:1px solid #374151;padding:6px 0;font-weight:700}.lbl{color:#9ca3af;font-weight:400}table{width:100%;font-size:0.85em;border-collapse:collapse}td,th{padding:6px;text-align:left;border-bottom:1px solid #374151}canvas{width:100%!important;height:180px!important}.badge{background:#1f2937;padding:2px 6px;border-radius:4px;font-size:0.8em} .page{display:none} .page:target{display:block} .nav{position:sticky;top:0;background:#111827;padding:10px;display:flex;gap:10px;justify-content:center;z-index:9} button{background:#374151;border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer}</style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body><div class="nav"><button onclick="h(-1)">←</button><span id="lbl" style="font-weight:bold;align-self:center">--:--</span><button onclick="h(1)">→</button></div><div id="pages"></div><script>const ps=()=>Array.from(document.querySelectorAll('.page')); function h(d){let i=Math.max(0,Math.min(ps().length-1, ps().findIndex(p=>'#'+p.id===location.hash)+d)); location.hash=ps()[i].id;} window.addEventListener('hashchange',()=>{const p=document.querySelector(location.hash); if(p){ps().forEach(x=>x.style.display='none');p.style.display='block';document.getElementById('lbl').innerText=p.dataset.hour.replace(/(..)(..)/,'$1:$2')}}); if(location.hash) window.dispatchEvent(new Event('hashchange')); else if(ps().length) location.hash=ps()[0].id;</script><div id="pages"><!-- BEGIN-PAGES -->
+<section class="page" id="h1239" data-hour="1239">
+<div class="grid">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 style="margin:0">Jake Clay</h2><span class="badge">12:39</span>
+    </div>
+    <div class="kpi"><span class="lbl">Calls Today</span><span>79</span></div>
+    <div class="kpi"><span class="lbl">Revenue MTD</span><span>£0</span></div>
+    <div class="kpi"><span class="lbl">Dial Target</span><span>4</span></div>
+  </div>
+  <div class="card"><canvas id="h1239_pace"></canvas></div>
+  <div class="card"><canvas id="h1239_funnel"></canvas></div>
+  <div class="card" style="grid-column:1/-1">
+    <h3 style="margin-top:0;color:#9ca3af">AI Analysis</h3>
+    <div style="white-space:pre-wrap;font-family:monospace;color:#d1d5db">
+
+</div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;color:#9ca3af">Priorities</h3>
+    <table><thead><tr><th>Name</th><th>Score</th><th>Src</th></tr></thead><tbody>
+      <tr><td>No leads</td></tr>
+    </tbody></table>
+  </div>
+  <div class="card"><h3 style="margin-top:0;color:#9ca3af">Team Activity (7d)</h3><canvas id="h1239_team"></canvas></div>
+</div>
+<script>
+(function(){
+  const D={"h1239_pace":{"type":"doughnut","data":{"datasets":[{"data":[73,0],"backgroundColor":["#009E73","#ffffff10"]}]},"options":{"cutout":"70%"}},"h1239_funnel":{"type":"bar","data":{"labels":["Bk","St","Cf","Dl"],"datasets":[{"data":[0,0,0,0],"backgroundColor":["#E69F00","#56B4E9","#009E73","#0072B2"]}]}},"h1239_team":{"type":"bar","data":{"labels":[],"datasets":[{"data":[],"backgroundColor":[]}]},"options":{"indexAxis":"y"}}};
+  Object.entries(D).forEach(([id,cfg])=>{
+    const el=document.getElementById(id);
+    if(el) new Chart(el,{...cfg,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},...cfg.options}});
+  });
+})();
+</script></section><!-- END-PAGES --></div></body></html>
