@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Mark Pearson Dashboard</h1>
-      <div class="sub">Tuesday, 17 Mar 2026 · 13:00 · Asia/Dubai</div>
+      <div class="sub">Tuesday, 17 Mar 2026 · 14:00 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -246,7 +246,7 @@ Meetings this hour:
 1ST MEETING - REVIEWS, TEAM MEETING, Morning Meeting, contact form
 
 Reasons:
-CHARLOTTE, JAKE, TOM, LUCA - your gaps are CRITICAL. 0 1st/2nd SATs done today is UNACCEPTABLE. Only 11 working days left and 8 hours today. You MUST step up NOW. Push harder, close more. No excuses.</div>
+CHARLOTTE, you have the biggest gaps across the board. This is CRITICAL. With only 11 working days left and 8 hours today, 0 1st SATs and 0 2nd SATs done today is UNACCEPTABLE. Everyone needs to step up NOW. Push harder, close deals, or fall further behind.</div>
     </section>
 
     <main class="grid">
@@ -263,7 +263,7 @@ CHARLOTTE, JAKE, TOM, LUCA - your gaps are CRITICAL. 0 1st/2nd SATs done today i
           
     <div class="kpi ">
       <div class="kpi-label">Bookings Today</div>
-      <div class="kpi-value">1</div>
+      <div class="kpi-value">2</div>
       <div class="kpi-note">0.0% calls → booked</div>
     </div>
   
@@ -414,6 +414,17 @@ CHARLOTTE, JAKE, TOM, LUCA - your gaps are CRITICAL. 0 1st/2nd SATs done today i
         
           <div class="list-row">
             <div>
+              <strong>11AM WAT: UK Property Strategy Meeting - Luca &amp; Chinedu</strong>
+              <div class="muted">luca.camilleri@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>14:00</div>
+              <div class="muted">60m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
               <strong>Reservation &amp; Next Steps - Leah &amp; Dayo</strong>
               <div class="muted">leah.higginson@baroncabot.com</div>
             </div>
@@ -427,17 +438,6 @@ CHARLOTTE, JAKE, TOM, LUCA - your gaps are CRITICAL. 0 1st/2nd SATs done today i
             <div>
               <strong>UK Property Strategy Meeting (11am Nigeria Time)</strong>
               <div class="muted">zayn.mahmood@baroncabot.com</div>
-            </div>
-            <div class="right">
-              <div>14:00</div>
-              <div class="muted">60m</div>
-            </div>
-          </div>
-        
-          <div class="list-row">
-            <div>
-              <strong>11am WAT: UK Property Investment Strategy Zoom meeting - Michael &amp; Tom</strong>
-              <div class="muted">tom.hepworth@baroncabot.com</div>
             </div>
             <div class="right">
               <div>14:00</div>
@@ -580,7 +580,7 @@ CHARLOTTE, JAKE, TOM, LUCA - your gaps are CRITICAL. 0 1st/2nd SATs done today i
               <tr>
                 <td>Tom Hepworth</td>
                 <td>0</td>
-                <td>1</td>
+                <td>2</td>
                 <td>0</td>
                 <td>0</td>
                 <td>£333,938</td>
@@ -678,11 +678,11 @@ CHARLOTTE, JAKE, TOM, LUCA - your gaps are CRITICAL. 0 1st/2nd SATs done today i
     makeChart('hourlyChart', {
       type: 'line',
       data: {
-        labels: [],
+        labels: ["14:00"],
         datasets: [
           {
             label: 'Calls',
-            data: [],
+            data: [0],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.15)',
             fill: true,
@@ -690,7 +690,7 @@ CHARLOTTE, JAKE, TOM, LUCA - your gaps are CRITICAL. 0 1st/2nd SATs done today i
           },
           {
             label: 'Bookings',
-            data: [],
+            data: [1],
             borderColor: '#10b981',
             backgroundColor: 'rgba(16,185,129,.12)',
             fill: true,
@@ -716,7 +716,7 @@ CHARLOTTE, JAKE, TOM, LUCA - your gaps are CRITICAL. 0 1st/2nd SATs done today i
           },
           {
             label: 'Bookings',
-            data: [8,7,7,0,0,12,12,7,6,8,3,0,13,1],
+            data: [8,7,7,0,0,12,12,7,6,8,3,0,12,2],
             borderColor: '#10b981',
             backgroundColor: 'rgba(16,185,129,.10)',
             fill: true,
