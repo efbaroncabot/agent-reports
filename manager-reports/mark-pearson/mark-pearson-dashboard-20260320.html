@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Mark Pearson Dashboard</h1>
-      <div class="sub">Friday, 20 Mar 2026 · 13:00 · Asia/Dubai</div>
+      <div class="sub">Friday, 20 Mar 2026 · 14:00 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -246,7 +246,7 @@ Meetings this hour:
 Team Training, TEAM MEETING, Morning Meeting, Investment Strategy Consultation between Tom Hepworth and Ahmed
 
 Reasons:
-CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd SATs today is UNACCEPTABLE. Only 8 working days left and 8 hours today. Every minute counts. Push harder, close deals. No excuses. Get those numbers moving.</div>
+TOM, CHARLOTTE - your gaps are CRITICAL. Only 8 working days left and we have ZERO 1st/2nd SATs today. This is UNACCEPTABLE. CHARLOTTE, you need 26 1st SATs. Get on the phones NOW. 8 hours left to turn this around. Push harder, every call counts.</div>
     </section>
 
     <main class="grid">
@@ -256,7 +256,7 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
           
     <div class="kpi ">
       <div class="kpi-label">Calls Today</div>
-      <div class="kpi-value">0</div>
+      <div class="kpi-value">2</div>
       <div class="kpi-note">8 staff in scope</div>
     </div>
   
@@ -324,8 +324,8 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
           
     <div class="kpi ">
       <div class="kpi-label">Connected Today</div>
-      <div class="kpi-value">0</div>
-      <div class="kpi-note">0.0% connect rate</div>
+      <div class="kpi-value">2</div>
+      <div class="kpi-note">100.0% connect rate</div>
     </div>
   
           
@@ -357,17 +357,6 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
         
     <div class="list">
       
-          <div class="list-row">
-            <div>
-              <strong>Investment Strategy Consultation between Tom Hepworth and Ahmed</strong>
-              <div class="muted">tom.hepworth@baroncabot.com</div>
-            </div>
-            <div class="right">
-              <div>10:00</div>
-              <div class="muted">45m</div>
-            </div>
-          </div>
-        
           <div class="list-row">
             <div>
               <strong>Decision &amp; Next Steps - 8am Nigeria Time</strong>
@@ -445,18 +434,53 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
             </div>
           </div>
         
+          <div class="list-row">
+            <div>
+              <strong>Onboarding Call (11am Nigeria Time)</strong>
+              <div class="muted">zayn.mahmood@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>14:00</div>
+              <div class="muted">30m</div>
+            </div>
+          </div>
+        
     </div>
   
       </section>
 
       <section class="card span-4">
         <h2>Top Performers</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>1. Charlotte Capes</strong>
+                  <div class="muted">Calls 2 · Bookings 0</div>
+                </div>
+                <div class="right">£333,938</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-4">
         <h2>Needs Attention</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>Charlotte Capes</strong>
+                  <div class="muted">Calls 2 · Last hour 0</div>
+                </div>
+                <div class="right">£333,938</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-6">
@@ -475,7 +499,7 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
                       <div class="muted">Meetings 7d 0 · Transcripts 0</div>
                     </div>
                     <div class="right">
-                      <div>6 strat</div>
+                      <div>5 strat</div>
                       <div class="muted">0.0% cashflow conv</div>
                     </div>
                   </div>
@@ -599,7 +623,7 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
             
               <tr>
                 <td>Charlotte Capes</td>
-                <td>0</td>
+                <td>2</td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -704,11 +728,11 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
     makeChart('dailyChart', {
       type: 'line',
       data: {
-        labels: ["06 Mar","07 Mar","08 Mar","09 Mar","10 Mar","11 Mar","12 Mar","13 Mar","14 Mar","15 Mar","16 Mar","17 Mar","18 Mar","19 Mar"],
+        labels: ["07 Mar","08 Mar","09 Mar","10 Mar","11 Mar","12 Mar","13 Mar","14 Mar","15 Mar","16 Mar","17 Mar","18 Mar","19 Mar","20 Mar"],
         datasets: [
           {
             label: 'Calls',
-            data: [682,32,6,876,812,720,779,578,204,9,877,909,740,619],
+            data: [32,6,876,812,720,779,578,204,9,877,909,740,619,2],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.12)',
             fill: true,
@@ -716,7 +740,7 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
           },
           {
             label: 'Bookings',
-            data: [7,0,0,12,12,7,6,8,3,0,12,14,9,6],
+            data: [0,0,12,12,7,6,8,3,0,12,14,9,6,0],
             borderColor: '#10b981',
             backgroundColor: 'rgba(16,185,129,.10)',
             fill: true,
@@ -734,7 +758,7 @@ CRITICAL. TOM and CHARLOTTE, you have the biggest gaps. Step up NOW. 0 1st/2nd S
         datasets: [
           {
             label: 'Calls',
-            data: [3759,4408,3091,4001,2720,3306,3978,3145],
+            data: [3759,4408,3091,4001,2720,3306,3978,3147],
             backgroundColor: 'rgba(79,140,255,.8)'
           },
           {
