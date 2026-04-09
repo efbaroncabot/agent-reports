@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Mark Pearson Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#121931;
+      --panel2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --line:#26324a;
+      --accent:#4f8cff;
+      --ok:#10b981;
+      --mid:#f59e0b;
+      --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    .wrap{
+      max-width:1500px;
+      margin:0 auto;
+      padding:20px;
+    }
+    .hero{
+      background:linear-gradient(135deg,#4f8cff,#6d5efc);
+      border-radius:16px;
+      padding:20px 24px;
+      margin-bottom:16px;
+    }
+    .hero h1{
+      margin:0 0 6px 0;
+      font-size:1.6rem;
+    }
+    .hero .sub{
+      opacity:.95;
+    }
+    .freshness{
+      margin-top:10px;
+      padding:8px 10px;
+      border-radius:10px;
+      display:inline-block;
+      font-size:.9rem;
+      background:rgba(255,255,255,.14);
+    }
+    .freshness.fresh{border-left:4px solid var(--ok)}
+    .freshness.warn{border-left:4px solid var(--mid)}
+    .freshness.stale{border-left:4px solid var(--bad)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:16px;
+    }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      min-width:0;
+    }
+    .span-12{grid-column:span 12}
+    .span-8{grid-column:span 8}
+    .span-6{grid-column:span 6}
+    .span-4{grid-column:span 4}
+    .span-3{grid-column:span 3}
+
+    h2{
+      margin:0 0 12px 0;
+      font-size:1.05rem;
+      color:#dbeafe;
+    }
+    .muted{color:var(--muted)}
+    .headline{
+      padding:12px 14px;
+      background:rgba(79,140,255,.08);
+      border:1px solid rgba(79,140,255,.25);
+      border-radius:12px;
+      margin-top:12px;
+    }
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+    .kpi{
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+    }
+    .kpi-label{
+      color:var(--muted);
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      margin-bottom:8px;
+    }
+    .kpi-value{
+      font-size:1.5rem;
+      font-weight:800;
+    }
+    .kpi-note{
+      margin-top:6px;
+      font-size:.85rem;
+      color:var(--muted);
+    }
+    .progress-item + .progress-item{margin-top:12px}
+    .progress-head,.progress-foot{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:.9rem;
+    }
+    .progress-track{
+      height:9px;
+      border-radius:999px;
+      background:#1b2740;
+      overflow:hidden;
+      margin:6px 0;
+    }
+    .progress-fill{
+      height:100%;
+    }
+    .progress-fill.ok{background:var(--ok)}
+    .progress-fill.mid{background:var(--mid)}
+    .progress-fill.bad{background:var(--bad)}
+
+    .list{display:flex;flex-direction:column;gap:10px}
+    .list-row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:12px;
+    }
+    .right{text-align:right}
+    .empty{
+      color:var(--muted);
+      padding:12px;
+      background:var(--panel2);
+      border:1px dashed var(--line);
+      border-radius:12px;
+    }
+    .badge{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:.75rem;
+      font-weight:700;
+      background:rgba(79,140,255,.16);
+    }
+    .badge.bad{
+      background:rgba(239,68,68,.18);
+      color:#fecaca;
+    }
+
+    .table-wrap{overflow:auto}
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    th,td{
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      white-space:nowrap;
+    }
+    th{
+      color:#cbd5e1;
+      background:rgba(79,140,255,.08);
+      position:sticky;
+      top:0;
+    }
+
+    .chart-box{
+      height:290px;
+    }
+    .headline{
+      padding:12px 14px;
+      background:rgba(79,140,255,.08);
+      border:1px solid rgba(79,140,255,.25);
+      border-radius:12px;
+      margin-top:12px;
+      white-space: pre-line;
+    }
+    @media (max-width: 1100px){
+      .span-8,.span-6,.span-4,.span-3{grid-column:span 12}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 680px){
+      .wrap{padding:12px}
+      .kpis{grid-template-columns:1fr}
+      .hero h1{font-size:1.25rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Mark Pearson Dashboard</h1>
+      <div class="sub">Thursday, 09 Apr 2026 · 13:00 · Asia/Dubai</div>
+      <div class="freshness stale">Data timestamp unreadable</div>
+      <div class="headline">Need to date / Has to date / Need next hour / Need today
+BOOKINGS:
+LUCA - 24/12/1/8
+JAKE - 24/13/1/8
+LEWIS - 20/9/1/4
+LEAH - 12/5/1/4
+TOM - 32/26/1/8
+ZAYN - 16/11/1/4
+RIO - 20/21/1/4
+
+1st SAT:
+JAKE - 12/1/1/4
+LUCA - 12/4/1/4
+RIO - 10/3/1/2
+TOM - 16/10/1/4
+LEWIS - 10/6/1/2
+ZAYN - 8/4/1/2
+LEAH - 6/2/1/2
+
+2nd SAT:
+JAKE - 6/0/1/2
+LUCA - 6/0/1/2
+RIO - 5/1/1/1
+LEWIS - 5/2/1/1
+TOM - 8/5/1/2
+LEAH - 3/1/1/1
+ZAYN - 4/4/1/1
+
+Meetings this hour:
+2ND MEETING - REVIEWS, TEAM MEETING, Morning Meeting
+
+Reasons:
+LUCA, JAKE, you are holding us back! 0 1st/2nd SATs today is UNACCEPTABLE. We have only 8 hours left and 16 working days to hit targets. Get your numbers up NOW. No excuses. Push harder, close more. This is CRITICAL.</div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-12">
+        <h2>Executive Summary</h2>
+        <div class="kpis">
+          
+    <div class="kpi ">
+      <div class="kpi-label">Calls Today</div>
+      <div class="kpi-value">0</div>
+      <div class="kpi-note">7 staff in scope</div>
+    </div>
+  
+          
+    <div class="kpi ">
+      <div class="kpi-label">Bookings Today</div>
+      <div class="kpi-value">3</div>
+      <div class="kpi-note">0.0% calls → booked</div>
+    </div>
+  
+          
+    <div class="kpi ">
+      <div class="kpi-label">First / Second / Third Sats</div>
+      <div class="kpi-value">0 / 0 / 0</div>
+      <div class="kpi-note">Revenue today £0</div>
+    </div>
+  
+          
+    <div class="kpi bad">
+      <div class="kpi-label">Revenue MTD</div>
+      <div class="kpi-value">£655,717</div>
+      <div class="kpi-note">30.2% of target</div>
+    </div>
+  
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Target Progress</h2>
+        
+    <div class="progress-item">
+      <div class="progress-head">
+        <span>First Sats MTD</span>
+        <span>30 / 67</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill bad" style="width:44.776119402985074%"></div></div>
+      <div class="progress-foot">44.8%</div>
+    </div>
+  
+        
+    <div class="progress-item">
+      <div class="progress-head">
+        <span>Second Sats MTD</span>
+        <span>13 / 38</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill bad" style="width:34.21052631578947%"></div></div>
+      <div class="progress-foot">34.2%</div>
+    </div>
+  
+        
+    <div class="progress-item">
+      <div class="progress-head">
+        <span>Revenue MTD</span>
+        <span>£655,717 / £2,168,182</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill bad" style="width:30.242710252183624%"></div></div>
+      <div class="progress-foot">30.2%</div>
+    </div>
+  
+      </section>
+
+      <section class="card span-6">
+        <h2>Focus Now</h2>
+        <div class="kpis">
+          
+    <div class="kpi ">
+      <div class="kpi-label">Connected Today</div>
+      <div class="kpi-value">0</div>
+      <div class="kpi-note">0.0% connect rate</div>
+    </div>
+  
+          
+    <div class="kpi ">
+      <div class="kpi-label">Calls Last Hour</div>
+      <div class="kpi-value">0</div>
+      <div class="kpi-note">Bookings 0</div>
+    </div>
+  
+          
+    <div class="kpi bad">
+      <div class="kpi-label">1st Sat Gap</div>
+      <div class="kpi-value">37</div>
+      <div class="kpi-note">44.8% attainment</div>
+    </div>
+  
+          
+    <div class="kpi bad">
+      <div class="kpi-label">Revenue Gap</div>
+      <div class="kpi-value">£1,512,465</div>
+      <div class="kpi-note">Behind target</div>
+    </div>
+  
+        </div>
+      </section>
+
+      <section class="card span-4">
+        <h2>Upcoming Client Meetings</h2>
+        
+    <div class="list">
+      
+          <div class="list-row">
+            <div>
+              <strong>UK Property Strategy Meeting With Jake (9:00AM)</strong>
+              <div class="muted">jake.clay@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:00</div>
+              <div class="muted">60m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>Investment Strategy Consultation between Tom Hepworth and Obinna</strong>
+              <div class="muted">tom.hepworth@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:00</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>Take control of your future today.</strong>
+              <div class="muted">leah.higginson@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:15</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>Take control of your future today.</strong>
+              <div class="muted">rio.duhaney@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:15</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>Call Back - 10 minutes between Baron &amp; Cabot and Kedir</strong>
+              <div class="muted">daniel.p@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>12:00</div>
+              <div class="muted">15m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>Cash Flow Analysis &amp; Next steps - Leah &amp; Nnadozie (10am WAT)</strong>
+              <div class="muted">leah.higginson@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>13:00</div>
+              <div class="muted">60m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>Take control of your future today.</strong>
+              <div class="muted">rio.duhaney@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>13:15</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>Take control of your future today.</strong>
+              <div class="muted">tom.hepworth@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>13:15</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+    </div>
+  
+      </section>
+
+      <section class="card span-4">
+        <h2>Top Performers</h2>
+        <div class="empty">None</div>
+      </section>
+
+      <section class="card span-4">
+        <h2>Needs Attention</h2>
+        <div class="empty">None</div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Anomaly Watch</h2>
+        <div class="empty">No critical anomalies.</div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Meeting Intelligence</h2>
+        
+            <div class="list">
+              
+                  <div class="list-row">
+                    <div>
+                      <strong>Jake Clay</strong>
+                      <div class="muted">Meetings 7d 2 · Transcripts 0</div>
+                    </div>
+                    <div class="right">
+                      <div>10 strat</div>
+                      <div class="muted">0.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Leah Higginson</strong>
+                      <div class="muted">Meetings 7d 1 · Transcripts 1</div>
+                    </div>
+                    <div class="right">
+                      <div>5 strat</div>
+                      <div class="muted">20.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Lewis Carney</strong>
+                      <div class="muted">Meetings 7d 3 · Transcripts 3</div>
+                    </div>
+                    <div class="right">
+                      <div>8 strat</div>
+                      <div class="muted">62.5% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Luca Camilleri</strong>
+                      <div class="muted">Meetings 7d 5 · Transcripts 2</div>
+                    </div>
+                    <div class="right">
+                      <div>10 strat</div>
+                      <div class="muted">20.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Rio Duhaney</strong>
+                      <div class="muted">Meetings 7d 4 · Transcripts 2</div>
+                    </div>
+                    <div class="right">
+                      <div>17 strat</div>
+                      <div class="muted">0.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Tom Hepworth</strong>
+                      <div class="muted">Meetings 7d 6 · Transcripts 5</div>
+                    </div>
+                    <div class="right">
+                      <div>22 strat</div>
+                      <div class="muted">22.7% cashflow conv</div>
+                    </div>
+                  </div>
+                
+            </div>
+          
+      </section>
+
+      <section class="card span-6">
+        <h2>Today by Hour</h2>
+        <div class="chart-box"><canvas id="hourlyChart"></canvas></div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Last 14 Days</h2>
+        <div class="chart-box"><canvas id="dailyChart"></canvas></div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Last 8 Weeks</h2>
+        <div class="chart-box"><canvas id="weeklyChart"></canvas></div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Monthly Revenue & Sats</h2>
+        <div class="chart-box"><canvas id="monthlyChart"></canvas></div>
+      </section>
+
+      <section class="card span-12">
+        <h2>Team Member Snapshot</h2>
+        
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Calls</th>
+            <th>Booked</th>
+            <th>1st Sat</th>
+            <th>2nd Sat</th>
+            <th>Revenue MTD</th>
+            <th>Revenue 30d</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+              <tr>
+                <td>Jake Clay</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£0</td>
+                <td>£1,035,000</td>
+              </tr>
+            
+              <tr>
+                <td>Lewis Carney</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£0</td>
+                <td>£727,385</td>
+              </tr>
+            
+              <tr>
+                <td>Tom Hepworth</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£253,250</td>
+                <td>£587,188</td>
+              </tr>
+            
+              <tr>
+                <td>Zayn Mahmood</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£0</td>
+                <td>£574,995</td>
+              </tr>
+            
+              <tr>
+                <td>Luca Camilleri</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£402,467</td>
+                <td>£402,467</td>
+              </tr>
+            
+              <tr>
+                <td>Rio Duhaney</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£0</td>
+                <td>£0</td>
+              </tr>
+            
+              <tr>
+                <td>Leah Higginson</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£0</td>
+                <td>£0</td>
+              </tr>
+            
+        </tbody>
+      </table>
+    </div>
+  
+      </section>
+    </main>
+  </div>
+
+  <script>
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = '#26324a';
+
+    function makeChart(id, config) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      new Chart(el, config);
+    }
+
+    makeChart('hourlyChart', {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Calls',
+            data: [],
+            borderColor: '#4f8cff',
+            backgroundColor: 'rgba(79,140,255,.15)',
+            fill: true,
+            tension: 0.35
+          },
+          {
+            label: 'Bookings',
+            data: [],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,.12)',
+            fill: true,
+            tension: 0.35
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    makeChart('dailyChart', {
+      type: 'line',
+      data: {
+        labels: ["27 Mar","28 Mar","29 Mar","30 Mar","31 Mar","01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr"],
+        datasets: [
+          {
+            label: 'Calls',
+            data: [668,85,3,549,612,700,583,247,41,2,542,602,475,0],
+            borderColor: '#4f8cff',
+            backgroundColor: 'rgba(79,140,255,.12)',
+            fill: true,
+            tension: 0.3
+          },
+          {
+            label: 'Bookings',
+            data: [6,4,0,9,10,14,9,15,3,0,19,22,12,3],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,.10)',
+            fill: true,
+            tension: 0.3
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    makeChart('weeklyChart', {
+      type: 'bar',
+      data: {
+        labels: ["16 Feb","23 Feb","02 Mar","09 Mar","16 Mar","23 Mar","30 Mar","06 Apr"],
+        datasets: [
+          {
+            label: 'Calls',
+            data: [3040,1753,2675,2248,2487,2949,2734,1619],
+            backgroundColor: 'rgba(79,140,255,.8)'
+          },
+          {
+            label: 'Bookings',
+            data: [53,30,38,42,38,42,60,56],
+            backgroundColor: 'rgba(16,185,129,.8)'
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    makeChart('monthlyChart', {
+      type: 'bar',
+      data: {
+        labels: ["Apr 26"],
+        datasets: [
+          {
+            label: 'Revenue',
+            data: [655717],
+            backgroundColor: 'rgba(79,140,255,.85)',
+            yAxisID: 'y'
+          },
+          {
+            label: 'First Sats',
+            data: [30],
+            backgroundColor: 'rgba(16,185,129,.85)',
+            yAxisID: 'y1'
+          },
+          {
+            label: 'Second Sats',
+            data: [13],
+            backgroundColor: 'rgba(245,158,11,.85)',
+            yAxisID: 'y1'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { position: 'left' },
+          y1: { position: 'right', grid: { drawOnChartArea: false } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
