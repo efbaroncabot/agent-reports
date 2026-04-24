@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Leah Higginson Dashboard</h1>
-      <div class="sub">Friday, 24 Apr 2026 · 13:00 · Asia/Dubai</div>
+      <div class="sub">Friday, 24 Apr 2026 · 14:00 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -240,10 +240,10 @@ ZAYN - 10/5/1/2
 LEAH - 7/2/1/2
 
 Meetings this hour:
-Team Training, TEAM MEETING, Morning Meeting, 12pm IST: UK Property Investment Strategy Zoom meeting - Gautam &amp; Tom
+Team Training, TEAM MEETING, Morning Meeting - Inference, Morning Meeting, 12pm IST: UK Property Investment Strategy Zoom meeting - Gautam &amp; Tom
 
 Reasons:
-LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit targets. 4 1st SATs and ZERO 2nd SATs by 1 PM is UNACCEPTABLE. You have 8 hours left today. This is not a drill. Push harder, make every call count. EXCEED your targets NOW.</div>
+LUCA, JAKE, TOM - you have the biggest gaps and must step up NOW. Only 5 working days left. 8 hours left today. Only 4 1st SATs and ZERO 2nd SATs done today is UNACCEPTABLE. Jake Clay, immediate attention needed. Push harder, close the gaps, EXCEED targets. NO EXCUSES.</div>
     </section>
 
     <main class="grid">
@@ -253,7 +253,7 @@ LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit target
           
     <div class="kpi ">
       <div class="kpi-label">Calls Today</div>
-      <div class="kpi-value">0</div>
+      <div class="kpi-value">2</div>
       <div class="kpi-note">7 staff in scope</div>
     </div>
   
@@ -321,8 +321,8 @@ LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit target
           
     <div class="kpi ">
       <div class="kpi-label">Connected Today</div>
-      <div class="kpi-value">0</div>
-      <div class="kpi-note">0.0% connect rate</div>
+      <div class="kpi-value">1</div>
+      <div class="kpi-note">50.0% connect rate</div>
     </div>
   
           
@@ -448,12 +448,36 @@ LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit target
 
       <section class="card span-4">
         <h2>Top Performers</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>1. Jake Clay</strong>
+                  <div class="muted">Calls 2 · Bookings 0</div>
+                </div>
+                <div class="right">£1,035,000</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-4">
         <h2>Needs Attention</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>Jake Clay</strong>
+                  <div class="muted">Calls 2 · Last hour 0</div>
+                </div>
+                <div class="right">£1,035,000</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-6">
@@ -524,7 +548,7 @@ LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit target
                   <div class="list-row">
                     <div>
                       <strong>Tom Hepworth</strong>
-                      <div class="muted">Meetings 7d 2 · Transcripts 0</div>
+                      <div class="muted">Meetings 7d 1 · Transcripts 0</div>
                     </div>
                     <div class="right">
                       <div>3 strat</div>
@@ -576,7 +600,7 @@ LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit target
           
               <tr>
                 <td>Jake Clay</td>
-                <td>0</td>
+                <td>2</td>
                 <td>0</td>
                 <td>1</td>
                 <td>0</td>
@@ -691,11 +715,11 @@ LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit target
     makeChart('dailyChart', {
       type: 'line',
       data: {
-        labels: ["09 Apr","10 Apr","11 Apr","12 Apr","13 Apr","14 Apr","15 Apr","16 Apr","17 Apr","18 Apr","20 Apr","21 Apr","22 Apr","23 Apr"],
+        labels: ["10 Apr","11 Apr","12 Apr","13 Apr","14 Apr","15 Apr","16 Apr","17 Apr","18 Apr","20 Apr","21 Apr","22 Apr","23 Apr","24 Apr"],
         datasets: [
           {
             label: 'Calls',
-            data: [722,303,220,4,346,614,461,813,495,76,836,742,698,655],
+            data: [303,220,4,346,614,461,813,495,76,836,742,698,655,2],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.12)',
             fill: true,
@@ -703,7 +727,7 @@ LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit target
           },
           {
             label: 'Bookings',
-            data: [16,13,4,2,17,15,12,15,8,3,0,0,0,0],
+            data: [13,4,2,17,15,12,15,8,3,0,0,0,0,0],
             borderColor: '#10b981',
             backgroundColor: 'rgba(16,185,129,.10)',
             fill: true,
@@ -721,7 +745,7 @@ LUCA, JAKE, TOM - your gaps are CRITICAL. Only 5 working days left to hit target
         datasets: [
           {
             label: 'Calls',
-            data: [2675,2248,2487,2949,2734,2868,2805,2931],
+            data: [2675,2248,2487,2949,2734,2868,2805,2933],
             backgroundColor: 'rgba(79,140,255,.8)'
           },
           {
