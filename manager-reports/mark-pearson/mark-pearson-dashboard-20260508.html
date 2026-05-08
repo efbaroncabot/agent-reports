@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Mark Pearson Dashboard</h1>
-      <div class="sub">Friday, 08 May 2026 · 13:00 · Asia/Dubai</div>
+      <div class="sub">Friday, 08 May 2026 · 14:00 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -243,7 +243,7 @@ Meetings this hour:
 TEAM MEETING, Team Training, Take control of your future today., Morning Meeting, 4pm Melbourne Time - UK Property Strategy Meeting - Lewis &amp; Ritesh
 
 Reasons:
-TOM, JAKE, RIO, LUCA - your booking gaps are CRITICAL. Only 16 working days left and we have just 1 first SAT and 1 second SAT today by 1 PM. This is UNACCEPTABLE. You have 8 hours to turn this around. STEP UP NOW or we miss target. NO EXCUSES.</div>
+TOM, JAKE, RIO, LUCA - your booking gaps are CRITICAL. Only 16 working days left to hit targets. 1st and 2nd SATs today are abysmal. We have 8 hours left to turn this around. LEWIS, you need immediate attention. NO EXCUSES. Get on the phones NOW and close those gaps.</div>
     </section>
 
     <main class="grid">
@@ -253,7 +253,7 @@ TOM, JAKE, RIO, LUCA - your booking gaps are CRITICAL. Only 16 working days left
           
     <div class="kpi ">
       <div class="kpi-label">Calls Today</div>
-      <div class="kpi-value">0</div>
+      <div class="kpi-value">1</div>
       <div class="kpi-note">7 staff in scope</div>
     </div>
   
@@ -321,8 +321,8 @@ TOM, JAKE, RIO, LUCA - your booking gaps are CRITICAL. Only 16 working days left
           
     <div class="kpi ">
       <div class="kpi-label">Connected Today</div>
-      <div class="kpi-value">0</div>
-      <div class="kpi-note">0.0% connect rate</div>
+      <div class="kpi-value">1</div>
+      <div class="kpi-note">100.0% connect rate</div>
     </div>
   
           
@@ -448,17 +448,55 @@ TOM, JAKE, RIO, LUCA - your booking gaps are CRITICAL. Only 16 working days left
 
       <section class="card span-4">
         <h2>Top Performers</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>1. Lewis Carney</strong>
+                  <div class="muted">Calls 1 · Bookings 0</div>
+                </div>
+                <div class="right">£333,938</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-4">
         <h2>Needs Attention</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>Lewis Carney</strong>
+                  <div class="muted">Calls 1 · Last hour 0</div>
+                </div>
+                <div class="right">£333,938</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-6">
         <h2>Anomaly Watch</h2>
-        <div class="empty">No critical anomalies.</div>
+        
+    <div class="list">
+      
+          <div class="list-row">
+            <div>
+              <strong>Lewis Carney</strong>
+              <div class="muted">
+                Calls z-score -1.49 · Connect z-score 5.28
+              </div>
+            </div>
+            <div class="right"><span class="badge bad">Watch</span></div>
+          </div>
+        
+    </div>
+  
       </section>
 
       <section class="card span-6">
@@ -586,7 +624,7 @@ TOM, JAKE, RIO, LUCA - your booking gaps are CRITICAL. Only 16 working days left
             
               <tr>
                 <td>Lewis Carney</td>
-                <td>0</td>
+                <td>1</td>
                 <td>0</td>
                 <td>0</td>
                 <td>1</td>
@@ -691,11 +729,11 @@ TOM, JAKE, RIO, LUCA - your booking gaps are CRITICAL. Only 16 working days left
     makeChart('dailyChart', {
       type: 'line',
       data: {
-        labels: ["24 Apr","25 Apr","26 Apr","27 Apr","28 Apr","29 Apr","30 Apr","01 May","02 May","03 May","04 May","05 May","06 May","07 May"],
+        labels: ["25 Apr","26 Apr","27 Apr","28 Apr","29 Apr","30 Apr","01 May","02 May","03 May","04 May","05 May","06 May","07 May","08 May"],
         datasets: [
           {
             label: 'Calls',
-            data: [362,61,8,463,840,565,568,400,98,6,881,849,1142,782],
+            data: [61,8,463,840,565,568,400,98,6,881,849,1142,782,1],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.12)',
             fill: true,
@@ -721,7 +759,7 @@ TOM, JAKE, RIO, LUCA - your booking gaps are CRITICAL. Only 16 working days left
         datasets: [
           {
             label: 'Calls',
-            data: [2487,2949,2734,2868,2805,3362,2940,3654],
+            data: [2487,2949,2734,2868,2805,3362,2940,3655],
             backgroundColor: 'rgba(79,140,255,.8)'
           },
           {
