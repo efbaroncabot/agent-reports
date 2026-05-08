@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Leah Higginson Dashboard</h1>
-      <div class="sub">Friday, 08 May 2026 · 13:00 · Asia/Dubai</div>
+      <div class="sub">Friday, 08 May 2026 · 14:00 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -243,7 +243,7 @@ Meetings this hour:
 TEAM MEETING, Team Training, Take control of your future today., Morning Meeting, 4pm Melbourne Time - UK Property Strategy Meeting - Lewis &amp; Ritesh
 
 Reasons:
-TOM, JAKE, LEAH - your gaps are CRITICAL. TOM, you&#39;re 28 behind on bookings! We have only 16 working days left. 1st &amp; 2nd SATs today are abysmal. With 8 hours left, you MUST deliver NOW. No excuses. Push harder, close deals. This is not a drill.</div>
+TOM, JAKE, RIO, LUCA - your Booking gaps are CRITICAL. TOM, you&#39;re 28 behind. Only 16 working days left. 1st &amp; 2nd SATs today are a joke. 8 hours left to turn this around. LEWIS CARNEY, immediate attention needed. NO EXCUSES. STEP UP NOW or get left behind.</div>
     </section>
 
     <main class="grid">
@@ -253,7 +253,7 @@ TOM, JAKE, LEAH - your gaps are CRITICAL. TOM, you&#39;re 28 behind on bookings!
           
     <div class="kpi ">
       <div class="kpi-label">Calls Today</div>
-      <div class="kpi-value">0</div>
+      <div class="kpi-value">1</div>
       <div class="kpi-note">7 staff in scope</div>
     </div>
   
@@ -321,8 +321,8 @@ TOM, JAKE, LEAH - your gaps are CRITICAL. TOM, you&#39;re 28 behind on bookings!
           
     <div class="kpi ">
       <div class="kpi-label">Connected Today</div>
-      <div class="kpi-value">0</div>
-      <div class="kpi-note">0.0% connect rate</div>
+      <div class="kpi-value">1</div>
+      <div class="kpi-note">100.0% connect rate</div>
     </div>
   
           
@@ -448,17 +448,55 @@ TOM, JAKE, LEAH - your gaps are CRITICAL. TOM, you&#39;re 28 behind on bookings!
 
       <section class="card span-4">
         <h2>Top Performers</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>1. Lewis Carney</strong>
+                  <div class="muted">Calls 1 · Bookings 0</div>
+                </div>
+                <div class="right">£333,938</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-4">
         <h2>Needs Attention</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>Lewis Carney</strong>
+                  <div class="muted">Calls 1 · Last hour 0</div>
+                </div>
+                <div class="right">£333,938</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-6">
         <h2>Anomaly Watch</h2>
-        <div class="empty">No critical anomalies.</div>
+        
+    <div class="list">
+      
+          <div class="list-row">
+            <div>
+              <strong>Lewis Carney</strong>
+              <div class="muted">
+                Calls z-score -1.49 · Connect z-score 5.28
+              </div>
+            </div>
+            <div class="right"><span class="badge bad">Watch</span></div>
+          </div>
+        
+    </div>
+  
       </section>
 
       <section class="card span-6">
@@ -586,7 +624,7 @@ TOM, JAKE, LEAH - your gaps are CRITICAL. TOM, you&#39;re 28 behind on bookings!
             
               <tr>
                 <td>Lewis Carney</td>
-                <td>0</td>
+                <td>1</td>
                 <td>0</td>
                 <td>0</td>
                 <td>1</td>
@@ -691,11 +729,11 @@ TOM, JAKE, LEAH - your gaps are CRITICAL. TOM, you&#39;re 28 behind on bookings!
     makeChart('dailyChart', {
       type: 'line',
       data: {
-        labels: ["24 Apr","25 Apr","26 Apr","27 Apr","28 Apr","29 Apr","30 Apr","01 May","02 May","03 May","04 May","05 May","06 May","07 May"],
+        labels: ["25 Apr","26 Apr","27 Apr","28 Apr","29 Apr","30 Apr","01 May","02 May","03 May","04 May","05 May","06 May","07 May","08 May"],
         datasets: [
           {
             label: 'Calls',
-            data: [362,61,8,463,840,565,568,400,98,6,881,849,1142,782],
+            data: [61,8,463,840,565,568,400,98,6,881,849,1142,782,1],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.12)',
             fill: true,
@@ -721,7 +759,7 @@ TOM, JAKE, LEAH - your gaps are CRITICAL. TOM, you&#39;re 28 behind on bookings!
         datasets: [
           {
             label: 'Calls',
-            data: [2487,2949,2734,2868,2805,3362,2940,3654],
+            data: [2487,2949,2734,2868,2805,3362,2940,3655],
             backgroundColor: 'rgba(79,140,255,.8)'
           },
           {
