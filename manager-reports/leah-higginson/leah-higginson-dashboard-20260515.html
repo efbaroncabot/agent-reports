@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Leah Higginson Dashboard</h1>
-      <div class="sub">Friday, 15 May 2026 · 13:00 · Asia/Dubai</div>
+      <div class="sub">Friday, 15 May 2026 · 14:00 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -243,7 +243,7 @@ Meetings this hour:
 TEAM MEETING, Team Training, Morning Meeting
 
 Reasons:
-TOM, LUCA: Your gaps are CRITICAL. We have only 11 working days left. 2 1st SATs and ZERO 2nd SATs done today is UNACCEPTABLE with 8 hours remaining. You are BEHIND. You need to catch up NOW. Push harder. No excuses.</div>
+TOM, LUCA, you have the biggest gaps. Step up NOW. Only 11 working days left. 2 1st SATs and 0 2nd SATs today is UNACCEPTABLE. You have 8 hours left. Leah, immediate attention needed. Push harder, everyone. No excuses.</div>
     </section>
 
     <main class="grid">
@@ -253,7 +253,7 @@ TOM, LUCA: Your gaps are CRITICAL. We have only 11 working days left. 2 1st SATs
           
     <div class="kpi ">
       <div class="kpi-label">Calls Today</div>
-      <div class="kpi-value">0</div>
+      <div class="kpi-value">2</div>
       <div class="kpi-note">7 staff in scope</div>
     </div>
   
@@ -356,17 +356,6 @@ TOM, LUCA: Your gaps are CRITICAL. We have only 11 working days left. 2 1st SATs
       
           <div class="list-row">
             <div>
-              <strong>Cash Flow Analytics (9am Zim Time)</strong>
-              <div class="muted">zayn.mahmood@baroncabot.com</div>
-            </div>
-            <div class="right">
-              <div>11:00</div>
-              <div class="muted">60m</div>
-            </div>
-          </div>
-        
-          <div class="list-row">
-            <div>
               <strong>UK Property Strategy Meeting With Jake (8:00AM)</strong>
               <div class="muted">jake.clay@baroncabot.com</div>
             </div>
@@ -442,18 +431,53 @@ TOM, LUCA: Your gaps are CRITICAL. We have only 11 working days left. 2 1st SATs
             </div>
           </div>
         
+          <div class="list-row">
+            <div>
+              <strong>Final Questions &amp; Next Steps - Mike &amp; Tom (10:30am WAT)</strong>
+              <div class="muted">tom.hepworth@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>13:30</div>
+              <div class="muted">30m</div>
+            </div>
+          </div>
+        
     </div>
   
       </section>
 
       <section class="card span-4">
         <h2>Top Performers</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>1. Leah Higginson</strong>
+                  <div class="muted">Calls 2 · Bookings 0</div>
+                </div>
+                <div class="right">£0</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-4">
         <h2>Needs Attention</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>Leah Higginson</strong>
+                  <div class="muted">Calls 2 · Last hour 0</div>
+                </div>
+                <div class="right">£0</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-6">
@@ -626,7 +650,7 @@ TOM, LUCA: Your gaps are CRITICAL. We have only 11 working days left. 2 1st SATs
             
               <tr>
                 <td>Leah Higginson</td>
-                <td>0</td>
+                <td>2</td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -691,11 +715,11 @@ TOM, LUCA: Your gaps are CRITICAL. We have only 11 working days left. 2 1st SATs
     makeChart('dailyChart', {
       type: 'line',
       data: {
-        labels: ["01 May","02 May","03 May","04 May","05 May","06 May","07 May","08 May","09 May","10 May","11 May","12 May","13 May","14 May"],
+        labels: ["02 May","03 May","04 May","05 May","06 May","07 May","08 May","09 May","10 May","11 May","12 May","13 May","14 May","15 May"],
         datasets: [
           {
             label: 'Calls',
-            data: [400,98,6,881,849,1142,782,642,136,5,699,994,317,778],
+            data: [98,6,881,849,1142,782,642,136,5,699,994,317,778,2],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.12)',
             fill: true,
@@ -721,7 +745,7 @@ TOM, LUCA: Your gaps are CRITICAL. We have only 11 working days left. 2 1st SATs
         datasets: [
           {
             label: 'Calls',
-            data: [2949,2734,2868,2805,3362,2940,4437,2788],
+            data: [2949,2734,2868,2805,3362,2940,4437,2790],
             backgroundColor: 'rgba(79,140,255,.8)'
           },
           {
