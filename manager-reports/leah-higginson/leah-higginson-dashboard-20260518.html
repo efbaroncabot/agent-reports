@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Leah Higginson Dashboard</h1>
-      <div class="sub">Monday, 18 May 2026 · 13:00 · Asia/Dubai</div>
+      <div class="sub">Monday, 18 May 2026 · 14:00 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -240,10 +240,10 @@ LEAH - 5/2/1/1
 ZAYN - 7/5/1/1
 
 Meetings this hour:
-TEAM MEETING, Jessica - Co-Ordinator Training, KPI Update (Weekly Operations Rhythm), Team Training, UK Property Strategy Meeting With Jake (2:00PM), Morning Meeting, Investment Strategy Consultation between Tom Hepworth and Nazar Omer Ibrahim Mohammed
+TEAM MEETING, Jessica - Co-Ordinator Training, KPI Update (Weekly Operations Rhythm), Team Training, Morning Meeting, Investment Strategy Consultation between Tom Hepworth and Nazar Omer Ibrahim Mohammed
 
 Reasons:
-TOM, you are CRITICALLY behind in Bookings and 1st SATs. This is UNACCEPTABLE. Only 10 working days left and 8 hours today. 2 1st SATs and ZERO 2nd SATs today is a DISGRACE. EVERYONE needs to step up NOW. Push harder, make those calls, secure those meetings. NO EXCUSES.</div>
+TOM, JAKE - you are dragging us down. TOM, 60 bookings and 17 1st SATs behind. JAKE, step up NOW. Only 10 working days left. 2 1st SATs and ZERO 2nd SATs today is UNACCEPTABLE. You have 8 hours. Get it done. No excuses.</div>
     </section>
 
     <main class="grid">
@@ -253,7 +253,7 @@ TOM, you are CRITICALLY behind in Bookings and 1st SATs. This is UNACCEPTABLE. O
           
     <div class="kpi ">
       <div class="kpi-label">Calls Today</div>
-      <div class="kpi-value">0</div>
+      <div class="kpi-value">1</div>
       <div class="kpi-note">7 staff in scope</div>
     </div>
   
@@ -356,17 +356,6 @@ TOM, you are CRITICALLY behind in Bookings and 1st SATs. This is UNACCEPTABLE. O
       
           <div class="list-row">
             <div>
-              <strong>UK Property Strategy Meeting With Jake (2:00PM)</strong>
-              <div class="muted">jake.clay@baroncabot.com</div>
-            </div>
-            <div class="right">
-              <div>10:00</div>
-              <div class="muted">60m</div>
-            </div>
-          </div>
-        
-          <div class="list-row">
-            <div>
               <strong>Investment Strategy Consultation between Tom Hepworth and Nazar Omer Ibrahim Mohammed</strong>
               <div class="muted">tom.hepworth@baroncabot.com</div>
             </div>
@@ -379,6 +368,17 @@ TOM, you are CRITICALLY behind in Bookings and 1st SATs. This is UNACCEPTABLE. O
           <div class="list-row">
             <div>
               <strong>UK Property Strategy Meeting With Jake (12:30PM IST)</strong>
+              <div class="muted">jake.clay@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:00</div>
+              <div class="muted">60m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>UK Property Strategy Meeting With Jake (2:00PM)</strong>
               <div class="muted">jake.clay@baroncabot.com</div>
             </div>
             <div class="right">
@@ -448,12 +448,36 @@ TOM, you are CRITICALLY behind in Bookings and 1st SATs. This is UNACCEPTABLE. O
 
       <section class="card span-4">
         <h2>Top Performers</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>1. Jake Clay</strong>
+                  <div class="muted">Calls 1 · Bookings 0</div>
+                </div>
+                <div class="right">£333,938</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-4">
         <h2>Needs Attention</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>Jake Clay</strong>
+                  <div class="muted">Calls 1 · Last hour 0</div>
+                </div>
+                <div class="right">£333,938</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-6">
@@ -596,7 +620,7 @@ TOM, you are CRITICALLY behind in Bookings and 1st SATs. This is UNACCEPTABLE. O
             
               <tr>
                 <td>Jake Clay</td>
-                <td>0</td>
+                <td>1</td>
                 <td>0</td>
                 <td>1</td>
                 <td>0</td>
@@ -691,11 +715,11 @@ TOM, you are CRITICALLY behind in Bookings and 1st SATs. This is UNACCEPTABLE. O
     makeChart('dailyChart', {
       type: 'line',
       data: {
-        labels: ["04 May","05 May","06 May","07 May","08 May","09 May","10 May","11 May","12 May","13 May","14 May","15 May","16 May","17 May"],
+        labels: ["05 May","06 May","07 May","08 May","09 May","10 May","11 May","12 May","13 May","14 May","15 May","16 May","17 May","18 May"],
         datasets: [
           {
             label: 'Calls',
-            data: [881,849,1142,782,642,136,5,699,994,317,778,539,411,6],
+            data: [849,1142,782,642,136,5,699,994,317,778,539,411,6,1],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.12)',
             fill: true,
@@ -717,16 +741,16 @@ TOM, you are CRITICALLY behind in Bookings and 1st SATs. This is UNACCEPTABLE. O
     makeChart('weeklyChart', {
       type: 'bar',
       data: {
-        labels: ["23 Mar","30 Mar","06 Apr","13 Apr","20 Apr","27 Apr","04 May","11 May"],
+        labels: ["30 Mar","06 Apr","13 Apr","20 Apr","27 Apr","04 May","11 May","18 May"],
         datasets: [
           {
             label: 'Calls',
-            data: [2949,2734,2868,2805,3362,2940,4437,3744],
+            data: [2734,2868,2805,3362,2940,4437,3744,1],
             backgroundColor: 'rgba(79,140,255,.8)'
           },
           {
             label: 'Bookings',
-            data: [36,60,89,70,0,0,0,0],
+            data: [60,89,70,0,0,0,0,0],
             backgroundColor: 'rgba(16,185,129,.8)'
           }
         ]
