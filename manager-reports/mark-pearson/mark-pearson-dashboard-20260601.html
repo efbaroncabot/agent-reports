@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Mark Pearson Dashboard</h1>
-      <div class="sub">Monday, 01 Jun 2026 · 13:01 · Asia/Dubai</div>
+      <div class="sub">Monday, 01 Jun 2026 · 14:01 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -240,7 +240,7 @@ Meetings this hour:
 TEAM MEETING, Team Training, KPI Update (Weekly Operations Rhythm), Morning Meeting, UK Property Investments Strategy - Booked by Mick between Tom Hepworth and Rajeev Dhingra
 
 Reasons:
-ZERO 1st &amp; 2nd SATs done by 1 PM is UNACCEPTABLE. Every agent needs to hit their &#39;Need next hour&#39; NOW. TOM, ZAYN, LEAH, JAKE, LEWIS, LUCA - you all need to drive bookings and SATs. Only 22 working days left. 8 hours left today. Push harder, exceed targets!</div>
+It&#39;s 2 PM and we have ZERO 1st or 2nd SATs done today. This is unacceptable. TOM, LEAH, you&#39;re at the top of the lists - set the pace! We have 8 hours left and only 22 working days. Tom Hepworth, immediate attention needed. Push harder, everyone. EXCEED targets NOW!</div>
     </section>
 
     <main class="grid">
@@ -250,7 +250,7 @@ ZERO 1st &amp; 2nd SATs done by 1 PM is UNACCEPTABLE. Every agent needs to hit t
           
     <div class="kpi ">
       <div class="kpi-label">Calls Today</div>
-      <div class="kpi-value">0</div>
+      <div class="kpi-value">2</div>
       <div class="kpi-note">6 staff in scope</div>
     </div>
   
@@ -318,8 +318,8 @@ ZERO 1st &amp; 2nd SATs done by 1 PM is UNACCEPTABLE. Every agent needs to hit t
           
     <div class="kpi ">
       <div class="kpi-label">Connected Today</div>
-      <div class="kpi-value">0</div>
-      <div class="kpi-note">0.0% connect rate</div>
+      <div class="kpi-value">2</div>
+      <div class="kpi-note">100.0% connect rate</div>
     </div>
   
           
@@ -445,12 +445,36 @@ ZERO 1st &amp; 2nd SATs done by 1 PM is UNACCEPTABLE. Every agent needs to hit t
 
       <section class="card span-4">
         <h2>Top Performers</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>1. Tom Hepworth</strong>
+                  <div class="muted">Calls 2 · Bookings 0</div>
+                </div>
+                <div class="right">£1,327,370</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-4">
         <h2>Needs Attention</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>Tom Hepworth</strong>
+                  <div class="muted">Calls 2 · Last hour 0</div>
+                </div>
+                <div class="right">£1,327,370</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-6">
@@ -573,7 +597,7 @@ ZERO 1st &amp; 2nd SATs done by 1 PM is UNACCEPTABLE. Every agent needs to hit t
           
               <tr>
                 <td>Tom Hepworth</td>
-                <td>0</td>
+                <td>2</td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -678,11 +702,11 @@ ZERO 1st &amp; 2nd SATs done by 1 PM is UNACCEPTABLE. Every agent needs to hit t
     makeChart('dailyChart', {
       type: 'line',
       data: {
-        labels: ["18 May","19 May","20 May","21 May","22 May","23 May","24 May","25 May","26 May","27 May","28 May","29 May","30 May","31 May"],
+        labels: ["19 May","20 May","21 May","22 May","23 May","24 May","25 May","26 May","27 May","28 May","29 May","30 May","31 May","01 Jun"],
         datasets: [
           {
             label: 'Calls',
-            data: [697,577,491,406,343,22,1,538,173,232,108,44,4,100],
+            data: [577,491,406,343,22,1,538,173,232,108,44,4,100,2],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.12)',
             fill: true,
@@ -704,16 +728,16 @@ ZERO 1st &amp; 2nd SATs done by 1 PM is UNACCEPTABLE. Every agent needs to hit t
     makeChart('weeklyChart', {
       type: 'bar',
       data: {
-        labels: ["06 Apr","13 Apr","20 Apr","27 Apr","04 May","11 May","18 May","25 May"],
+        labels: ["13 Apr","20 Apr","27 Apr","04 May","11 May","18 May","25 May","01 Jun"],
         datasets: [
           {
             label: 'Calls',
-            data: [2547,2338,2682,2477,3458,3412,2537,1199],
+            data: [2338,2682,2477,3458,3412,2537,1199,2],
             backgroundColor: 'rgba(79,140,255,.8)'
           },
           {
             label: 'Bookings',
-            data: [70,63,0,0,0,0,0,0],
+            data: [63,0,0,0,0,0,0,0],
             backgroundColor: 'rgba(16,185,129,.8)'
           }
         ]
