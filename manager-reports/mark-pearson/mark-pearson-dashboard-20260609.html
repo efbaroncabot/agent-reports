@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Mark Pearson Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#121931;
+      --panel2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --line:#26324a;
+      --accent:#4f8cff;
+      --ok:#10b981;
+      --mid:#f59e0b;
+      --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    .wrap{
+      max-width:1500px;
+      margin:0 auto;
+      padding:20px;
+    }
+    .hero{
+      background:linear-gradient(135deg,#4f8cff,#6d5efc);
+      border-radius:16px;
+      padding:20px 24px;
+      margin-bottom:16px;
+    }
+    .hero h1{
+      margin:0 0 6px 0;
+      font-size:1.6rem;
+    }
+    .hero .sub{
+      opacity:.95;
+    }
+    .freshness{
+      margin-top:10px;
+      padding:8px 10px;
+      border-radius:10px;
+      display:inline-block;
+      font-size:.9rem;
+      background:rgba(255,255,255,.14);
+    }
+    .freshness.fresh{border-left:4px solid var(--ok)}
+    .freshness.warn{border-left:4px solid var(--mid)}
+    .freshness.stale{border-left:4px solid var(--bad)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:16px;
+    }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      min-width:0;
+    }
+    .span-12{grid-column:span 12}
+    .span-8{grid-column:span 8}
+    .span-6{grid-column:span 6}
+    .span-4{grid-column:span 4}
+    .span-3{grid-column:span 3}
+
+    h2{
+      margin:0 0 12px 0;
+      font-size:1.05rem;
+      color:#dbeafe;
+    }
+    .muted{color:var(--muted)}
+    .headline{
+      padding:12px 14px;
+      background:rgba(79,140,255,.08);
+      border:1px solid rgba(79,140,255,.25);
+      border-radius:12px;
+      margin-top:12px;
+    }
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+    .kpi{
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+    }
+    .kpi-label{
+      color:var(--muted);
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      margin-bottom:8px;
+    }
+    .kpi-value{
+      font-size:1.5rem;
+      font-weight:800;
+    }
+    .kpi-note{
+      margin-top:6px;
+      font-size:.85rem;
+      color:var(--muted);
+    }
+    .progress-item + .progress-item{margin-top:12px}
+    .progress-head,.progress-foot{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:.9rem;
+    }
+    .progress-track{
+      height:9px;
+      border-radius:999px;
+      background:#1b2740;
+      overflow:hidden;
+      margin:6px 0;
+    }
+    .progress-fill{
+      height:100%;
+    }
+    .progress-fill.ok{background:var(--ok)}
+    .progress-fill.mid{background:var(--mid)}
+    .progress-fill.bad{background:var(--bad)}
+
+    .list{display:flex;flex-direction:column;gap:10px}
+    .list-row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:12px;
+    }
+    .right{text-align:right}
+    .empty{
+      color:var(--muted);
+      padding:12px;
+      background:var(--panel2);
+      border:1px dashed var(--line);
+      border-radius:12px;
+    }
+    .badge{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:.75rem;
+      font-weight:700;
+      background:rgba(79,140,255,.16);
+    }
+    .badge.bad{
+      background:rgba(239,68,68,.18);
+      color:#fecaca;
+    }
+
+    .table-wrap{overflow:auto}
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    th,td{
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      white-space:nowrap;
+    }
+    th{
+      color:#cbd5e1;
+      background:rgba(79,140,255,.08);
+      position:sticky;
+      top:0;
+    }
+
+    .chart-box{
+      height:290px;
+    }
+    .headline{
+      padding:12px 14px;
+      background:rgba(79,140,255,.08);
+      border:1px solid rgba(79,140,255,.25);
+      border-radius:12px;
+      margin-top:12px;
+      white-space: pre-line;
+    }
+    @media (max-width: 1100px){
+      .span-8,.span-6,.span-4,.span-3{grid-column:span 12}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 680px){
+      .wrap{padding:12px}
+      .kpis{grid-template-columns:1fr}
+      .hero h1{font-size:1.25rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Mark Pearson Dashboard</h1>
+      <div class="sub">Tuesday, 09 Jun 2026 · 13:00 · Asia/Dubai</div>
+      <div class="freshness stale">Data timestamp unreadable</div>
+      <div class="headline">Need to date / Has to date / Need next hour / Need today
+BOOKINGS:
+TOM - 32/0/1/7
+JAKE - 24/0/1/8
+LUCA - 24/0/1/8
+LEWIS - 20/0/1/4
+ZAYN - 16/0/1/3
+LEAH - 12/0/1/2
+
+1st SAT:
+JAKE - 12/1/1/4
+TOM - 16/6/1/2
+LEWIS - 10/2/1/2
+LUCA - 12/5/1/4
+ZAYN - 8/4/0/0
+LEAH - 6/3/0/0
+
+2nd SAT:
+TOM - 8/2/1/1
+JAKE - 6/0/1/2
+LUCA - 6/0/1/2
+LEWIS - 5/1/1/1
+LEAH - 3/1/0/0
+ZAYN - 4/2/0/0
+
+Meetings this hour:
+TEAM MEETING, 1ST MEETING - REVIEWS, UK Property Investments Strategy - Booked by Mick between Jake Lee Clay and Sitwala Mulonda, UK Property Investments Strategy - 9:00am Qatar Jake Lee Clay and Sanket Khanna, Morning Meeting, Zayn and Okeze - UK Property Strategy (7am Nigeria Time), Quality Report (Weekly Operating Rhythm)
+
+Reasons:
+TOM, JAKE, LUCA - your Booking gaps are CRITICAL. JAKE, your 1st SAT gap is unacceptable. We have only 16 working days left. 7 1st SATs and 3 2nd SATs by 1 PM is a DISASTER. You have 8 hours to turn this around. STEP UP NOW.</div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-12">
+        <h2>Executive Summary</h2>
+        <div class="kpis">
+          
+    <div class="kpi ">
+      <div class="kpi-label">Calls Today</div>
+      <div class="kpi-value">0</div>
+      <div class="kpi-note">6 staff in scope</div>
+    </div>
+  
+          
+    <div class="kpi ">
+      <div class="kpi-label">Bookings Today</div>
+      <div class="kpi-value">0</div>
+      <div class="kpi-note">0.0% calls → booked</div>
+    </div>
+  
+          
+    <div class="kpi ">
+      <div class="kpi-label">First / Second / Third Sats</div>
+      <div class="kpi-value">7 / 3 / 0</div>
+      <div class="kpi-note">Revenue today £0</div>
+    </div>
+  
+          
+    <div class="kpi bad">
+      <div class="kpi-label">Revenue MTD</div>
+      <div class="kpi-value">£0</div>
+      <div class="kpi-note">0.0% of target</div>
+    </div>
+  
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Target Progress</h2>
+        
+    <div class="progress-item">
+      <div class="progress-head">
+        <span>First Sats MTD</span>
+        <span>21 / 58</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill bad" style="width:36.206896551724135%"></div></div>
+      <div class="progress-foot">36.2%</div>
+    </div>
+  
+        
+    <div class="progress-item">
+      <div class="progress-head">
+        <span>Second Sats MTD</span>
+        <span>6 / 32</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill bad" style="width:18.75%"></div></div>
+      <div class="progress-foot">18.8%</div>
+    </div>
+  
+        
+    <div class="progress-item">
+      <div class="progress-head">
+        <span>Revenue MTD</span>
+        <span>£0 / £2,031,818</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill bad" style="width:0%"></div></div>
+      <div class="progress-foot">0.0%</div>
+    </div>
+  
+      </section>
+
+      <section class="card span-6">
+        <h2>Focus Now</h2>
+        <div class="kpis">
+          
+    <div class="kpi ">
+      <div class="kpi-label">Connected Today</div>
+      <div class="kpi-value">0</div>
+      <div class="kpi-note">0.0% connect rate</div>
+    </div>
+  
+          
+    <div class="kpi ">
+      <div class="kpi-label">Calls Last Hour</div>
+      <div class="kpi-value">0</div>
+      <div class="kpi-note">Bookings 0</div>
+    </div>
+  
+          
+    <div class="kpi bad">
+      <div class="kpi-label">1st Sat Gap</div>
+      <div class="kpi-value">37</div>
+      <div class="kpi-note">36.2% attainment</div>
+    </div>
+  
+          
+    <div class="kpi bad">
+      <div class="kpi-label">Revenue Gap</div>
+      <div class="kpi-value">£2,031,818</div>
+      <div class="kpi-note">Behind target</div>
+    </div>
+  
+        </div>
+      </section>
+
+      <section class="card span-4">
+        <h2>Upcoming Client Meetings</h2>
+        
+    <div class="list">
+      
+          <div class="list-row">
+            <div>
+              <strong>UK Property Investments Strategy - 9:00am Qatar Jake Lee Clay and Sanket Khanna</strong>
+              <div class="muted">jake.clay@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>10:00</div>
+              <div class="muted">60m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>Zayn and Okeze - UK Property Strategy (7am Nigeria Time)</strong>
+              <div class="muted">zayn.mahmood@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>10:00</div>
+              <div class="muted">60m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>UK Property Investments Strategy - Booked by Mick between Jake Lee Clay and Sitwala Mulonda</strong>
+              <div class="muted">jake.clay@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>10:30</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>UK Property Investments Strategy - Booked by Mick between Zayn Mahmood and Anurag Sharma</strong>
+              <div class="muted">zayn.mahmood@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:00</div>
+              <div class="muted">60m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>UK Property Investments Strategy - Booked by Mick between Tom Hepworth and Babatunde Tosin</strong>
+              <div class="muted">tom.hepworth@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:00</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>UK Property Investments Strategy - Booked by Mick between Jake Lee Clay and Martin Soderberg</strong>
+              <div class="muted">jake.clay@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:15</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>UK Property Investments Strategy - Booked by Mick between Lewis Carney and Eric Ngoesionwu</strong>
+              <div class="muted">lewis.carney@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>11:45</div>
+              <div class="muted">45m</div>
+            </div>
+          </div>
+        
+          <div class="list-row">
+            <div>
+              <strong>UK Property Investments Strategy - Booked by Mick between Zayn Mahmood and Brian Frimpong</strong>
+              <div class="muted">zayn.mahmood@baroncabot.com</div>
+            </div>
+            <div class="right">
+              <div>12:00</div>
+              <div class="muted">60m</div>
+            </div>
+          </div>
+        
+    </div>
+  
+      </section>
+
+      <section class="card span-4">
+        <h2>Top Performers</h2>
+        <div class="empty">None</div>
+      </section>
+
+      <section class="card span-4">
+        <h2>Needs Attention</h2>
+        <div class="empty">None</div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Anomaly Watch</h2>
+        <div class="empty">No critical anomalies.</div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Meeting Intelligence</h2>
+        
+            <div class="list">
+              
+                  <div class="list-row">
+                    <div>
+                      <strong>Jake Clay</strong>
+                      <div class="muted">Meetings 7d 0 · Transcripts 0</div>
+                    </div>
+                    <div class="right">
+                      <div>0 strat</div>
+                      <div class="muted">0.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Leah Higginson</strong>
+                      <div class="muted">Meetings 7d 0 · Transcripts 0</div>
+                    </div>
+                    <div class="right">
+                      <div>0 strat</div>
+                      <div class="muted">0.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Lewis Carney</strong>
+                      <div class="muted">Meetings 7d 0 · Transcripts 0</div>
+                    </div>
+                    <div class="right">
+                      <div>0 strat</div>
+                      <div class="muted">0.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Luca Camilleri</strong>
+                      <div class="muted">Meetings 7d 0 · Transcripts 0</div>
+                    </div>
+                    <div class="right">
+                      <div>0 strat</div>
+                      <div class="muted">0.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Tom Hepworth</strong>
+                      <div class="muted">Meetings 7d 0 · Transcripts 0</div>
+                    </div>
+                    <div class="right">
+                      <div>0 strat</div>
+                      <div class="muted">0.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+                  <div class="list-row">
+                    <div>
+                      <strong>Zayn Mahmood</strong>
+                      <div class="muted">Meetings 7d 0 · Transcripts 0</div>
+                    </div>
+                    <div class="right">
+                      <div>0 strat</div>
+                      <div class="muted">0.0% cashflow conv</div>
+                    </div>
+                  </div>
+                
+            </div>
+          
+      </section>
+
+      <section class="card span-6">
+        <h2>Today by Hour</h2>
+        <div class="chart-box"><canvas id="hourlyChart"></canvas></div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Last 14 Days</h2>
+        <div class="chart-box"><canvas id="dailyChart"></canvas></div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Last 8 Weeks</h2>
+        <div class="chart-box"><canvas id="weeklyChart"></canvas></div>
+      </section>
+
+      <section class="card span-6">
+        <h2>Monthly Revenue & Sats</h2>
+        <div class="chart-box"><canvas id="monthlyChart"></canvas></div>
+      </section>
+
+      <section class="card span-12">
+        <h2>Team Member Snapshot</h2>
+        
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Calls</th>
+            <th>Booked</th>
+            <th>1st Sat</th>
+            <th>2nd Sat</th>
+            <th>Revenue MTD</th>
+            <th>Revenue 30d</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+              <tr>
+                <td>Tom Hepworth</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>£0</td>
+                <td>£728,995</td>
+              </tr>
+            
+              <tr>
+                <td>Jake Clay</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£0</td>
+                <td>£452,105</td>
+              </tr>
+            
+              <tr>
+                <td>Leah Higginson</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>£0</td>
+                <td>£344,960</td>
+              </tr>
+            
+              <tr>
+                <td>Zayn Mahmood</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>£0</td>
+                <td>£154,960</td>
+              </tr>
+            
+              <tr>
+                <td>Lewis Carney</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>£0</td>
+                <td>£0</td>
+              </tr>
+            
+              <tr>
+                <td>Luca Camilleri</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>£0</td>
+                <td>£0</td>
+              </tr>
+            
+        </tbody>
+      </table>
+    </div>
+  
+      </section>
+    </main>
+  </div>
+
+  <script>
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = '#26324a';
+
+    function makeChart(id, config) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      new Chart(el, config);
+    }
+
+    makeChart('hourlyChart', {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Calls',
+            data: [],
+            borderColor: '#4f8cff',
+            backgroundColor: 'rgba(79,140,255,.15)',
+            fill: true,
+            tension: 0.35
+          },
+          {
+            label: 'Bookings',
+            data: [],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,.12)',
+            fill: true,
+            tension: 0.35
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    makeChart('dailyChart', {
+      type: 'line',
+      data: {
+        labels: ["26 May","27 May","28 May","29 May","30 May","31 May","01 Jun","02 Jun","03 Jun","04 Jun","05 Jun","06 Jun","07 Jun","08 Jun"],
+        datasets: [
+          {
+            label: 'Calls',
+            data: [173,232,108,44,4,100,543,480,336,254,225,48,5,316],
+            borderColor: '#4f8cff',
+            backgroundColor: 'rgba(79,140,255,.12)',
+            fill: true,
+            tension: 0.3
+          },
+          {
+            label: 'Bookings',
+            data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,.10)',
+            fill: true,
+            tension: 0.3
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    makeChart('weeklyChart', {
+      type: 'bar',
+      data: {
+        labels: ["20 Apr","27 Apr","04 May","11 May","18 May","25 May","01 Jun","08 Jun"],
+        datasets: [
+          {
+            label: 'Calls',
+            data: [2682,2477,3458,3412,2537,1199,1891,316],
+            backgroundColor: 'rgba(79,140,255,.8)'
+          },
+          {
+            label: 'Bookings',
+            data: [0,0,0,0,0,0,0,0],
+            backgroundColor: 'rgba(16,185,129,.8)'
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    makeChart('monthlyChart', {
+      type: 'bar',
+      data: {
+        labels: ["Jun 26"],
+        datasets: [
+          {
+            label: 'Revenue',
+            data: [0],
+            backgroundColor: 'rgba(79,140,255,.85)',
+            yAxisID: 'y'
+          },
+          {
+            label: 'First Sats',
+            data: [21],
+            backgroundColor: 'rgba(16,185,129,.85)',
+            yAxisID: 'y1'
+          },
+          {
+            label: 'Second Sats',
+            data: [6],
+            backgroundColor: 'rgba(245,158,11,.85)',
+            yAxisID: 'y1'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { position: 'left' },
+          y1: { position: 'right', grid: { drawOnChartArea: false } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
