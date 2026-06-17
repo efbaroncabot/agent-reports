@@ -209,7 +209,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>Mark Pearson Dashboard</h1>
-      <div class="sub">Wednesday, 17 Jun 2026 · 13:00 · Asia/Dubai</div>
+      <div class="sub">Wednesday, 17 Jun 2026 · 14:00 · Asia/Dubai</div>
       <div class="freshness stale">Data timestamp unreadable</div>
       <div class="headline">Need to date / Has to date / Need next hour / Need today
 BOOKINGS:
@@ -240,7 +240,7 @@ Meetings this hour:
 TEAM MEETING, Ody email, Annual Leave, Call Mukura - 263779878867
 
 Reasons:
-TOM, your 60 booking gap is critical. JAKE, LUCA, LEWIS, you MUST close your gaps. With only 10 working days left, today&#39;s 3 1st SATs and ZERO 2nd SATs is UNACCEPTABLE. You have 8 hours. Hit your &#39;Need today&#39; targets. NO ONE is comfortable until we EXCEED.</div>
+TOM, your gaps are CRITICAL. 60 bookings, 16 1st SATs needed. Only 10 working days left. 3 1st SATs and 0 2nd SATs done today is UNACCEPTABLE. With 8 hours left, ZAYN and everyone else, you MUST step up NOW. No excuses. Push harder, close deals. The clock is ticking.</div>
     </section>
 
     <main class="grid">
@@ -250,7 +250,7 @@ TOM, your 60 booking gap is critical. JAKE, LUCA, LEWIS, you MUST close your gap
           
     <div class="kpi ">
       <div class="kpi-label">Calls Today</div>
-      <div class="kpi-value">0</div>
+      <div class="kpi-value">3</div>
       <div class="kpi-note">6 staff in scope</div>
     </div>
   
@@ -318,8 +318,8 @@ TOM, your 60 booking gap is critical. JAKE, LUCA, LEWIS, you MUST close your gap
           
     <div class="kpi ">
       <div class="kpi-label">Connected Today</div>
-      <div class="kpi-value">0</div>
-      <div class="kpi-note">0.0% connect rate</div>
+      <div class="kpi-value">1</div>
+      <div class="kpi-note">33.3% connect rate</div>
     </div>
   
           
@@ -445,17 +445,71 @@ TOM, your 60 booking gap is critical. JAKE, LUCA, LEWIS, you MUST close your gap
 
       <section class="card span-4">
         <h2>Top Performers</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>1. Tom Hepworth</strong>
+                  <div class="muted">Calls 2 · Bookings 0</div>
+                </div>
+                <div class="right">£933,933</div>
+              </div>
+            
+              <div class="list-row">
+                <div>
+                  <strong>2. Zayn Mahmood</strong>
+                  <div class="muted">Calls 1 · Bookings 0</div>
+                </div>
+                <div class="right">£154,960</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-4">
         <h2>Needs Attention</h2>
-        <div class="empty">None</div>
+        
+    <div class="list">
+      
+              <div class="list-row">
+                <div>
+                  <strong>Zayn Mahmood</strong>
+                  <div class="muted">Calls 1 · Last hour 0</div>
+                </div>
+                <div class="right">£154,960</div>
+              </div>
+            
+              <div class="list-row">
+                <div>
+                  <strong>Tom Hepworth</strong>
+                  <div class="muted">Calls 2 · Last hour 0</div>
+                </div>
+                <div class="right">£933,933</div>
+              </div>
+            
+    </div>
+  
       </section>
 
       <section class="card span-6">
         <h2>Anomaly Watch</h2>
-        <div class="empty">No critical anomalies.</div>
+        
+    <div class="list">
+      
+          <div class="list-row">
+            <div>
+              <strong>Luca Camilleri</strong>
+              <div class="muted">
+                Calls z-score -4.95 · Connect z-score 0.00
+              </div>
+            </div>
+            <div class="right"><span class="badge bad">Watch</span></div>
+          </div>
+        
+    </div>
+  
       </section>
 
       <section class="card span-6">
@@ -573,7 +627,7 @@ TOM, your 60 booking gap is critical. JAKE, LUCA, LEWIS, you MUST close your gap
           
               <tr>
                 <td>Tom Hepworth</td>
-                <td>0</td>
+                <td>2</td>
                 <td>0</td>
                 <td>1</td>
                 <td>0</td>
@@ -593,7 +647,7 @@ TOM, your 60 booking gap is critical. JAKE, LUCA, LEWIS, you MUST close your gap
             
               <tr>
                 <td>Zayn Mahmood</td>
-                <td>0</td>
+                <td>1</td>
                 <td>0</td>
                 <td>1</td>
                 <td>0</td>
@@ -678,11 +732,11 @@ TOM, your 60 booking gap is critical. JAKE, LUCA, LEWIS, you MUST close your gap
     makeChart('dailyChart', {
       type: 'line',
       data: {
-        labels: ["03 Jun","04 Jun","05 Jun","06 Jun","07 Jun","08 Jun","09 Jun","10 Jun","11 Jun","12 Jun","13 Jun","14 Jun","15 Jun","16 Jun"],
+        labels: ["04 Jun","05 Jun","06 Jun","07 Jun","08 Jun","09 Jun","10 Jun","11 Jun","12 Jun","13 Jun","14 Jun","15 Jun","16 Jun","17 Jun"],
         datasets: [
           {
             label: 'Calls',
-            data: [336,254,225,48,5,316,369,250,244,271,58,4,118,524],
+            data: [254,225,48,5,316,369,250,244,271,58,4,118,524,3],
             borderColor: '#4f8cff',
             backgroundColor: 'rgba(79,140,255,.12)',
             fill: true,
@@ -708,7 +762,7 @@ TOM, your 60 booking gap is critical. JAKE, LUCA, LEWIS, you MUST close your gap
         datasets: [
           {
             label: 'Calls',
-            data: [2477,3458,3412,2537,1199,1891,1512,642],
+            data: [2477,3458,3412,2537,1199,1891,1512,645],
             backgroundColor: 'rgba(79,140,255,.8)'
           },
           {
